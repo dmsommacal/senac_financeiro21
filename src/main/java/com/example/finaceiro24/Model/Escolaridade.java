@@ -1,0 +1,13 @@
+package com.example.finaceiro24.Model;
+
+public enum  Escolaridade {
+    FUNDAMENTAL_COMPLETO,
+    FUNDAMENTAL_INCOMPLETO,
+    MEDIO_COMPLETO,
+    MEDIO_INCOMPLETO,
+    SUPERIOR_COMPLETO,
+    SUPERIOR_INCOMPLETO,
+    GRADUACAO_COMPLETA,
+    GRADUACAO_INCOMPLETA
+
+}
