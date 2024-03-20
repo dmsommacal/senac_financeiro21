@@ -3,7 +3,6 @@ package com.rh.financeiro.model;
 import java.time.LocalDate;
 
 public class Entrada {
-
     private Double valor;
     private LocalDate data;
     private String descricao;
