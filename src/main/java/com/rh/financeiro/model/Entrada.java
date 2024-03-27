@@ -1,10 +1,16 @@
 package com.rh.financeiro.model;
 
-import java.time.LocalDate;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
 
-public class Entrada {
+import java.time.LocalDate;
+@Entity
+public class Entrada extends EntityId{
+    @Column
     private Double valor;
+    @Column
     private LocalDate data;
+    @Column
     private String descricao;
 
     public Entrada(Double valor, LocalDate data, String descricao) {

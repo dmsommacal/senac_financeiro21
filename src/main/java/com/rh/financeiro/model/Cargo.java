@@ -1,19 +1,37 @@
 package com.rh.financeiro.model;
 
-public class Cargo {
+import jakarta.persistence.*;
 
+import java.util.List;
+
+@Entity
+public class Cargo extends EntityId{
+    @OneToMany
+    private List<Funcionario> funcionarios;
+    @Column
     private String Descricao;
+    @Column
     private String Nivel;
+    @Column
     private Boolean Comissao;
     private Turno turno;
     private ModalidadeContratual modalidadeContratual;
 
-    public Cargo(String descricao, String nivel, Boolean comissao, Turno turno, ModalidadeContratual modalidadeContratual) {
+    public Cargo(List<Funcionario> funcionarios, String descricao, String nivel, Boolean comissao, Turno turno, ModalidadeContratual modalidadeContratual) {
+        this.funcionarios = funcionarios;
         Descricao = descricao;
         Nivel = nivel;
         Comissao = comissao;
         this.turno = turno;
         this.modalidadeContratual = modalidadeContratual;
+    }
+
+    public List<Funcionario> getFuncionarios() {
+        return funcionarios;
+    }
+
+    public void setFuncionarios(List<Funcionario> funcionarios) {
+        this.funcionarios = funcionarios;
     }
 
     public String getDescricao() {
@@ -59,7 +77,8 @@ public class Cargo {
     @Override
     public String toString() {
         return "Cargo{" +
-                "Descricao='" + Descricao + '\'' +
+                "funcionarios=" + funcionarios +
+                ", Descricao='" + Descricao + '\'' +
                 ", Nivel='" + Nivel + '\'' +
                 ", Comissao=" + Comissao +
                 ", turno=" + turno +

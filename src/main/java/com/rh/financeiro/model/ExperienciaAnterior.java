@@ -1,19 +1,36 @@
 package com.rh.financeiro.model;
 
+import jakarta.persistence.*;
+
 import java.time.LocalDate;
-
-public class ExperienciaAnterior {
-
+@Entity
+public class ExperienciaAnterior extends EntityId{
+    @ManyToOne
+    @JoinColumn(name = "funcionario_id")
+    private Funcionario funcionario;
+    @Column
     private String Descricao;
+    @Column
     private String Cargo;
+    @Column
     private LocalDate PeriodoInicial;
+    @Column
     private LocalDate PeriodoFinal;
 
-    public ExperienciaAnterior(String descricao, String cargo, LocalDate periodoInicial, LocalDate periodoFinal) {
+    public ExperienciaAnterior(Funcionario funcionario, String descricao, String cargo, LocalDate periodoInicial, LocalDate periodoFinal) {
+        this.funcionario = funcionario;
         Descricao = descricao;
         Cargo = cargo;
         PeriodoInicial = periodoInicial;
         PeriodoFinal = periodoFinal;
+    }
+
+    public Funcionario getFuncionario() {
+        return funcionario;
+    }
+
+    public void setFuncionario(Funcionario funcionario) {
+        this.funcionario = funcionario;
     }
 
     public String getDescricao() {
@@ -51,7 +68,8 @@ public class ExperienciaAnterior {
     @Override
     public String toString() {
         return "ExperienciaAnterior{" +
-                "Descricao='" + Descricao + '\'' +
+                "funcionario=" + funcionario +
+                ", Descricao='" + Descricao + '\'' +
                 ", Cargo='" + Cargo + '\'' +
                 ", PeriodoInicial=" + PeriodoInicial +
                 ", PeriodoFinal=" + PeriodoFinal +

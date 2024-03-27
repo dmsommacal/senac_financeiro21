@@ -1,7 +1,9 @@
 package com.rh.financeiro.model;
 
-public class FolhaRescisao extends FolhaPagamento{
+import jakarta.persistence.Column;
 
+public class FolhaRescisao extends FolhaPagamento{
+    @Column
     private Double valorRescisao;
 
     public FolhaRescisao(Double hrtrabalhada, Double INSS, Double IRRF, Double FGTS, Double valorRescisao) {

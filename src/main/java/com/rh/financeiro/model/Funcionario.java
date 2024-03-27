@@ -1,53 +1,87 @@
 package com.rh.financeiro.model;
 
-import jakarta.persistence.Entity;
+import jakarta.persistence.*;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
 @Entity
-public class Funcionario {
-    private List<ExperienciaAnterior> ExperienciaAnterior;
-    private List<Certificacoes> Certificacoes;
+public class Funcionario extends EntityId{
+    @OneToMany
+    private List<ExperienciaAnterior> experienciaAnterior;
+    @OneToMany
+    private List<Certificacoes> certificacoes;
     private Escolaridade escolaridade;
     private EstadoCivil estadoCivil;
     private Genero genero;
     private Status status;
+    @ManyToOne
+    @JoinColumn(name = "cargo_id")
     private Cargo cargo;
+    @Column
     private String Nome;
+    @Column
     private String CPF;
+    @Column
     private String RG;
+    @Column
     private String Endereco;
+    @Column
     private String CTPS;
+    @Column
     private Double SalarioContratual;
+    @Column
     private Integer CargaHoraria;
+    @Column
     private String FonePessoal;
+    @Column
     private String FoneRecados;
+    @Column
     private String Titulo;
+    @Column
     private String CarteiraDeReservista;
+    @Column
     private LocalDate DataNascimento;
+    @Column
     private String Pis;
+    @Column
     private String RegistroProfissional;
+    @Column
     private String Email;
+    @Column
     private String Sindicato;
+    @Column
     private String Setor;
+    @Column
     private String CNH;
+    @Column
     private LocalDate DataAdmissao;
+    @Column
     private String RacaCor;
+    @Column
     private String Religiao;
+    @Column
     private Boolean DoadorSangue;
+    @Column
     private String Nacionalidade;
+    @Column
     private String RedeSocial;
+    @Column
     private String AreaAtuacao;
+    @Column
     private String Matricula;
+    @Column
     private String Idiomas;
+    @Column
     private Integer HoraExtra;
+    @Column
     private LocalTime HoraEntrada;
+    @Column
     private LocalTime HoraSaida;
 
-    public Funcionario(List<com.rh.financeiro.model.ExperienciaAnterior> experienciaAnterior, List<com.rh.financeiro.model.Certificacoes> certificacoes, Escolaridade escolaridade, EstadoCivil estadoCivil, Genero genero, Status status, Cargo cargo, String nome, String CPF, String RG, String endereco, String CTPS, Double salarioContratual, Integer cargaHoraria, String fonePessoal, String foneRecados, String titulo, String carteiraDeReservista, LocalDate dataNascimento, String pis, String registroProfissional, String email, String sindicato, String setor, String CNH, LocalDate dataAdmissao, String racaCor, String religiao, Boolean doadorSangue, String nacionalidade, String redeSocial, String areaAtuacao, String matricula, String idiomas, Integer horaExtra, LocalTime horaEntrada, LocalTime horaSaida) {
-        ExperienciaAnterior = experienciaAnterior;
-        Certificacoes = certificacoes;
+    public Funcionario(List<ExperienciaAnterior> experienciaAnterior, List<Certificacoes> certificacoes, Escolaridade escolaridade, EstadoCivil estadoCivil, Genero genero, Status status, Cargo cargo, String nome, String CPF, String RG, String endereco, String CTPS, Double salarioContratual, Integer cargaHoraria, String fonePessoal, String foneRecados, String titulo, String carteiraDeReservista, LocalDate dataNascimento, String pis, String registroProfissional, String email, String sindicato, String setor, String CNH, LocalDate dataAdmissao, String racaCor, String religiao, Boolean doadorSangue, String nacionalidade, String redeSocial, String areaAtuacao, String matricula, String idiomas, Integer horaExtra, LocalTime horaEntrada, LocalTime horaSaida) {
+        this.experienciaAnterior = experienciaAnterior;
+        this.certificacoes = certificacoes;
         this.escolaridade = escolaridade;
         this.estadoCivil = estadoCivil;
         this.genero = genero;
@@ -85,20 +119,20 @@ public class Funcionario {
         HoraSaida = horaSaida;
     }
 
-    public List<com.rh.financeiro.model.ExperienciaAnterior> getExperienciaAnterior() {
-        return ExperienciaAnterior;
+    public List<ExperienciaAnterior> getExperienciaAnterior() {
+        return experienciaAnterior;
     }
 
-    public void setExperienciaAnterior(List<com.rh.financeiro.model.ExperienciaAnterior> experienciaAnterior) {
-        ExperienciaAnterior = experienciaAnterior;
+    public void setExperienciaAnterior(List<ExperienciaAnterior> experienciaAnterior) {
+        this.experienciaAnterior = experienciaAnterior;
     }
 
-    public List<com.rh.financeiro.model.Certificacoes> getCertificacoes() {
-        return Certificacoes;
+    public List<Certificacoes> getCertificacoes() {
+        return certificacoes;
     }
 
-    public void setCertificacoes(List<com.rh.financeiro.model.Certificacoes> certificacoes) {
-        Certificacoes = certificacoes;
+    public void setCertificacoes(List<Certificacoes> certificacoes) {
+        this.certificacoes = certificacoes;
     }
 
     public Escolaridade getEscolaridade() {
@@ -384,8 +418,8 @@ public class Funcionario {
     @Override
     public String toString() {
         return "Funcionario{" +
-                "ExperienciaAnterior=" + ExperienciaAnterior +
-                ", Certificacoes=" + Certificacoes +
+                ", experienciaAnterior=" + experienciaAnterior +
+                ", certificacoes=" + certificacoes +
                 ", escolaridade=" + escolaridade +
                 ", estadoCivil=" + estadoCivil +
                 ", genero=" + genero +

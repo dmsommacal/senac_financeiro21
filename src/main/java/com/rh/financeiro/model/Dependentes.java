@@ -1,9 +1,14 @@
 package com.rh.financeiro.model;
 
-public class Dependentes {
-
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+@Entity
+public class Dependentes extends EntityId{
+    @Column
     private String Nome;
+    @Column
     private Escolaridade escolaridade;
+    @Column
     private String DataNascimento;
 
     public Dependentes(String nome, Escolaridade escolaridade, String dataNascimento) {

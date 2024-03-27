@@ -1,15 +1,21 @@
 package com.rh.financeiro.model;
 
-public class Relatorio {
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
 
+@Entity
+public class Relatorio extends EntityId{
+    @Column
     private Double relEntrada;
+    @Column
     private Double relSaida;
-    private Double relDemosntrativo;
+    @Column
+    private Double relDemonstrativo;
 
     public Relatorio(Double relEntrada, Double relSaida, Double relDemosntrativo) {
         this.relEntrada = relEntrada;
         this.relSaida = relSaida;
-        this.relDemosntrativo = relDemosntrativo;
+        this.relDemonstrativo = relDemosntrativo;
     }
 
     public Double getRelEntrada() {
@@ -29,11 +35,11 @@ public class Relatorio {
     }
 
     public Double getRelDemosntrativo() {
-        return relDemosntrativo;
+        return relDemonstrativo;
     }
 
     public void setRelDemosntrativo(Double relDemosntrativo) {
-        this.relDemosntrativo = relDemosntrativo;
+        this.relDemonstrativo = relDemosntrativo;
     }
 
     @Override
@@ -41,7 +47,7 @@ public class Relatorio {
         return "Relatorio{" +
                 "relEntrada=" + relEntrada +
                 ", relSaida=" + relSaida +
-                ", relDemosntrativo=" + relDemosntrativo +
+                ", relDemonstrativo=" + relDemonstrativo +
                 '}';
     }
 }

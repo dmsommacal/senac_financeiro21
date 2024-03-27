@@ -13,16 +13,15 @@ import java.util.List;
 
 public class FuncionarioController {
     @Autowired
-    private FuncionarioRepository repository;
+    private FuncionarioRepository funcionarioRepository;
     @PostMapping
     public ResponseEntity create(@RequestBody Funcionario entity) {
-        repository.save(entity);
+        funcionarioRepository.save(entity);
         return ResponseEntity.ok().body(entity);
     }
     @GetMapping
-    public ResponseEntity findAll(){
-        return ResponseEntity.ok(findAll());
+    public ResponseEntity<List<Funcionario>> findAll(){
+        return ResponseEntity.ok().body(funcionarioRepository.findAll());
     }
-
 }
 

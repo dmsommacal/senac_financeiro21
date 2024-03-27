@@ -1,10 +1,17 @@
 package com.rh.financeiro.model;
 
-public class Filiacao {
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
 
+@Entity
+public class Filiacao extends EntityId{
+    @Column
     private String NomePai;
+    @Column
     private String TelefonePai;
+    @Column
     private String NomeMae;
+    @Column
     private String TelefoneMae;
 
     public Filiacao(String nomePai, String telefonePai, String nomeMae, String telefoneMae) {

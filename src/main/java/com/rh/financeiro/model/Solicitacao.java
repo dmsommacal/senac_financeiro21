@@ -1,9 +1,15 @@
 package com.rh.financeiro.model;
 
-public class Solicitacao {
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
 
+@Entity
+public class Solicitacao extends EntityId{
+    @Column
     private Double solicitacao;
+    @Column
     private Boolean aprovacao;
+    @Column
     private String descricao;
 
     public Solicitacao(Double solicitacao, Boolean aprovacao, String descricao) {

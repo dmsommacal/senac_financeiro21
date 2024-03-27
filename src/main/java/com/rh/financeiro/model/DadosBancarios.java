@@ -1,11 +1,16 @@
 package com.rh.financeiro.model;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+
 import java.util.List;
-
-public class DadosBancarios {
-
+@Entity
+public class DadosBancarios extends EntityId{
+    @Column
     private String Banco;
+    @Column
     private String Agencia;
+    @Column
     private String Conta;
     private List<TipoConta> tipoConta;
 

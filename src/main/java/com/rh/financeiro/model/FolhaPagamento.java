@@ -1,10 +1,17 @@
 package com.rh.financeiro.model;
 
-public class FolhaPagamento {
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
 
+@Entity
+public class FolhaPagamento extends EntityId{
+    @Column
     private Double hrtrabalhada;
+    @Column
     private Double INSS;
+    @Column
     private Double IRRF;
+    @Column
     private Double FGTS;
 
     public FolhaPagamento(Double hrtrabalhada, Double INSS, Double IRRF, Double FGTS) {
