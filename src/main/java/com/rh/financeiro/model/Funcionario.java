@@ -1,5 +1,9 @@
 package com.rh.financeiro.model;
 
+import com.rh.financeiro.enums.Escolaridade;
+import com.rh.financeiro.enums.EstadoCivil;
+import com.rh.financeiro.enums.Genero;
+import com.rh.financeiro.enums.Status;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;

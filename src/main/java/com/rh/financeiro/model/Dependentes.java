@@ -1,5 +1,6 @@
 package com.rh.financeiro.model;
 
+import com.rh.financeiro.enums.Escolaridade;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 @Entity

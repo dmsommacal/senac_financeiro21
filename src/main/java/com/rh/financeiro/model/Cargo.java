@@ -1,5 +1,7 @@
 package com.rh.financeiro.model;
 
+import com.rh.financeiro.enums.ModalidadeContratual;
+import com.rh.financeiro.enums.Turno;
 import jakarta.persistence.*;
 
 import java.util.List;

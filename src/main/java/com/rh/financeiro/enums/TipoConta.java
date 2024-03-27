@@ -1,4 +1,4 @@
-package com.rh.financeiro.model;
+package com.rh.financeiro.enums;
 
 public enum TipoConta {
     CORRENTE,

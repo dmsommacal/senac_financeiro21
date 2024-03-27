@@ -1,4 +1,4 @@
-package com.rh.financeiro.model;
+package com.rh.financeiro.enums;
 
 public enum TipoRH {
     A_POSITIVO,
