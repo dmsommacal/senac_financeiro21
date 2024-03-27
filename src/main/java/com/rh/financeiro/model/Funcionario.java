@@ -18,11 +18,11 @@ public class Funcionario extends EntityId{
     @ManyToOne
     @JoinColumn(name = "cargo_id")
     private Cargo cargo;
-    @Column
+    @Column(nullable = false)
     private String Nome;
-    @Column
+    @Column(nullable = false)
     private String CPF;
-    @Column
+    @Column(nullable = false)
     private String RG;
     @Column
     private String Endereco;
@@ -418,7 +418,7 @@ public class Funcionario extends EntityId{
     @Override
     public String toString() {
         return "Funcionario{" +
-                ", experienciaAnterior=" + experienciaAnterior +
+                "experienciaAnterior=" + experienciaAnterior +
                 ", certificacoes=" + certificacoes +
                 ", escolaridade=" + escolaridade +
                 ", estadoCivil=" + estadoCivil +
