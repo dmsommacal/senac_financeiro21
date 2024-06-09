@@ -3,6 +3,7 @@ package rh.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import rh.model.Dependentes;
+import rh.repository.DependentesRepository;
 
 import java.util.List;
 import java.util.Optional;

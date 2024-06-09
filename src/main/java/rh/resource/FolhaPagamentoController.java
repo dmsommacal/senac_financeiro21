@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import rh.model.FolhaPagamento;
+import rh.service.FolhaPagamentoService;
 
 import java.net.URI;
 import java.util.List;
@@ -46,7 +47,7 @@ public class FolhaPagamentoController {
 
     @PutMapping("{id}")
     public ResponseEntity update(@PathVariable("id") Long id, @RequestBody FolhaPagamento entity) {
-        FolhaPagamento folhaPagamento = service.alterar(id, entity);
+        FolhaPagamento alterado = service.alterar(id, entity);
         return ResponseEntity.ok().body(alterado);
     }
 }
