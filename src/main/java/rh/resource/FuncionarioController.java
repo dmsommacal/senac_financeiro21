@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import rh.model.Funcionario;
+import rh.service.FuncionarioService;
 
 import java.net.URI;
 import java.util.List;
@@ -46,7 +47,7 @@ public class FuncionarioController {
 
     @PutMapping("{id}")
     public ResponseEntity update(@PathVariable("id") Long id, @RequestBody Funcionario entity) {
-        Funcionario funcionario = service.alterar(id, entity);
+        Funcionario alterado = service.alterar(id, entity);
         return ResponseEntity.ok().body(alterado);
     }
 }

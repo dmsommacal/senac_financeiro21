@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import rh.model.Filiacao;
+import rh.service.FiliacaoService;
 
 import java.net.URI;
 import java.util.List;
@@ -20,7 +21,7 @@ public class FiliacaoController {
 
     @PostMapping
     public ResponseEntity create(@RequestBody Filiacao entity) {
-        Filiacaoao save = service.salvar(entity);
+        Filiacao save = service.salvar(entity);
         return ResponseEntity.created(URI.create("/api/filiacoes/" + entity.getId())).body(save);
     }
 
@@ -46,7 +47,7 @@ public class FiliacaoController {
 
     @PutMapping("{id}")
     public ResponseEntity update(@PathVariable("id") Long id, @RequestBody Filiacao entity) {
-        Filiacao filiacao = service.alterar(id, entity);
+        Filiacao alterado = service.alterar(id, entity);
         return ResponseEntity.ok().body(alterado);
     }
 }

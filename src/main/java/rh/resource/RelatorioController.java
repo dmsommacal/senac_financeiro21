@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import rh.model.Relatorio;
+import rh.service.RelatorioService;
 
 import java.net.URI;
 import java.util.List;
@@ -46,7 +47,7 @@ public class RelatorioController {
 
     @PutMapping("{id}")
     public ResponseEntity update(@PathVariable("id") Long id, @RequestBody Relatorio entity) {
-        Relatorio relatorio = service.alterar(id, entity);
+        Relatorio alterado = service.alterar(id, entity);
         return ResponseEntity.ok().body(alterado);
     }
 }

@@ -3,6 +3,7 @@ package rh.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import rh.model.DadosBancarios;
+import rh.repository.DadosBancariosRepository;
 
 import java.util.List;
 import java.util.Optional;

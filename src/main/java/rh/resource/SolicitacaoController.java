@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import rh.model.Solicitacao;
+import rh.service.SolicitacaoService;
 
 import java.net.URI;
 import java.util.List;
@@ -46,7 +47,7 @@ public class SolicitacaoController {
 
     @PutMapping("{id}")
     public ResponseEntity update(@PathVariable("id") Long id, @RequestBody Solicitacao entity) {
-        Solicitacao solicitacao = service.alterar(id, entity);
+        Solicitacao alterado = service.alterar(id, entity);
         return ResponseEntity.ok().body(alterado);
     }
 }
