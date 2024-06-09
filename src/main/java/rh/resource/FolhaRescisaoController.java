@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import rh.model.FolhaRescisao;
+import rh.service.FolhaRescisaoService;
 
 import java.net.URI;
 import java.util.List;
@@ -46,7 +47,7 @@ public class FolhaRescisaoController {
 
     @PutMapping("{id}")
     public ResponseEntity update(@PathVariable("id") Long id, @RequestBody FolhaRescisao entity) {
-        FolhaRescisao folhaRescisao = service.alterar(id, entity);
+        FolhaRescisao alterado = service.alterar(id, entity);
         return ResponseEntity.ok().body(alterado);
     }
 }

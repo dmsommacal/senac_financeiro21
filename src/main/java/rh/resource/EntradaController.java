@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import rh.model.Entrada;
+import rh.service.EntradaService;
 
 import java.net.URI;
 import java.util.List;
@@ -46,7 +47,7 @@ public class EntradaController {
 
     @PutMapping("{id}")
     public ResponseEntity update(@PathVariable("id") Long id, @RequestBody Entrada entity) {
-        Entrada entrada = service.alterar(id, entity);
+        Entrada alterado = service.alterar(id, entity);
         return ResponseEntity.ok().body(alterado);
     }
 }
