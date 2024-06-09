@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import rh.model.DadosBancarios;
+import rh.service.DadosBancariosService;
 
 import java.net.URI;
 import java.util.List;
@@ -46,7 +47,7 @@ public class DadosBancariosController {
 
     @PutMapping("{id}")
     public ResponseEntity update(@PathVariable("id") Long id, @RequestBody DadosBancarios entity) {
-        DadosBancarios dadosBancarios = service.alterar(id, entity);
+        DadosBancarios alterado = service.alterar(id, entity);
         return ResponseEntity.ok().body(alterado);
     }
 }

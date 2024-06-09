@@ -3,6 +3,8 @@ package rh.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import rh.model.FolhaRescisao;
+import rh.repository.FolhaPagamentoRepository;
+import rh.repository.FolhaRescisaoRepository;
 
 import java.util.List;
 import java.util.Optional;

@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import rh.model.Cargo;
+import rh.service.CargoService;
 
 import java.net.URI;
 import java.util.List;

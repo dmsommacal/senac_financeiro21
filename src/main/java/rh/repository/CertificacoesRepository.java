@@ -5,7 +5,7 @@ import org.springframework.stereotype.Repository;
 import rh.model.Certificacoes;
 
 @Repository
-public interface CartificacoesRepository extends JpaRepository <Certificacoes, Long> {
+public interface CertificacoesRepository extends JpaRepository <Certificacoes, Long> {
 }
 
 

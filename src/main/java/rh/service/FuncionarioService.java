@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import rh.enterprise.ValidationException;
 import rh.model.Funcionario;
+import rh.repository.FuncionarioRepository;
 
 import java.util.List;
 import java.util.Optional;
