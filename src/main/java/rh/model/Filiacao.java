@@ -6,59 +6,60 @@ import jakarta.persistence.Entity;
 @Entity
 public class Filiacao extends EntityId{
     @Column
-    private String NomePai;
+    private String nomePai;
     @Column
-    private String TelefonePai;
+    private String telefonePai;
     @Column
-    private String NomeMae;
+    private String nomeMae;
     @Column
-    private String TelefoneMae;
+    private String telefoneMae;
 
     public Filiacao(String nomePai, String telefonePai, String nomeMae, String telefoneMae) {
-        NomePai = nomePai;
-        TelefonePai = telefonePai;
-        NomeMae = nomeMae;
-        TelefoneMae = telefoneMae;
+        this.nomePai = nomePai;
+        this.telefonePai = telefonePai;
+        this.nomeMae = nomeMae;
+        this.telefoneMae = telefoneMae;
     }
 
     public String getNomePai() {
-        return NomePai;
+        return nomePai;
     }
 
     public void setNomePai(String nomePai) {
-        NomePai = nomePai;
+        this.nomePai = nomePai;
     }
 
     public String getTelefonePai() {
-        return TelefonePai;
+        return telefonePai;
     }
 
     public void setTelefonePai(String telefonePai) {
-        TelefonePai = telefonePai;
+        this.telefonePai = telefonePai;
     }
 
     public String getNomeMae() {
-        return NomeMae;
+        return nomeMae;
     }
 
     public void setNomeMae(String nomeMae) {
-        NomeMae = nomeMae;
+        this.nomeMae = nomeMae;
     }
 
     public String getTelefoneMae() {
-        return TelefoneMae;
+        return telefoneMae;
     }
 
     public void setTelefoneMae(String telefoneMae) {
-        TelefoneMae = telefoneMae;
+        this.telefoneMae = telefoneMae;
     }
+
     @Override
     public String toString() {
         return "Filiacao{" +
-                "NomePai='" + NomePai + '\'' +
-                ", TelefonePai='" + TelefonePai + '\'' +
-                ", NomeMae='" + NomeMae + '\'' +
-                ", TelefoneMae='" + TelefoneMae + '\'' +
+                "nomePai='" + nomePai + '\'' +
+                ", telefonePai='" + telefonePai + '\'' +
+                ", nomeMae='" + nomeMae + '\'' +
+                ", telefoneMae='" + telefoneMae + '\'' +
                 '}';
     }
 }

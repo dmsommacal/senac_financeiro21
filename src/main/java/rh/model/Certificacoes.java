@@ -10,44 +10,44 @@ import java.time.LocalDate;
 @Entity
 public class Certificacoes extends EntityId{
     @Column
-    private String Nome;
+    private String nome;
     @Column
-    private Double CargaHoraria;
+    private Double cargaHoraria;
     @Column
-    private LocalDate DataEmissao;
+    private LocalDate dataEmissao;
     @ManyToOne
     @JoinColumn(name = "funcionario_id")
     private Funcionario funcionario;
 
     public Certificacoes(String nome, Double cargaHoraria, LocalDate dataEmissao, Funcionario funcionario) {
-        Nome = nome;
-        CargaHoraria = cargaHoraria;
-        DataEmissao = dataEmissao;
+        this.nome = nome;
+        this.cargaHoraria = cargaHoraria;
+        this.dataEmissao = dataEmissao;
         this.funcionario = funcionario;
     }
 
     public String getNome() {
-        return Nome;
+        return nome;
     }
 
     public void setNome(String nome) {
-        Nome = nome;
+        this.nome = nome;
     }
 
     public Double getCargaHoraria() {
-        return CargaHoraria;
+        return cargaHoraria;
     }
 
     public void setCargaHoraria(Double cargaHoraria) {
-        CargaHoraria = cargaHoraria;
+        this.cargaHoraria = cargaHoraria;
     }
 
     public LocalDate getDataEmissao() {
-        return DataEmissao;
+        return dataEmissao;
     }
 
     public void setDataEmissao(LocalDate dataEmissao) {
-        DataEmissao = dataEmissao;
+        this.dataEmissao = dataEmissao;
     }
 
     public Funcionario getFuncionario() {
@@ -61,9 +61,9 @@ public class Certificacoes extends EntityId{
     @Override
     public String toString() {
         return "Certificacoes{" +
-                "Nome='" + Nome + '\'' +
-                ", CargaHoraria=" + CargaHoraria +
-                ", DataEmissao=" + DataEmissao +
+                "nome='" + nome + '\'' +
+                ", cargaHoraria=" + cargaHoraria +
+                ", dataEmissao=" + dataEmissao +
                 ", funcionario=" + funcionario +
                 '}';
     }
