@@ -10,7 +10,7 @@ import java.net.URI;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/folhasRecisoes")
+@RequestMapping("/api/folhas-recisoes")
 
 
 public class FolhaRescisaoController {
@@ -22,7 +22,7 @@ public class FolhaRescisaoController {
     @PostMapping
     public ResponseEntity create(@RequestBody FolhaRescisao entity) {
         FolhaRescisao save = service.salvar(entity);
-        return ResponseEntity.created(URI.create("/api/folhasRecisoes/" + entity.getId())).body(save);
+        return ResponseEntity.created(URI.create("/api/folhas-recisoes/" + entity.getId())).body(save);
     }
 
     @GetMapping
