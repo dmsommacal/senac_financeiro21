@@ -2,7 +2,10 @@ package rh.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import rh.enterprise.ValidationException;
+import rh.model.Saldo;
 import rh.model.Solicitacao;
+import rh.repository.SaldoRepository;
 import rh.repository.SolicitacaoRepository;
 
 import java.util.List;
@@ -14,7 +17,20 @@ public class SolicitacaoService {
     @Autowired
     private SolicitacaoRepository solicitacaoRepository;
 
+    @Autowired
+    private SaldoRepository saldoRepository;
+
     public Solicitacao salvar(Solicitacao entity){
+
+        Saldo saldo = entity.getSaldo();
+
+        if (entity.getValorSolicitado() > saldo.getValorDisponivel()){
+            throw new ValidationException("O saldo solicitado é maior do que o disponível!!!");
+        }
+
+        saldo.setValorDisponivel(saldo.getValorDisponivel() - entity.getValorSolicitado());
+        saldoRepository.save(saldo);
+
         return solicitacaoRepository.save(entity);
     }
 

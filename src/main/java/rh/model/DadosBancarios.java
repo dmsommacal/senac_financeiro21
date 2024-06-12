@@ -9,44 +9,42 @@ import java.util.List;
 @Entity
 public class DadosBancarios extends EntityId{
     @Column
-    private String Banco;
+    private String banco;
     @Column
-    private String Agencia;
+    private String agencia;
     @Column
-    private String Conta;
+    private String conta;
     private List<TipoConta> tipoConta;
 
     public DadosBancarios(String banco, String agencia, String conta, List<TipoConta> tipoConta) {
-        Banco = banco;
-        Agencia = agencia;
-        Conta = conta;
+        this.banco = banco;
+        this.agencia = agencia;
+        this.conta = conta;
         this.tipoConta = tipoConta;
     }
-
     public String getBanco() {
-        return Banco;
+        return banco;
     }
 
     public void setBanco(String banco) {
-        Banco = banco;
+        this.banco = banco;
     }
 
     public String getAgencia() {
-        return Agencia;
+        return agencia;
     }
 
     public void setAgencia(String agencia) {
-        Agencia = agencia;
+        this.agencia = agencia;
     }
 
     public String getConta() {
-        return Conta;
+        return conta;
     }
 
     public void setConta(String conta) {
-        Conta = conta;
+        this.conta = conta;
     }
-
 
     public List<TipoConta> getTipoConta() {
         return tipoConta;
@@ -59,9 +57,9 @@ public class DadosBancarios extends EntityId{
     @Override
     public String toString() {
         return "DadosBancarios{" +
-                "Banco='" + Banco + '\'' +
-                ", Agencia='" + Agencia + '\'' +
-                ", Conta='" + Conta + '\'' +
+                "banco='" + banco + '\'' +
+                ", agencia='" + agencia + '\'' +
+                ", conta='" + conta + '\'' +
                 ", tipoConta=" + tipoConta +
                 '}';
     }
