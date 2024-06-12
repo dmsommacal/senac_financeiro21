@@ -4,7 +4,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import rh.enterprise.ValidationException;
 import rh.model.Entrada;
+import rh.model.Saldo;
 import rh.repository.EntradaRepository;
+import rh.repository.SaldoRepository;
+
 
 import java.util.List;
 import java.util.Optional;
@@ -15,10 +18,20 @@ public class EntradaService {
     @Autowired
     private EntradaRepository entradaRepository;
 
+    @Autowired
+    private SaldoRepository saldoRepository;
+
     public Entrada salvar(Entrada entity){
+
+        Saldo saldo = entity.getSaldo();  // valores financeiros devem utilizar a classe BigDecimal e nunca double
+
         if (entity.getValor() == 0.0 || entity.getDescricao().isBlank()){
             throw new ValidationException("A entrada tem que ter um valor e uma descrição.");
         }
+
+        saldo.setValorDisponivel(saldo.getValorDisponivel() + entity.getValor()); // Isso da pau em sistemas distribuidos
+        saldoRepository.save(saldo);
+
         return entradaRepository.save(entity);
     }
 
@@ -42,4 +55,5 @@ public class EntradaService {
     public void remover(Long id) {
         entradaRepository.deleteById(id);
     }
+
 }

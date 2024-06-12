@@ -26,7 +26,6 @@ public class SolicitacaoController {
     }
 
     @GetMapping
-
     public ResponseEntity findAll() {
         List<Solicitacao> solicitacao = service.buscaTodos();
         return ResponseEntity.ok(solicitacao);

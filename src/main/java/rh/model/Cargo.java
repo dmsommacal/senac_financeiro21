@@ -10,22 +10,22 @@ import java.util.List;
 
 @Entity
 public class Cargo extends EntityId{
-    @OneToMany
+    @OneToMany(mappedBy = "cargo")
     private List<Funcionario> funcionarios;
     @Column
-    private String Descricao;
+    private String descricao;
     @Column
-    private String Nivel;
+    private String nivel;
     @Column
-    private Boolean Comissao;
+    private Boolean comissao;
     private Turno turno;
     private ModalidadeContratual modalidadeContratual;
 
     public Cargo(List<Funcionario> funcionarios, String descricao, String nivel, Boolean comissao, Turno turno, ModalidadeContratual modalidadeContratual) {
         this.funcionarios = funcionarios;
-        Descricao = descricao;
-        Nivel = nivel;
-        Comissao = comissao;
+        this.descricao = descricao;
+        this.nivel = nivel;
+        this.comissao = comissao;
         this.turno = turno;
         this.modalidadeContratual = modalidadeContratual;
     }
@@ -39,27 +39,27 @@ public class Cargo extends EntityId{
     }
 
     public String getDescricao() {
-        return Descricao;
+        return descricao;
     }
 
     public void setDescricao(String descricao) {
-        Descricao = descricao;
+        this.descricao = descricao;
     }
 
     public String getNivel() {
-        return Nivel;
+        return nivel;
     }
 
     public void setNivel(String nivel) {
-        Nivel = nivel;
+        this.nivel = nivel;
     }
 
     public Boolean getComissao() {
-        return Comissao;
+        return comissao;
     }
 
     public void setComissao(Boolean comissao) {
-        Comissao = comissao;
+        this.comissao = comissao;
     }
 
     public Turno getTurno() {
@@ -82,9 +82,9 @@ public class Cargo extends EntityId{
     public String toString() {
         return "Cargo{" +
                 "funcionarios=" + funcionarios +
-                ", Descricao='" + Descricao + '\'' +
-                ", Nivel='" + Nivel + '\'' +
-                ", Comissao=" + Comissao +
+                ", descricao='" + descricao + '\'' +
+                ", nivel='" + nivel + '\'' +
+                ", comissao=" + comissao +
                 ", turno=" + turno +
                 ", modalidadeContratual=" + modalidadeContratual +
                 '}';

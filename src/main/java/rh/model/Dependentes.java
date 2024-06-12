@@ -7,24 +7,24 @@ import rh.enums.Escolaridade;
 @Entity
 public class Dependentes extends EntityId{
     @Column
-    private String Nome;
+    private String nome;
     @Column
     private Escolaridade escolaridade;
     @Column
-    private String DataNascimento;
+    private String dataNascimento;
 
     public Dependentes(String nome, Escolaridade escolaridade, String dataNascimento) {
-        Nome = nome;
+        this.nome = nome;
         this.escolaridade = escolaridade;
-        DataNascimento = dataNascimento;
+        this.dataNascimento = dataNascimento;
     }
 
     public String getNome() {
-        return Nome;
+        return nome;
     }
 
     public void setNome(String nome) {
-        Nome = nome;
+        this.nome = nome;
     }
 
     public Escolaridade getEscolaridade() {
@@ -36,19 +36,19 @@ public class Dependentes extends EntityId{
     }
 
     public String getDataNascimento() {
-        return DataNascimento;
+        return dataNascimento;
     }
 
     public void setDataNascimento(String dataNascimento) {
-        DataNascimento = dataNascimento;
+        this.dataNascimento = dataNascimento;
     }
 
     @Override
     public String toString() {
         return "Dependentes{" +
-                "Nome='" + Nome + '\'' +
+                "nome='" + nome + '\'' +
                 ", escolaridade=" + escolaridade +
-                ", DataNascimento='" + DataNascimento + '\'' +
+                ", dataNascimento='" + dataNascimento + '\'' +
                 '}';
     }
 }

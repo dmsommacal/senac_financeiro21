@@ -13,20 +13,20 @@ public class ExperienciaAnterior extends EntityId{
     @JoinColumn(name = "funcionario_id")
     private Funcionario funcionario;
     @Column
-    private String Descricao;
+    private String descricao;
     @Column
-    private String Cargo;
+    private String cargo;
     @Column
-    private LocalDate PeriodoInicial;
+    private LocalDate periodoInicial;
     @Column
-    private LocalDate PeriodoFinal;
+    private LocalDate periodoFinal;
 
     public ExperienciaAnterior(Funcionario funcionario, String descricao, String cargo, LocalDate periodoInicial, LocalDate periodoFinal) {
         this.funcionario = funcionario;
-        Descricao = descricao;
-        Cargo = cargo;
-        PeriodoInicial = periodoInicial;
-        PeriodoFinal = periodoFinal;
+        this.descricao = descricao;
+        this.cargo = cargo;
+        this.periodoInicial = periodoInicial;
+        this.periodoFinal = periodoFinal;
     }
 
     public Funcionario getFuncionario() {
@@ -38,45 +38,45 @@ public class ExperienciaAnterior extends EntityId{
     }
 
     public String getDescricao() {
-        return Descricao;
+        return descricao;
     }
 
     public void setDescricao(String descricao) {
-        Descricao = descricao;
+        this.descricao = descricao;
     }
 
     public String getCargo() {
-        return Cargo;
+        return cargo;
     }
 
     public void setCargo(String cargo) {
-        Cargo = cargo;
+        this.cargo = cargo;
     }
 
     public LocalDate getPeriodoInicial() {
-        return PeriodoInicial;
+        return periodoInicial;
     }
 
     public void setPeriodoInicial(LocalDate periodoInicial) {
-        PeriodoInicial = periodoInicial;
+        this.periodoInicial = periodoInicial;
     }
 
     public LocalDate getPeriodoFinal() {
-        return PeriodoFinal;
+        return periodoFinal;
     }
 
     public void setPeriodoFinal(LocalDate periodoFinal) {
-        PeriodoFinal = periodoFinal;
+        this.periodoFinal = periodoFinal;
     }
 
     @Override
     public String toString() {
         return "ExperienciaAnterior{" +
                 "funcionario=" + funcionario +
-                ", Descricao='" + Descricao + '\'' +
-                ", Cargo='" + Cargo + '\'' +
-                ", PeriodoInicial=" + PeriodoInicial +
-                ", PeriodoFinal=" + PeriodoFinal +
+                ", descricao='" + descricao + '\'' +
+                ", cargo='" + cargo + '\'' +
+                ", periodoInicial=" + periodoInicial +
+                ", periodoFinal=" + periodoFinal +
                 '}';
     }
 }

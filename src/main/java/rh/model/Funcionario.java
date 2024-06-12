@@ -12,9 +12,9 @@ import java.util.List;
 
 @Entity
 public class Funcionario extends EntityId{
-    @OneToMany
-    private List<ExperienciaAnterior> experienciaAnterior;
-    @OneToMany
+    @OneToMany(mappedBy = "funcionario")
+    private List<ExperienciaAnterior> experienciasAnteriores;
+    @OneToMany(mappedBy = "funcionario")
     private List<Certificacoes> certificacoes;
     private Escolaridade escolaridade;
     private EstadoCivil estadoCivil;
@@ -24,115 +24,115 @@ public class Funcionario extends EntityId{
     @JoinColumn(name = "cargo_id")
     private Cargo cargo;
     @Column(nullable = false)
-    private String Nome;
+    private String nome;
     @Column(nullable = false)
-    private String CPF;
+    private String cpf;
     @Column(nullable = false)
-    private String RG;
+    private String rg;
     @Column
-    private String Endereco;
+    private String endereco;
     @Column
-    private String CTPS;
+    private String ctps;
     @Column
-    private Double SalarioContratual;
+    private Double salarioContratual;
     @Column
-    private Integer CargaHoraria;
+    private Integer cargaHoraria;
     @Column
-    private String FonePessoal;
+    private String fonePessoal;
     @Column
-    private String FoneRecados;
+    private String foneRecados;
     @Column
-    private String Titulo;
+    private String titulo;
     @Column
-    private String CarteiraDeReservista;
+    private String carteiraReservista;
     @Column
-    private LocalDate DataNascimento;
+    private LocalDate dataNascimento;
     @Column
-    private String Pis;
+    private String pis;
     @Column
-    private String RegistroProfissional;
+    private String registroProfissional;
     @Column
-    private String Email;
+    private String email;
     @Column
-    private String Sindicato;
+    private String sindicato;
     @Column
-    private String Setor;
+    private String setor;
     @Column
-    private String CNH;
+    private String cnh;
     @Column
-    private LocalDate DataAdmissao;
+    private LocalDate dataAdmissao;
     @Column
-    private String RacaCor;
+    private String racaCor;
     @Column
-    private String Religiao;
+    private String religiao;
     @Column
-    private Boolean DoadorSangue;
+    private Boolean doadorSangue;
     @Column
-    private String Nacionalidade;
+    private String nacionalidade;
     @Column
-    private String RedeSocial;
+    private String redeSocial;
     @Column
-    private String AreaAtuacao;
+    private String areaAtuacao;
     @Column
-    private String Matricula;
+    private String matricula;
     @Column
-    private String Idiomas;
+    private String idiomas;
     @Column
-    private Integer HoraExtra;
+    private Integer horaExtra;
     @Column
-    private LocalTime HoraEntrada;
+    private LocalTime horaEntrada;
     @Column
-    private LocalTime HoraSaida;
+    private LocalTime horaSaida;
 
     public Funcionario() {
     }
 
-    public Funcionario(List<ExperienciaAnterior> experienciaAnterior, List<Certificacoes> certificacoes, Escolaridade escolaridade, EstadoCivil estadoCivil, Genero genero, Status status, Cargo cargo, String nome, String CPF, String RG, String endereco, String CTPS, Double salarioContratual, Integer cargaHoraria, String fonePessoal, String foneRecados, String titulo, String carteiraDeReservista, LocalDate dataNascimento, String pis, String registroProfissional, String email, String sindicato, String setor, String CNH, LocalDate dataAdmissao, String racaCor, String religiao, Boolean doadorSangue, String nacionalidade, String redeSocial, String areaAtuacao, String matricula, String idiomas, Integer horaExtra, LocalTime horaEntrada, LocalTime horaSaida) {
-        this.experienciaAnterior = experienciaAnterior;
+    public Funcionario(List<ExperienciaAnterior> experienciasAnteriores, List<Certificacoes> certificacoes, Escolaridade escolaridade, EstadoCivil estadoCivil, Genero genero, Status status, Cargo cargo, String nome, String cpf, String rg, String endereco, String ctps, Double salarioContratual, Integer cargaHoraria, String fonePessoal, String foneRecados, String titulo, String carteiraReservista, LocalDate dataNascimento, String pis, String registroProfissional, String email, String sindicato, String setor, String cnh, LocalDate dataAdmissao, String racaCor, String religiao, Boolean doadorSangue, String nacionalidade, String redeSocial, String areaAtuacao, String matricula, String idiomas, Integer horaExtra, LocalTime horaEntrada, LocalTime horaSaida) {
+        this.experienciasAnteriores = experienciasAnteriores;
         this.certificacoes = certificacoes;
         this.escolaridade = escolaridade;
         this.estadoCivil = estadoCivil;
         this.genero = genero;
         this.status = status;
         this.cargo = cargo;
-        Nome = nome;
-        this.CPF = CPF;
-        this.RG = RG;
-        Endereco = endereco;
-        this.CTPS = CTPS;
-        SalarioContratual = salarioContratual;
-        CargaHoraria = cargaHoraria;
-        FonePessoal = fonePessoal;
-        FoneRecados = foneRecados;
-        Titulo = titulo;
-        CarteiraDeReservista = carteiraDeReservista;
-        DataNascimento = dataNascimento;
-        Pis = pis;
-        RegistroProfissional = registroProfissional;
-        Email = email;
-        Sindicato = sindicato;
-        Setor = setor;
-        this.CNH = CNH;
-        DataAdmissao = dataAdmissao;
-        RacaCor = racaCor;
-        Religiao = religiao;
-        DoadorSangue = doadorSangue;
-        Nacionalidade = nacionalidade;
-        RedeSocial = redeSocial;
-        AreaAtuacao = areaAtuacao;
-        Matricula = matricula;
-        Idiomas = idiomas;
-        HoraExtra = horaExtra;
-        HoraEntrada = horaEntrada;
-        HoraSaida = horaSaida;
+        this.nome = nome;
+        this.cpf = cpf;
+        this.rg = rg;
+        this.endereco = endereco;
+        this.ctps = ctps;
+        this.salarioContratual = salarioContratual;
+        this.cargaHoraria = cargaHoraria;
+        this.fonePessoal = fonePessoal;
+        this.foneRecados = foneRecados;
+        this.titulo = titulo;
+        this.carteiraReservista = carteiraReservista;
+        this.dataNascimento = dataNascimento;
+        this.pis = pis;
+        this.registroProfissional = registroProfissional;
+        this.email = email;
+        this.sindicato = sindicato;
+        this.setor = setor;
+        this.cnh = cnh;
+        this.dataAdmissao = dataAdmissao;
+        this.racaCor = racaCor;
+        this.religiao = religiao;
+        this.doadorSangue = doadorSangue;
+        this.nacionalidade = nacionalidade;
+        this.redeSocial = redeSocial;
+        this.areaAtuacao = areaAtuacao;
+        this.matricula = matricula;
+        this.idiomas = idiomas;
+        this.horaExtra = horaExtra;
+        this.horaEntrada = horaEntrada;
+        this.horaSaida = horaSaida;
     }
 
-    public List<ExperienciaAnterior> getExperienciaAnterior() {
-        return experienciaAnterior;
+    public List<ExperienciaAnterior> getExperienciasAnteriores() {
+        return experienciasAnteriores;
     }
 
-    public void setExperienciaAnterior(List<ExperienciaAnterior> experienciaAnterior) {
-        this.experienciaAnterior = experienciaAnterior;
+    public void setExperienciasAnteriores(List<ExperienciaAnterior> experienciasAnteriores) {
+        this.experienciasAnteriores = experienciasAnteriores;
     }
 
     public List<Certificacoes> getCertificacoes() {
@@ -184,285 +184,285 @@ public class Funcionario extends EntityId{
     }
 
     public String getNome() {
-        return Nome;
+        return nome;
     }
 
     public void setNome(String nome) {
-        Nome = nome;
+        this.nome = nome;
     }
 
-    public String getCPF() {
-        return CPF;
+    public String getCpf() {
+        return cpf;
     }
 
-    public void setCPF(String CPF) {
-        this.CPF = CPF;
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
     }
 
-    public String getRG() {
-        return RG;
+    public String getRg() {
+        return rg;
     }
 
-    public void setRG(String RG) {
-        this.RG = RG;
+    public void setRg(String rg) {
+        this.rg = rg;
     }
 
     public String getEndereco() {
-        return Endereco;
+        return endereco;
     }
 
     public void setEndereco(String endereco) {
-        Endereco = endereco;
+        this.endereco = endereco;
     }
 
-    public String getCTPS() {
-        return CTPS;
+    public String getCtps() {
+        return ctps;
     }
 
-    public void setCTPS(String CTPS) {
-        this.CTPS = CTPS;
+    public void setCtps(String ctps) {
+        this.ctps = ctps;
     }
 
     public Double getSalarioContratual() {
-        return SalarioContratual;
+        return salarioContratual;
     }
 
     public void setSalarioContratual(Double salarioContratual) {
-        SalarioContratual = salarioContratual;
+        this.salarioContratual = salarioContratual;
     }
 
     public Integer getCargaHoraria() {
-        return CargaHoraria;
+        return cargaHoraria;
     }
 
     public void setCargaHoraria(Integer cargaHoraria) {
-        CargaHoraria = cargaHoraria;
+        this.cargaHoraria = cargaHoraria;
     }
 
     public String getFonePessoal() {
-        return FonePessoal;
+        return fonePessoal;
     }
 
     public void setFonePessoal(String fonePessoal) {
-        FonePessoal = fonePessoal;
+        this.fonePessoal = fonePessoal;
     }
 
     public String getFoneRecados() {
-        return FoneRecados;
+        return foneRecados;
     }
 
     public void setFoneRecados(String foneRecados) {
-        FoneRecados = foneRecados;
+        this.foneRecados = foneRecados;
     }
 
     public String getTitulo() {
-        return Titulo;
+        return titulo;
     }
 
     public void setTitulo(String titulo) {
-        Titulo = titulo;
+        this.titulo = titulo;
     }
 
-    public String getCarteiraDeReservista() {
-        return CarteiraDeReservista;
+    public String getCarteiraReservista() {
+        return carteiraReservista;
     }
 
-    public void setCarteiraDeReservista(String carteiraDeReservista) {
-        CarteiraDeReservista = carteiraDeReservista;
+    public void setCarteiraReservista(String carteiraReservista) {
+        this.carteiraReservista = carteiraReservista;
     }
 
     public LocalDate getDataNascimento() {
-        return DataNascimento;
+        return dataNascimento;
     }
 
     public void setDataNascimento(LocalDate dataNascimento) {
-        DataNascimento = dataNascimento;
+        this.dataNascimento = dataNascimento;
     }
 
     public String getPis() {
-        return Pis;
+        return pis;
     }
 
     public void setPis(String pis) {
-        Pis = pis;
+        this.pis = pis;
     }
 
     public String getRegistroProfissional() {
-        return RegistroProfissional;
+        return registroProfissional;
     }
 
     public void setRegistroProfissional(String registroProfissional) {
-        RegistroProfissional = registroProfissional;
+        this.registroProfissional = registroProfissional;
     }
 
     public String getEmail() {
-        return Email;
+        return email;
     }
 
     public void setEmail(String email) {
-        Email = email;
+        this.email = email;
     }
 
     public String getSindicato() {
-        return Sindicato;
+        return sindicato;
     }
 
     public void setSindicato(String sindicato) {
-        Sindicato = sindicato;
+        this.sindicato = sindicato;
     }
 
     public String getSetor() {
-        return Setor;
+        return setor;
     }
 
     public void setSetor(String setor) {
-        Setor = setor;
+        this.setor = setor;
     }
 
-    public String getCNH() {
-        return CNH;
+    public String getCnh() {
+        return cnh;
     }
 
-    public void setCNH(String CNH) {
-        this.CNH = CNH;
+    public void setCnh(String cnh) {
+        this.cnh = cnh;
     }
 
     public LocalDate getDataAdmissao() {
-        return DataAdmissao;
+        return dataAdmissao;
     }
 
     public void setDataAdmissao(LocalDate dataAdmissao) {
-        DataAdmissao = dataAdmissao;
+        this.dataAdmissao = dataAdmissao;
     }
 
     public String getRacaCor() {
-        return RacaCor;
+        return racaCor;
     }
 
     public void setRacaCor(String racaCor) {
-        RacaCor = racaCor;
+        this.racaCor = racaCor;
     }
 
     public String getReligiao() {
-        return Religiao;
+        return religiao;
     }
 
     public void setReligiao(String religiao) {
-        Religiao = religiao;
+        this.religiao = religiao;
     }
 
     public Boolean getDoadorSangue() {
-        return DoadorSangue;
+        return doadorSangue;
     }
 
     public void setDoadorSangue(Boolean doadorSangue) {
-        DoadorSangue = doadorSangue;
+        this.doadorSangue = doadorSangue;
     }
 
     public String getNacionalidade() {
-        return Nacionalidade;
+        return nacionalidade;
     }
 
     public void setNacionalidade(String nacionalidade) {
-        Nacionalidade = nacionalidade;
+        this.nacionalidade = nacionalidade;
     }
 
     public String getRedeSocial() {
-        return RedeSocial;
+        return redeSocial;
     }
 
     public void setRedeSocial(String redeSocial) {
-        RedeSocial = redeSocial;
+        this.redeSocial = redeSocial;
     }
 
     public String getAreaAtuacao() {
-        return AreaAtuacao;
+        return areaAtuacao;
     }
 
     public void setAreaAtuacao(String areaAtuacao) {
-        AreaAtuacao = areaAtuacao;
+        this.areaAtuacao = areaAtuacao;
     }
 
     public String getMatricula() {
-        return Matricula;
+        return matricula;
     }
 
     public void setMatricula(String matricula) {
-        Matricula = matricula;
+        this.matricula = matricula;
     }
 
     public String getIdiomas() {
-        return Idiomas;
+        return idiomas;
     }
 
     public void setIdiomas(String idiomas) {
-        Idiomas = idiomas;
+        this.idiomas = idiomas;
     }
 
     public Integer getHoraExtra() {
-        return HoraExtra;
+        return horaExtra;
     }
 
     public void setHoraExtra(Integer horaExtra) {
-        HoraExtra = horaExtra;
+        this.horaExtra = horaExtra;
     }
 
     public LocalTime getHoraEntrada() {
-        return HoraEntrada;
+        return horaEntrada;
     }
 
     public void setHoraEntrada(LocalTime horaEntrada) {
-        HoraEntrada = horaEntrada;
+        this.horaEntrada = horaEntrada;
     }
 
     public LocalTime getHoraSaida() {
-        return HoraSaida;
+        return horaSaida;
     }
 
     public void setHoraSaida(LocalTime horaSaida) {
-        HoraSaida = horaSaida;
+        this.horaSaida = horaSaida;
     }
 
     @Override
     public String toString() {
         return "Funcionario{" +
-                "experienciaAnterior=" + experienciaAnterior +
+                "experienciasAnteriores=" + experienciasAnteriores +
                 ", certificacoes=" + certificacoes +
                 ", escolaridade=" + escolaridade +
                 ", estadoCivil=" + estadoCivil +
                 ", genero=" + genero +
                 ", status=" + status +
                 ", cargo=" + cargo +
-                ", Nome='" + Nome + '\'' +
-                ", CPF='" + CPF + '\'' +
-                ", RG='" + RG + '\'' +
-                ", Endereco='" + Endereco + '\'' +
-                ", CTPS='" + CTPS + '\'' +
-                ", SalarioContratual=" + SalarioContratual +
-                ", CargaHoraria=" + CargaHoraria +
-                ", FonePessoal='" + FonePessoal + '\'' +
-                ", FoneRecados='" + FoneRecados + '\'' +
-                ", Titulo='" + Titulo + '\'' +
-                ", CarteiraDeReservista='" + CarteiraDeReservista + '\'' +
-                ", DataNascimento=" + DataNascimento +
-                ", Pis='" + Pis + '\'' +
-                ", RegistroProfissional='" + RegistroProfissional + '\'' +
-                ", Email='" + Email + '\'' +
-                ", Sindicato='" + Sindicato + '\'' +
-                ", Setor='" + Setor + '\'' +
-                ", CNH='" + CNH + '\'' +
-                ", DataAdmissao=" + DataAdmissao +
-                ", RacaCor='" + RacaCor + '\'' +
-                ", Religiao='" + Religiao + '\'' +
-                ", DoadorSangue=" + DoadorSangue +
-                ", Nacionalidade='" + Nacionalidade + '\'' +
-                ", RedeSocial='" + RedeSocial + '\'' +
-                ", AreaAtuacao='" + AreaAtuacao + '\'' +
-                ", Matricula='" + Matricula + '\'' +
-                ", Idiomas='" + Idiomas + '\'' +
-                ", HoraExtra=" + HoraExtra +
-                ", HoraEntrada=" + HoraEntrada +
-                ", HoraSaida=" + HoraSaida +
+                ", nome='" + nome + '\'' +
+                ", cpf='" + cpf + '\'' +
+                ", rg='" + rg + '\'' +
+                ", endereco='" + endereco + '\'' +
+                ", ctps='" + ctps + '\'' +
+                ", salarioContratual=" + salarioContratual +
+                ", cargaHoraria=" + cargaHoraria +
+                ", fonePessoal='" + fonePessoal + '\'' +
+                ", foneRecados='" + foneRecados + '\'' +
+                ", titulo='" + titulo + '\'' +
+                ", carteiraReservista='" + carteiraReservista + '\'' +
+                ", dataNascimento=" + dataNascimento +
+                ", pis='" + pis + '\'' +
+                ", registroProfissional='" + registroProfissional + '\'' +
+                ", email='" + email + '\'' +
+                ", sindicato='" + sindicato + '\'' +
+                ", setor='" + setor + '\'' +
+                ", cnh='" + cnh + '\'' +
+                ", dataAdmissao=" + dataAdmissao +
+                ", racaCor='" + racaCor + '\'' +
+                ", religiao='" + religiao + '\'' +
+                ", doadorSangue=" + doadorSangue +
+                ", nacionalidade='" + nacionalidade + '\'' +
+                ", redeSocial='" + redeSocial + '\'' +
+                ", areaAtuacao='" + areaAtuacao + '\'' +
+                ", matricula='" + matricula + '\'' +
+                ", idiomas='" + idiomas + '\'' +
+                ", horaExtra=" + horaExtra +
+                ", horaEntrada=" + horaEntrada +
+                ", horaSaida=" + horaSaida +
                 '}';
     }
 }
