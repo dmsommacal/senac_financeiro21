@@ -6,60 +6,60 @@ import jakarta.persistence.Entity;
 @Entity
 public class FolhaPagamento extends EntityId{
     @Column
-    private Double hrtrabalhada;
+    private Double horaTrabalhada;
     @Column
-    private Double INSS;
+    private Double inss;
     @Column
-    private Double IRRF;
+    private Double irrf;
     @Column
-    private Double FGTS;
+    private Double fgts;
 
-    public FolhaPagamento(Double hrtrabalhada, Double INSS, Double IRRF, Double FGTS) {
-        this.hrtrabalhada = hrtrabalhada;
-        this.INSS = INSS;
-        this.IRRF = IRRF;
-        this.FGTS = FGTS;
+    public FolhaPagamento(Double horaTrabalhada, Double inss, Double irrf, Double fgts) {
+        this.horaTrabalhada = horaTrabalhada;
+        this.inss = inss;
+        this.irrf = irrf;
+        this.fgts = fgts;
     }
 
-    public Double getHrtrabalhada() {
-        return hrtrabalhada;
+    public Double getHoraTrabalhada() {
+        return horaTrabalhada;
     }
 
-    public void setHrtrabalhada(Double hrtrabalhada) {
-        this.hrtrabalhada = hrtrabalhada;
+    public void setHoraTrabalhada(Double horaTrabalhada) {
+        this.horaTrabalhada = horaTrabalhada;
     }
 
-    public Double getINSS() {
-        return INSS;
+    public Double getInss() {
+        return inss;
     }
 
-    public void setINSS(Double INSS) {
-        this.INSS = INSS;
+    public void setInss(Double inss) {
+        this.inss = inss;
     }
 
-    public Double getIRRF() {
-        return IRRF;
+    public Double getIrrf() {
+        return irrf;
     }
 
-    public void setIRRF(Double IRRF) {
-        this.IRRF = IRRF;
+    public void setIrrf(Double irrf) {
+        this.irrf = irrf;
     }
 
-    public Double getFGTS() {
-        return FGTS;
+    public Double getFgts() {
+        return fgts;
     }
 
-    public void setFGTS(Double FGTS) {
-        this.FGTS = FGTS;
+    public void setFgts(Double fgts) {
+        this.fgts = fgts;
     }
 
     @Override
     public String toString() {
         return "FolhaPagamento{" +
-                "hrtrabalhada=" + hrtrabalhada +
-                ", INSS=" + INSS +
-                ", IRRF=" + IRRF +
-                ", FGTS=" + FGTS +
+                "horaTrabalhada=" + horaTrabalhada +
+                ", inss=" + inss +
+                ", irrf=" + irrf +
+                ", fgts=" + fgts +
                 '}';
     }
 }
