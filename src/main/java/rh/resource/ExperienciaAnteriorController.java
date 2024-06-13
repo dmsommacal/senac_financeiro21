@@ -13,7 +13,7 @@ import java.util.List;
 @RequestMapping("/api/experienciaAnteriores")
 
 
-public class ExperienciaAnteriorController {
+public class ExperienciaAnteriorController extends AbstractController{
 
     @Autowired
     private ExperienciaAnteriorService service;

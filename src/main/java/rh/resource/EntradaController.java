@@ -13,7 +13,7 @@ import java.util.List;
 @RequestMapping("/api/entradas")
 
 
-public class EntradaController {
+public class EntradaController extends AbstractController{
 
     @Autowired
     private EntradaService service;

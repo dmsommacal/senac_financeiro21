@@ -13,7 +13,7 @@ import java.util.List;
 @RequestMapping("/api/dadosBancarios")
 
 
-public class DadosBancariosController {
+public class DadosBancariosController extends AbstractController{
 
     @Autowired
     private DadosBancariosService service;

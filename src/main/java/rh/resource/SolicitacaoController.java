@@ -13,7 +13,7 @@ import java.util.List;
 @RequestMapping("/api/solicitacoes")
 
 
-public class SolicitacaoController {
+public class SolicitacaoController extends AbstractController{
 
     @Autowired
     private SolicitacaoService service;
