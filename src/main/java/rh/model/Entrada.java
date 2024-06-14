@@ -64,15 +64,6 @@ public class Entrada extends EntityId{
     public void setDescricao(String descricao) {
         this.descricao = descricao;
     }
-
-    public Saldo getSaldo() {
-        return saldo;
-    }
-
-    public void setSaldo(Saldo saldo) {
-        this.saldo = saldo;
-    }
-
     @Override
     public String toString() {
         return "Entrada{" +

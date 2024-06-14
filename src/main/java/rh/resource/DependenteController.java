@@ -3,8 +3,8 @@ package rh.resource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import rh.model.Dependentes;
-import rh.service.DependentesService;
+import rh.model.Dependente;
+import rh.service.DependenteService;
 
 import java.net.URI;
 import java.util.List;
@@ -13,29 +13,29 @@ import java.util.List;
 @RequestMapping("/api/dependentes")
 
 
-public class DependentesController extends AbstractController{
+public class DependenteController extends AbstractController{
 
     @Autowired
-    private DependentesService service;
+    private DependenteService service;
 
 
     @PostMapping
-    public ResponseEntity create(@RequestBody Dependentes entity) {
-        Dependentes save = service.salvar(entity);
+    public ResponseEntity create(@RequestBody Dependente entity) {
+        Dependente save = service.salvar(entity);
         return ResponseEntity.created(URI.create("/api/dependentes/" + entity.getId())).body(save);
     }
 
     @GetMapping
 
     public ResponseEntity findAll() {
-        List<Dependentes> dependentes = service.buscaTodos();
+        List<Dependente> dependentes = service.buscaTodos();
         return ResponseEntity.ok(dependentes);
     }
 
     @GetMapping("{id}")
     public ResponseEntity findById(@PathVariable("id") Long id) {
-        Dependentes dependentes = service.buscaPorId(id);
-        return ResponseEntity.ok(dependentes);
+        Dependente dependente = service.buscaPorId(id);
+        return ResponseEntity.ok(dependente);
     }
 
 
@@ -46,8 +46,8 @@ public class DependentesController extends AbstractController{
     }
 
     @PutMapping("{id}")
-    public ResponseEntity update(@PathVariable("id") Long id, @RequestBody Dependentes entity) {
-        Dependentes alterado = service.alterar(id, entity);
+    public ResponseEntity update(@PathVariable("id") Long id, @RequestBody Dependente entity) {
+        Dependente alterado = service.alterar(id, entity);
         return ResponseEntity.ok().body(alterado);
     }
 }

@@ -15,7 +15,7 @@ public class Funcionario extends EntityId{
     @OneToMany(mappedBy = "funcionario")
     private List<ExperienciaAnterior> experienciasAnteriores;
     @OneToMany(mappedBy = "funcionario")
-    private List<Certificacoes> certificacoes;
+    private List<Certificacao> certificacoes;
     private Escolaridade escolaridade;
     private EstadoCivil estadoCivil;
     private Genero genero;
@@ -87,7 +87,7 @@ public class Funcionario extends EntityId{
     public Funcionario() {
     }
 
-    public Funcionario(List<ExperienciaAnterior> experienciasAnteriores, List<Certificacoes> certificacoes, Escolaridade escolaridade, EstadoCivil estadoCivil, Genero genero, Status status, Cargo cargo, String nome, String cpf, String rg, String endereco, String ctps, Double salarioContratual, Integer cargaHoraria, String fonePessoal, String foneRecados, String titulo, String carteiraReservista, LocalDate dataNascimento, String pis, String registroProfissional, String email, String sindicato, String setor, String cnh, LocalDate dataAdmissao, String racaCor, String religiao, Boolean doadorSangue, String nacionalidade, String redeSocial, String areaAtuacao, String matricula, String idiomas, Integer horaExtra, LocalTime horaEntrada, LocalTime horaSaida) {
+    public Funcionario(List<ExperienciaAnterior> experienciasAnteriores, List<Certificacao> certificacoes, Escolaridade escolaridade, EstadoCivil estadoCivil, Genero genero, Status status, Cargo cargo, String nome, String cpf, String rg, String endereco, String ctps, Double salarioContratual, Integer cargaHoraria, String fonePessoal, String foneRecados, String titulo, String carteiraReservista, LocalDate dataNascimento, String pis, String registroProfissional, String email, String sindicato, String setor, String cnh, LocalDate dataAdmissao, String racaCor, String religiao, Boolean doadorSangue, String nacionalidade, String redeSocial, String areaAtuacao, String matricula, String idiomas, Integer horaExtra, LocalTime horaEntrada, LocalTime horaSaida) {
         this.experienciasAnteriores = experienciasAnteriores;
         this.certificacoes = certificacoes;
         this.escolaridade = escolaridade;
@@ -135,11 +135,11 @@ public class Funcionario extends EntityId{
         this.experienciasAnteriores = experienciasAnteriores;
     }
 
-    public List<Certificacoes> getCertificacoes() {
+    public List<Certificacao> getCertificacoes() {
         return certificacoes;
     }
 
-    public void setCertificacoes(List<Certificacoes> certificacoes) {
+    public void setCertificacoes(List<Certificacao> certificacoes) {
         this.certificacoes = certificacoes;
     }
 
