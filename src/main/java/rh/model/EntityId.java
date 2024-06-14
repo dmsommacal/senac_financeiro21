@@ -5,7 +5,7 @@ import jakarta.persistence.*;
 @MappedSuperclass
 public class EntityId {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY  )
     @Column(name = "id", nullable = false)
 
     private Long id;

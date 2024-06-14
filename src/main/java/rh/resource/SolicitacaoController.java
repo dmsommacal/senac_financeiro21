@@ -11,13 +11,10 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/solicitacoes")
-
-
 public class SolicitacaoController extends AbstractController{
 
     @Autowired
     private SolicitacaoService service;
-
 
     @PostMapping
     public ResponseEntity create(@RequestBody Solicitacao entity) {

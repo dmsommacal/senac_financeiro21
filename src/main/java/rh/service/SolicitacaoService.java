@@ -1,5 +1,6 @@
 package rh.service;
 
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import rh.enterprise.ValidationException;
@@ -8,6 +9,7 @@ import rh.model.Solicitacao;
 import rh.repository.SaldoRepository;
 import rh.repository.SolicitacaoRepository;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 
@@ -20,17 +22,14 @@ public class SolicitacaoService {
     @Autowired
     private SaldoRepository saldoRepository;
 
-    public Solicitacao salvar(Solicitacao entity){
+    @Transactional
+    public Solicitacao salvar(Solicitacao entity) {
 
-        Saldo saldo = entity.getSaldo();
-
-        if (entity.getValorSolicitado() > saldo.getValorDisponivel()){
-            throw new ValidationException("O saldo solicitado é maior do que o disponível!!!");
-        }
-
-        saldo.setValorDisponivel(saldo.getValorDisponivel() - entity.getValorSolicitado());
+        Saldo saldo = saldoRepository.findById(1L).orElseThrow(() -> new ValidationException("Saldo não identificado!"));
+        saldo.setValorDisponivel(saldo.getValorDisponivel().subtract(entity.getValorSolicitado()));
         saldoRepository.save(saldo);
 
+        entity.setSaldo(saldo);
         return solicitacaoRepository.save(entity);
     }
 

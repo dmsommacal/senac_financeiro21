@@ -2,17 +2,22 @@ package rh.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import rh.enterprise.ValidationException;
 import rh.model.Saldo;
 import rh.repository.SaldoRepository;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 @Service
 public class SaldoService {
     @Autowired
     private SaldoRepository saldoRepository;
-
+  
     public Saldo salvar(Saldo entity){
+        if (entity.getValorDisponivel() != null && entity.getValorDisponivel().compareTo(BigDecimal.ZERO) != 0){
+            throw new ValidationException("Já existe um saldo cadastrado!");
+        }
         return saldoRepository.save(entity);
     }
     public List<Saldo> buscaTodos(){

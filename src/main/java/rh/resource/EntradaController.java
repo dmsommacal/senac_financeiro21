@@ -11,8 +11,6 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/entradas")
-
-
 public class EntradaController extends AbstractController{
 
     @Autowired

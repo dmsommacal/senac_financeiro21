@@ -10,7 +10,7 @@ import java.net.URI;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/dadosBancarios")
+@RequestMapping("/api/dados-bancarios")
 
 
 public class DadosBancariosController extends AbstractController{
@@ -22,7 +22,7 @@ public class DadosBancariosController extends AbstractController{
     @PostMapping
     public ResponseEntity create(@RequestBody DadosBancarios entity) {
         DadosBancarios save = service.salvar(entity);
-        return ResponseEntity.created(URI.create("/api/dadosBancarios/" + entity.getId())).body(save);
+        return ResponseEntity.created(URI.create("/api/dados-bancarios/" + entity.getId())).body(save);
     }
 
     @GetMapping

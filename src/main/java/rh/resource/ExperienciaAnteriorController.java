@@ -10,7 +10,7 @@ import java.net.URI;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/experienciaAnteriores")
+@RequestMapping("/api/experiencias-anteriores")
 
 
 public class ExperienciaAnteriorController extends AbstractController{
@@ -22,7 +22,7 @@ public class ExperienciaAnteriorController extends AbstractController{
     @PostMapping
     public ResponseEntity create(@RequestBody ExperienciaAnterior entity) {
         ExperienciaAnterior save = service.salvar(entity);
-        return ResponseEntity.created(URI.create("/api/experienciaAnteriores/" + entity.getId())).body(save);
+        return ResponseEntity.created(URI.create("/api/experiencias-anteriores/" + entity.getId())).body(save);
     }
 
     @GetMapping
