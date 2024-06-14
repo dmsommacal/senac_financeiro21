@@ -10,7 +10,7 @@ import java.net.URI;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/cargo")
+@RequestMapping("/api/cargos")
 public class CargoController {
 
     @Autowired
@@ -20,7 +20,7 @@ public class CargoController {
     @PostMapping
     public ResponseEntity create(@RequestBody Cargo entity) {
         Cargo save = service.salvar(entity);
-        return ResponseEntity.created(URI.create("/api/cargo/" + entity.getId())).body(save);
+        return ResponseEntity.created(URI.create("/api/cargos/" + entity.getId())).body(save);
     }
 
     @GetMapping
