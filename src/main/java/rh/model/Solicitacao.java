@@ -1,54 +1,31 @@
 package rh.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import  com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
-import java.util.List;
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
 
 @Entity
 public class Solicitacao extends EntityId{
-    @Column
-    private Double valorSolicitado;
-    @Column
-    private Boolean aprovacao;
-    @Column
-    private String descricao;
     @ManyToOne
     @JoinColumn(name = "saldo_id")
     @JsonIgnore
     private Saldo saldo;
+    @Column(nullable = false)
+    private BigDecimal valorSolicitado;
+    @Column
+    private LocalDateTime dataHora;
+    @Column
+    private String descricao;
 
     public Solicitacao() {
     }
 
-    public Solicitacao(Double valorSolicitado, Boolean aprovacao, String descricao, Saldo saldo) {
-        this.valorSolicitado = valorSolicitado;
-        this.aprovacao = aprovacao;
-        this.descricao = descricao;
+    public Solicitacao(Saldo saldo, BigDecimal valorSolicitado, LocalDateTime dataHora, String descricao) {
         this.saldo = saldo;
-    }
-
-    public Double getValorSolicitado() {
-        return valorSolicitado;
-    }
-
-    public void setValorSolicitado(Double valorSolicitado) {
         this.valorSolicitado = valorSolicitado;
-    }
-
-    public Boolean getAprovacao() {
-        return aprovacao;
-    }
-
-    public void setAprovacao(Boolean aprovacao) {
-        this.aprovacao = aprovacao;
-    }
-
-    public String getDescricao() {
-        return descricao;
-    }
-
-    public void setDescricao(String descricao) {
+        this.dataHora = dataHora;
         this.descricao = descricao;
     }
 
@@ -60,13 +37,38 @@ public class Solicitacao extends EntityId{
         this.saldo = saldo;
     }
 
+    public BigDecimal getValorSolicitado() {
+        return valorSolicitado;
+    }
+
+    public void setValorSolicitado(BigDecimal valorSolicitado) {
+        this.valorSolicitado = valorSolicitado;
+    }
+
+    public LocalDateTime getDataHora() {
+        return dataHora;
+    }
+
+    public void setDataHora(LocalDateTime dataHora) {
+        this.dataHora = dataHora;
+    }
+
+    public String getDescricao() {
+        return descricao;
+    }
+
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
+    }
+
     @Override
     public String toString() {
         return "Solicitacao{" +
-                "valorSolicitado=" + valorSolicitado +
-                ", aprovacao=" + aprovacao +
+                "saldo=" + saldo +
+                ", valorSolicitado=" + valorSolicitado +
+                ", dataHora=" + dataHora +
                 ", descricao='" + descricao + '\'' +
-                ", saldo=" + saldo +
                 '}';
     }
 }
+

@@ -11,8 +11,6 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/solicitacoes")
-
-
 public class SolicitacaoController {
 
     @Autowired

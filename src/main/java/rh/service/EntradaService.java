@@ -1,5 +1,6 @@
 package rh.service;
 
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import rh.enterprise.ValidationException;
@@ -9,6 +10,7 @@ import rh.repository.EntradaRepository;
 import rh.repository.SaldoRepository;
 
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 
@@ -17,21 +19,16 @@ public class EntradaService {
 
     @Autowired
     private EntradaRepository entradaRepository;
-
     @Autowired
     private SaldoRepository saldoRepository;
+    @Transactional
+    public Entrada salvar(Entrada entity) {
 
-    public Entrada salvar(Entrada entity){
-
-        Saldo saldo = entity.getSaldo();  // valores financeiros devem utilizar a classe BigDecimal e nunca double
-
-        if (entity.getValor() == 0.0 || entity.getDescricao().isBlank()){
-            throw new ValidationException("A entrada tem que ter um valor e uma descrição.");
-        }
-
-        saldo.setValorDisponivel(saldo.getValorDisponivel() + entity.getValor()); // Isso da pau em sistemas distribuidos
+        Saldo saldo = saldoRepository.findById(1L).orElseThrow(() -> new ValidationException("Saldo não identificado!"));
+        saldo.setValorDisponivel(saldo.getValorDisponivel().add(entity.getValor()));
         saldoRepository.save(saldo);
 
+        entity.setSaldo(saldo);
         return entradaRepository.save(entity);
     }
 
@@ -46,7 +43,6 @@ public class EntradaService {
         Optional<Entrada> encontrado = entradaRepository.findById(id);
         if (encontrado.isPresent()){
             Entrada entrada = encontrado.get();
-
 
             return entradaRepository.save(entrada);
         }
