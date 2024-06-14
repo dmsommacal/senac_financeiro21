@@ -7,7 +7,7 @@ import rh.enums.TipoConta;
 import java.util.List;
 
 @Entity
-public class DadosBancarios extends EntityId{
+public class DadoBancario extends EntityId{
     @Column
     private String banco;
     @Column
@@ -16,7 +16,7 @@ public class DadosBancarios extends EntityId{
     private String conta;
     private List<TipoConta> tipoConta;
 
-    public DadosBancarios(String banco, String agencia, String conta, List<TipoConta> tipoConta) {
+    public DadoBancario(String banco, String agencia, String conta, List<TipoConta> tipoConta) {
         this.banco = banco;
         this.agencia = agencia;
         this.conta = conta;

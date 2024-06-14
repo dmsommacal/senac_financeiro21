@@ -5,7 +5,7 @@ import jakarta.persistence.Entity;
 import rh.enums.Escolaridade;
 
 @Entity
-public class Dependentes extends EntityId{
+public class Dependente extends EntityId{
     @Column
     private String nome;
     @Column
@@ -13,7 +13,7 @@ public class Dependentes extends EntityId{
     @Column
     private String dataNascimento;
 
-    public Dependentes(String nome, Escolaridade escolaridade, String dataNascimento) {
+    public Dependente(String nome, Escolaridade escolaridade, String dataNascimento) {
         this.nome = nome;
         this.escolaridade = escolaridade;
         this.dataNascimento = dataNascimento;

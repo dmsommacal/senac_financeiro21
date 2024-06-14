@@ -2,11 +2,10 @@ package rh.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-import rh.model.Dependentes;
+import rh.model.Certificacao;
 
 @Repository
-public interface DependentesRepository extends JpaRepository<Dependentes, Long> {
-
-
+public interface CertificacaoRepository extends JpaRepository <Certificacao, Long> {
 }
+
 
