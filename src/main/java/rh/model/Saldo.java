@@ -9,6 +9,7 @@ import java.util.List;
 
 @Entity
 public class Saldo extends EntityId{
+
     @OneToMany(mappedBy = "saldo")
     private List<Entrada> entradas;
     @OneToMany(mappedBy = "saldo")
@@ -58,4 +59,3 @@ public class Saldo extends EntityId{
                 '}';
     }
 }
-

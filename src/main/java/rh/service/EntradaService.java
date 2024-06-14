@@ -9,7 +9,6 @@ import rh.model.Saldo;
 import rh.repository.EntradaRepository;
 import rh.repository.SaldoRepository;
 
-
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
@@ -21,6 +20,7 @@ public class EntradaService {
     private EntradaRepository entradaRepository;
     @Autowired
     private SaldoRepository saldoRepository;
+    
     @Transactional
     public Entrada salvar(Entrada entity) {
 

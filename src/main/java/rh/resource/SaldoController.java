@@ -11,7 +11,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/saldos")
-public class SaldoController {
+public class SaldoController extends AbstractController{
 
     @Autowired
     private SaldoService service;

@@ -13,7 +13,7 @@ import java.util.List;
 @RequestMapping("/api/folhas-recisoes")
 
 
-public class FolhaRescisaoController {
+public class FolhaRescisaoController extends AbstractController{
 
     @Autowired
     private FolhaRescisaoService service;

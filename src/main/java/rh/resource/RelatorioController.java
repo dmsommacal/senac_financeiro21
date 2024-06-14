@@ -13,7 +13,7 @@ import java.util.List;
 @RequestMapping("/api/relatorios")
 
 
-public class RelatorioController {
+public class RelatorioController extends AbstractController{
 
     @Autowired
     private RelatorioService service;

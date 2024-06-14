@@ -13,6 +13,7 @@ import java.util.Optional;
 public class SaldoService {
     @Autowired
     private SaldoRepository saldoRepository;
+  
     public Saldo salvar(Saldo entity){
         if (entity.getValorDisponivel() != null && entity.getValorDisponivel().compareTo(BigDecimal.ZERO) != 0){
             throw new ValidationException("Já existe um saldo cadastrado!");

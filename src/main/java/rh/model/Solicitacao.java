@@ -1,7 +1,9 @@
 package rh.model;
 
-import  com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+
+import java.util.List;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -16,8 +18,6 @@ public class Solicitacao extends EntityId{
     private BigDecimal valorSolicitado;
     @Column
     private LocalDateTime dataHora;
-    @Column
-    private String descricao;
 
     public Solicitacao() {
     }
@@ -27,13 +27,6 @@ public class Solicitacao extends EntityId{
         this.valorSolicitado = valorSolicitado;
         this.dataHora = dataHora;
         this.descricao = descricao;
-    }
-
-    public Saldo getSaldo() {
-        return saldo;
-    }
-
-    public void setSaldo(Saldo saldo) {
         this.saldo = saldo;
     }
 
@@ -61,10 +54,18 @@ public class Solicitacao extends EntityId{
         this.descricao = descricao;
     }
 
+    public Saldo getSaldo() {
+        return saldo;
+    }
+
+    public void setSaldo(Saldo saldo) {
+        this.saldo = saldo;
+    }
+
     @Override
     public String toString() {
         return "Solicitacao{" +
-                "saldo=" + saldo +
+                "saldo=" + saldo +                
                 ", valorSolicitado=" + valorSolicitado +
                 ", dataHora=" + dataHora +
                 ", descricao='" + descricao + '\'' +

@@ -11,6 +11,7 @@ import java.time.LocalDateTime;
 
 @Entity
 public class Entrada extends EntityId{
+  
     @ManyToOne
     @JoinColumn(name = "saldo_id")
     @JsonIgnore
@@ -64,6 +65,14 @@ public class Entrada extends EntityId{
         this.descricao = descricao;
     }
 
+    public Saldo getSaldo() {
+        return saldo;
+    }
+
+    public void setSaldo(Saldo saldo) {
+        this.saldo = saldo;
+    }
+
     @Override
     public String toString() {
         return "Entrada{" +
@@ -71,6 +80,7 @@ public class Entrada extends EntityId{
                 ", valor=" + valor +
                 ", dataHora=" + dataHora +
                 ", descricao='" + descricao + '\'' +
+                ", saldo=" + saldo +
                 '}';
     }
 }
