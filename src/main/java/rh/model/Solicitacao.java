@@ -5,43 +5,45 @@ import jakarta.persistence.*;
 
 import java.util.List;
 
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
+
 @Entity
 public class Solicitacao extends EntityId{
-    @Column
-    private Double valorSolicitado;
-    @Column
-    private Boolean aprovacao;
-    @Column
-    private String descricao;
     @ManyToOne
     @JoinColumn(name = "saldo_id")
     @JsonIgnore
     private Saldo saldo;
+    @Column(nullable = false)
+    private BigDecimal valorSolicitado;
+    @Column
+    private LocalDateTime dataHora;
 
     public Solicitacao() {
     }
 
-    public Solicitacao(Double valorSolicitado, Boolean aprovacao, String descricao, Saldo saldo) {
+    public Solicitacao(Saldo saldo, BigDecimal valorSolicitado, LocalDateTime dataHora, String descricao) {
+        this.saldo = saldo;
         this.valorSolicitado = valorSolicitado;
-        this.aprovacao = aprovacao;
+        this.dataHora = dataHora;
         this.descricao = descricao;
         this.saldo = saldo;
     }
 
-    public Double getValorSolicitado() {
+    public BigDecimal getValorSolicitado() {
         return valorSolicitado;
     }
 
-    public void setValorSolicitado(Double valorSolicitado) {
+    public void setValorSolicitado(BigDecimal valorSolicitado) {
         this.valorSolicitado = valorSolicitado;
     }
 
-    public Boolean getAprovacao() {
-        return aprovacao;
+    public LocalDateTime getDataHora() {
+        return dataHora;
     }
 
-    public void setAprovacao(Boolean aprovacao) {
-        this.aprovacao = aprovacao;
+    public void setDataHora(LocalDateTime dataHora) {
+        this.dataHora = dataHora;
     }
 
     public String getDescricao() {
@@ -63,10 +65,11 @@ public class Solicitacao extends EntityId{
     @Override
     public String toString() {
         return "Solicitacao{" +
-                "valorSolicitado=" + valorSolicitado +
-                ", aprovacao=" + aprovacao +
+                "saldo=" + saldo +                
+                ", valorSolicitado=" + valorSolicitado +
+                ", dataHora=" + dataHora +
                 ", descricao='" + descricao + '\'' +
-                ", saldo=" + saldo +
                 '}';
     }
 }
+

@@ -13,7 +13,7 @@ import java.util.List;
 @RequestMapping("/api/filiacoes")
 
 
-public class FiliacaoController {
+public class FiliacaoController extends AbstractController{
 
     @Autowired
     private FiliacaoService service;

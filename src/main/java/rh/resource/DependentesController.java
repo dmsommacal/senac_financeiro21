@@ -13,7 +13,7 @@ import java.util.List;
 @RequestMapping("/api/dependentes")
 
 
-public class DependentesController {
+public class DependentesController extends AbstractController{
 
     @Autowired
     private DependentesService service;

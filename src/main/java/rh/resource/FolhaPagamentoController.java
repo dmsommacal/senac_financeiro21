@@ -13,7 +13,7 @@ import java.util.List;
 @RequestMapping("/api/folhas-pagamentos")
 
 
-public class FolhaPagamentoController {
+public class FolhaPagamentoController extends AbstractController{
 
     @Autowired
     private FolhaPagamentoService service;
