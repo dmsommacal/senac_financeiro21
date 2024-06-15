@@ -1,29 +1,39 @@
 package rh.model;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.*;
+
+import java.util.List;
 
 @Entity
 public class Solicitacao extends EntityId{
     @Column
-    private Double solicitacao;
+    private Double valorSolicitado;
     @Column
     private Boolean aprovacao;
     @Column
     private String descricao;
+    @ManyToOne
+    @JoinColumn(name = "saldo_id")
+    @JsonIgnore
+    private Saldo saldo;
 
-    public Solicitacao(Double solicitacao, Boolean aprovacao, String descricao) {
-        this.solicitacao = solicitacao;
+    public Solicitacao() {
+    }
+
+    public Solicitacao(Double valorSolicitado, Boolean aprovacao, String descricao, Saldo saldo) {
+        this.valorSolicitado = valorSolicitado;
         this.aprovacao = aprovacao;
         this.descricao = descricao;
+        this.saldo = saldo;
     }
 
-    public Double getSolicitacao() {
-        return solicitacao;
+    public Double getValorSolicitado() {
+        return valorSolicitado;
     }
 
-    public void setSolicitacao(Double solicitacao) {
-        this.solicitacao = solicitacao;
+    public void setValorSolicitado(Double valorSolicitado) {
+        this.valorSolicitado = valorSolicitado;
     }
 
     public Boolean getAprovacao() {
@@ -42,12 +52,21 @@ public class Solicitacao extends EntityId{
         this.descricao = descricao;
     }
 
+    public Saldo getSaldo() {
+        return saldo;
+    }
+
+    public void setSaldo(Saldo saldo) {
+        this.saldo = saldo;
+    }
+
     @Override
     public String toString() {
         return "Solicitacao{" +
-                "solicitacao=" + solicitacao +
+                "valorSolicitado=" + valorSolicitado +
                 ", aprovacao=" + aprovacao +
                 ", descricao='" + descricao + '\'' +
+                ", saldo=" + saldo +
                 '}';
     }
 }
