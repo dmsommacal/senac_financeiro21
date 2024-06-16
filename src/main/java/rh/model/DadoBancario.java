@@ -16,7 +16,7 @@ public class DadoBancario extends EntityId{
     private String conta;
     private List<TipoConta> tipoConta;
 
-    public DadoBancario(String banco, String agencia, String conta, List<TipoConta> tipoConta) {
+    public DadoBancario() {
         this.banco = banco;
         this.agencia = agencia;
         this.conta = conta;

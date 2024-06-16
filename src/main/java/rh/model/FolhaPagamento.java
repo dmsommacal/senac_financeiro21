@@ -14,7 +14,7 @@ public class FolhaPagamento extends EntityId{
     @Column
     private Double fgts;
 
-    public FolhaPagamento(Double horaTrabalhada, Double inss, Double irrf, Double fgts) {
+    public FolhaPagamento() {
         this.horaTrabalhada = horaTrabalhada;
         this.inss = inss;
         this.irrf = irrf;

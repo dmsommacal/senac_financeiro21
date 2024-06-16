@@ -21,7 +21,7 @@ public class ExperienciaAnterior extends EntityId{
     @Column
     private LocalDate periodoFinal;
 
-    public ExperienciaAnterior(Funcionario funcionario, String descricao, String cargo, LocalDate periodoInicial, LocalDate periodoFinal) {
+    public ExperienciaAnterior() {
         this.funcionario = funcionario;
         this.descricao = descricao;
         this.cargo = cargo;
