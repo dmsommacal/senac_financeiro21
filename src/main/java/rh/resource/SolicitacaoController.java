@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import rh.model.Solicitacao;
+import rh.resource.dto.SolicitacaoDTO;
 import rh.service.SolicitacaoService;
 
 import java.net.URI;
@@ -25,7 +26,7 @@ public class SolicitacaoController extends AbstractController{
     @GetMapping
     public ResponseEntity findAll() {
         List<Solicitacao> solicitacao = service.buscaTodos();
-        return ResponseEntity.ok(solicitacao);
+        return ResponseEntity.ok(SolicitacaoDTO.fromEntityList(solicitacao));
     }
 
     @GetMapping("{id}")

@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import rh.model.ExperienciaAnterior;
+import rh.resource.dto.ExperienciaAnteriorDTO;
 import rh.service.ExperienciaAnteriorService;
 
 import java.net.URI;
@@ -29,7 +30,7 @@ public class ExperienciaAnteriorController extends AbstractController{
 
     public ResponseEntity findAll() {
         List<ExperienciaAnterior> experienciaAnteriores = service.buscaTodos();
-        return ResponseEntity.ok(experienciaAnteriores);
+        return ResponseEntity.ok(ExperienciaAnteriorDTO.fromEntityList(experienciaAnteriores));
     }
 
     @GetMapping("{id}")
