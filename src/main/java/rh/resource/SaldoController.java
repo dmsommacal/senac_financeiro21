@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import rh.model.Saldo;
+import rh.resource.dto.SaldoDTO;
 import rh.service.SaldoService;
 
 import java.net.URI;
@@ -24,7 +25,7 @@ public class SaldoController extends AbstractController{
     @GetMapping
     public ResponseEntity findAll() {
         List<Saldo> saldo = service.buscaTodos();
-        return ResponseEntity.ok(saldo);
+        return ResponseEntity.ok(SaldoDTO.fromEntityList(saldo));
     }
     @GetMapping("{id}")
     public ResponseEntity findById(@PathVariable("id") Long id) {

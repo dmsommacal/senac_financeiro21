@@ -8,8 +8,8 @@ public class FolhaRescisao extends FolhaPagamento{
     @Column
     private Double valorRescisao;
 
-    public FolhaRescisao(Double hrtrabalhada, Double INSS, Double IRRF, Double FGTS, Double valorRescisao) {
-        super(hrtrabalhada, INSS, IRRF, FGTS);
+    public FolhaRescisao() {
+        super();
         this.valorRescisao = valorRescisao;
     }
 

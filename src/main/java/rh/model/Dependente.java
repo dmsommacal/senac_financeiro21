@@ -13,7 +13,7 @@ public class Dependente extends EntityId{
     @Column
     private String dataNascimento;
 
-    public Dependente(String nome, Escolaridade escolaridade, String dataNascimento) {
+    public Dependente() {
         this.nome = nome;
         this.escolaridade = escolaridade;
         this.dataNascimento = dataNascimento;

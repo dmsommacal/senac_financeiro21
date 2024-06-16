@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import rh.model.DadoBancario;
+import rh.resource.dto.DadoBancarioDTO;
 import rh.service.DadoBancarioService;
 
 import java.net.URI;
@@ -29,7 +30,7 @@ public class DadoBancarioController extends AbstractController{
 
     public ResponseEntity findAll() {
         List<DadoBancario> dadosBancarios = service.buscaTodos();
-        return ResponseEntity.ok(dadosBancarios);
+        return ResponseEntity.ok(DadoBancarioDTO.fromEntityList(dadosBancarios));
     }
 
     @GetMapping("{id}")
