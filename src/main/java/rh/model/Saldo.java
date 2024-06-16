@@ -16,7 +16,6 @@ public class Saldo extends EntityId{
     private List<Solicitacao> solicitacoes;
     @Column(nullable = false)
     private BigDecimal valorDisponivel;
-
     public Saldo() {
     }
 

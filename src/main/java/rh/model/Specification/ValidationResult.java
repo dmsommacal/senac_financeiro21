@@ -1,4 +1,4 @@
-package rh.model;
+package rh.model.Specification;
 
 public class ValidationResult {
 

@@ -4,6 +4,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import rh.model.*;
+import rh.model.Specification.Specification;
+import rh.model.Specification.ValidationResult;
+import rh.model.Specification.ValorSpecification;
 import rh.service.EntradaService;
 
 import java.net.URI;
@@ -18,18 +21,14 @@ public class EntradaController extends AbstractController{
 
     @PostMapping
     public ResponseEntity create(@RequestBody Entrada entity) {
-
         Entrada entrada = new Entrada();
-        Specification<Entrada> entradaSpec = new EntradaSpecification();
 
-        Specification<Entrada> validEntradaSpec = entradaSpec.and(entradaSpec);
+        Specification<Entrada> valorSpec = new ValorSpecification();
 
-        ValidationResult result = validEntradaSpec.isSatisfiedBy(entrada);
-        if (result.isValid()){
-            System.out.println("Entrada válida");
-        }
-        else{
-            System.out.println("Enrada inválida: " + result.getMessage());
+        ValidationResult result = valorSpec.isSatisfiedBy(entity);
+
+        if (!result.isValid()){
+            System.out.println("Entrada inválida: " + result.getMessage());
         }
 
         Entrada save = service.salvar(entity);

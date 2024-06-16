@@ -1,5 +1,4 @@
-package rh.model;
-
+package rh.model.Specification;
 public abstract class CompositeSpecification<T> implements Specification<T> {
     public Specification<T> and(Specification<T> other){
         return new AndSpecification<>(this, other);

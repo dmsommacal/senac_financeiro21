@@ -1,7 +1,7 @@
-package rh.model;
+package rh.model.Specification;
 
-public class NotSpecification<T> extends CompositeSpecification<T>{
-    private Specification<T>spec;
+public class NotSpecification<T> extends CompositeSpecification<T> {
+    private Specification<T> spec;
     public NotSpecification(Specification<T> spec){
         this.spec = spec;
     }
