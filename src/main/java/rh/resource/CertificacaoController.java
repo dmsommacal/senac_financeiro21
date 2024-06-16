@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import rh.model.Certificacao;
+import rh.resource.dto.CertificacaoDTO;
 import rh.service.CertificacaoService;
 
 import java.net.URI;
@@ -29,7 +30,7 @@ public class CertificacaoController extends AbstractController{
 
     public ResponseEntity findAll() {
         List<Certificacao> certificacoes = service.buscaTodos();
-        return ResponseEntity.ok(certificacoes);
+        return ResponseEntity.ok(CertificacaoDTO.fromEntityList(certificacoes));
     }
 
     @GetMapping("{id}")
