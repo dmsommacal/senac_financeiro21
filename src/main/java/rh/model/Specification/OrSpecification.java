@@ -1,6 +1,6 @@
-package rh.model;
+package rh.model.Specification;
 
-public class OrSpecification<T> extends CompositeSpecification<T>{
+public class OrSpecification<T> extends CompositeSpecification<T> {
     private Specification<T> spec1;
     private Specification<T> spec2;
     public OrSpecification(Specification<T> spec1, Specification<T> spec2){

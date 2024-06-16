@@ -3,6 +3,7 @@ package rh.resource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import rh.resource.dto.CargoDTO;
 import rh.model.Cargo;
 import rh.service.CargoService;
 
@@ -24,10 +25,9 @@ public class CargoController extends AbstractController{
     }
 
     @GetMapping
-
     public ResponseEntity findAll() {
         List<Cargo> cargos = service.buscaTodos();
-        return ResponseEntity.ok(cargos);
+        return ResponseEntity.ok(CargoDTO.fromEntityList(cargos));
     }
 
     @GetMapping("{id}")
