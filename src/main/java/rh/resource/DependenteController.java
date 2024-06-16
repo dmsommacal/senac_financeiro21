@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import rh.model.Dependente;
+import rh.resource.dto.DependenteDTO;
 import rh.service.DependenteService;
 
 import java.net.URI;
@@ -26,10 +27,9 @@ public class DependenteController extends AbstractController{
     }
 
     @GetMapping
-
     public ResponseEntity findAll() {
         List<Dependente> dependentes = service.buscaTodos();
-        return ResponseEntity.ok(dependentes);
+        return ResponseEntity.ok(DependenteDTO.fromEntityList(dependentes));
     }
 
     @GetMapping("{id}")
