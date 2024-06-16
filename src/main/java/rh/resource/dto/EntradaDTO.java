@@ -3,6 +3,7 @@ package rh.resource.dto;
 import jakarta.persistence.Column;
 import rh.model.Cargo;
 import rh.model.Entrada;
+import rh.model.Relatorio;
 import rh.model.Saldo;
 
 import java.math.BigDecimal;
@@ -12,16 +13,17 @@ import java.util.List;
 
 public class EntradaDTO {
     private Saldo saldo;
+    private Relatorio relatorio;
     private BigDecimal valor;
-
     private LocalDateTime dataHora;
     private String descricao;
 
     public EntradaDTO() {
     }
 
-    public EntradaDTO(Saldo saldo, BigDecimal valor, LocalDateTime dataHora, String descricao) {
+    public EntradaDTO(Saldo saldo, Relatorio relatorio, BigDecimal valor, LocalDateTime dataHora, String descricao) {
         this.saldo = saldo;
+        this.relatorio = relatorio;
         this.valor = valor;
         this.dataHora = dataHora;
         this.descricao = descricao;
@@ -33,6 +35,14 @@ public class EntradaDTO {
 
     public void setSaldo(Saldo saldo) {
         this.saldo = saldo;
+    }
+
+    public Relatorio getRelatorio() {
+        return relatorio;
+    }
+
+    public void setRelatorio(Relatorio relatorio) {
+        this.relatorio = relatorio;
     }
 
     public BigDecimal getValor() {
@@ -62,6 +72,7 @@ public class EntradaDTO {
     public static EntradaDTO fromEntity(Entrada entrada) {
         return new EntradaDTO(
                 entrada.getSaldo(),
+                entrada.getRelatorio(),
                 entrada.getValor(),
                 entrada.getDataHora(),
                 entrada.getDescricao()
@@ -79,6 +90,7 @@ public class EntradaDTO {
     public Entrada toEntity() {
         Entrada entrada = new Entrada();
         entrada.setValor(this.valor);
+        entrada.setRelatorio(this.relatorio);
         entrada.setSaldo(this.saldo);
         entrada.setDataHora(this.dataHora);
         entrada.setDescricao(this.descricao);

@@ -25,8 +25,8 @@ public class SolicitacaoController extends AbstractController{
 
     @GetMapping
     public ResponseEntity findAll() {
-        List<Solicitacao> solicitacao = service.buscaTodos();
-        return ResponseEntity.ok(SolicitacaoDTO.fromEntityList(solicitacao));
+        List<Solicitacao> solicitacoes = service.buscaTodos();
+        return ResponseEntity.ok(SolicitacaoDTO.fromEntityList(solicitacoes));
     }
 
     @GetMapping("{id}")

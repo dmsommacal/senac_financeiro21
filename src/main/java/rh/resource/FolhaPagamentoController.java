@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import rh.model.FolhaPagamento;
+import rh.resource.dto.FolhaPagamentoDTO;
 import rh.service.FolhaPagamentoService;
 
 import java.net.URI;
@@ -28,8 +29,8 @@ public class FolhaPagamentoController extends AbstractController{
     @GetMapping
 
     public ResponseEntity findAll() {
-        List<FolhaPagamento> folhaPagamento = service.buscaTodos();
-        return ResponseEntity.ok(folhaPagamento);
+        List<FolhaPagamento> folhaPagamentos = service.buscaTodos();
+        return ResponseEntity.ok(FolhaPagamentoDTO.fromEntityList(folhaPagamentos));
     }
 
     @GetMapping("{id}")

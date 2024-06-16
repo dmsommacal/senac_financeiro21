@@ -11,11 +11,13 @@ import java.time.LocalDateTime;
 
 @Entity
 public class Entrada extends EntityId{
-  
     @ManyToOne
     @JoinColumn(name = "saldo_id")
     @JsonIgnore
     private Saldo saldo;
+    @ManyToOne
+    @JoinColumn(name = "relatorio_id")
+    private Relatorio relatorio;
     @Column(nullable = false)
     private BigDecimal valor;
     @Column
@@ -26,8 +28,9 @@ public class Entrada extends EntityId{
     public Entrada() {
     }
 
-    public Entrada(Saldo saldo, BigDecimal valor, LocalDateTime dataHora, String descricao) {
+    public Entrada(Saldo saldo, Relatorio relatorio, BigDecimal valor, LocalDateTime dataHora, String descricao) {
         this.saldo = saldo;
+        this.relatorio = relatorio;
         this.valor = valor;
         this.dataHora = dataHora;
         this.descricao = descricao;
@@ -39,6 +42,14 @@ public class Entrada extends EntityId{
 
     public void setSaldo(Saldo saldo) {
         this.saldo = saldo;
+    }
+
+    public Relatorio getRelatorio() {
+        return relatorio;
+    }
+
+    public void setRelatorio(Relatorio relatorio) {
+        this.relatorio = relatorio;
     }
 
     public BigDecimal getValor() {
@@ -64,14 +75,15 @@ public class Entrada extends EntityId{
     public void setDescricao(String descricao) {
         this.descricao = descricao;
     }
+
     @Override
     public String toString() {
         return "Entrada{" +
                 "saldo=" + saldo +
+                ", relatorio=" + relatorio +
                 ", valor=" + valor +
                 ", dataHora=" + dataHora +
                 ", descricao='" + descricao + '\'' +
-                ", saldo=" + saldo +
                 '}';
     }
 }

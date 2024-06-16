@@ -24,8 +24,8 @@ public class SaldoController extends AbstractController{
     }
     @GetMapping
     public ResponseEntity findAll() {
-        List<Saldo> saldo = service.buscaTodos();
-        return ResponseEntity.ok(SaldoDTO.fromEntityList(saldo));
+        List<Saldo> saldos = service.buscaTodos();
+        return ResponseEntity.ok(SaldoDTO.fromEntityList(saldos));
     }
     @GetMapping("{id}")
     public ResponseEntity findById(@PathVariable("id") Long id) {

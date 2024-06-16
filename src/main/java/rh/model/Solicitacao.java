@@ -14,6 +14,9 @@ public class Solicitacao extends EntityId{
     @JoinColumn(name = "saldo_id")
     @JsonIgnore
     private Saldo saldo;
+    @ManyToOne
+    @JoinColumn(name = "relatorio_id")
+    private Relatorio relatorio;
     @Column(nullable = false)
     private BigDecimal valorSolicitado;
     @Column
@@ -23,8 +26,9 @@ public class Solicitacao extends EntityId{
     public Solicitacao() {
     }
 
-    public Solicitacao(Saldo saldo, BigDecimal valorSolicitado, LocalDateTime dataHora, String descricao) {
+    public Solicitacao(Saldo saldo, Relatorio relatorio, BigDecimal valorSolicitado, LocalDateTime dataHora, String descricao) {
         this.saldo = saldo;
+        this.relatorio = relatorio;
         this.valorSolicitado = valorSolicitado;
         this.dataHora = dataHora;
         this.descricao = descricao;
@@ -36,6 +40,14 @@ public class Solicitacao extends EntityId{
 
     public void setSaldo(Saldo saldo) {
         this.saldo = saldo;
+    }
+
+    public Relatorio getRelatorio() {
+        return relatorio;
+    }
+
+    public void setRelatorio(Relatorio relatorio) {
+        this.relatorio = relatorio;
     }
 
     public BigDecimal getValorSolicitado() {
@@ -66,6 +78,7 @@ public class Solicitacao extends EntityId{
     public String toString() {
         return "Solicitacao{" +
                 "saldo=" + saldo +
+                ", relatorio=" + relatorio +
                 ", valorSolicitado=" + valorSolicitado +
                 ", dataHora=" + dataHora +
                 ", descricao='" + descricao + '\'' +

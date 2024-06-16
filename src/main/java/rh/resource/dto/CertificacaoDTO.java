@@ -1,7 +1,5 @@
 package rh.resource.dto;
 
-
-import rh.model.Cargo;
 import rh.model.Certificacao;
 import rh.model.Funcionario;
 

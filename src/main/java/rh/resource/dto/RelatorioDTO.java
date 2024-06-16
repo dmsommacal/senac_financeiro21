@@ -1,40 +1,40 @@
 package rh.resource.dto;
 
-import jakarta.persistence.Column;
-import rh.model.Cargo;
+import rh.model.Entrada;
 import rh.model.Relatorio;
+import rh.model.Solicitacao;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class RelatorioDTO {
-    private Double relEntrada;
-   private Double relSaida;
-   private Double relDemonstrativo;
+    private List<Entrada> entradas;
+    private List<Solicitacao> solicitacoes;
+    private Double relDemonstrativo;
 
     public RelatorioDTO() {
     }
 
-    public RelatorioDTO(Double relEntrada, Double relSaida, Double relDemonstrativo) {
-        this.relEntrada = relEntrada;
-        this.relSaida = relSaida;
+    public RelatorioDTO(List<Entrada> entradas, List<Solicitacao> solicitacoes, Double relDemonstrativo) {
+        this.entradas = entradas;
+        this.solicitacoes = solicitacoes;
         this.relDemonstrativo = relDemonstrativo;
     }
 
-    public Double getRelEntrada() {
-        return relEntrada;
+    public List<Entrada> getEntradas() {
+        return entradas;
     }
 
-    public void setRelEntrada(Double relEntrada) {
-        this.relEntrada = relEntrada;
+    public void setEntradas(List<Entrada> entradas) {
+        this.entradas = entradas;
     }
 
-    public Double getRelSaida() {
-        return relSaida;
+    public List<Solicitacao> getSolicitacoes() {
+        return solicitacoes;
     }
 
-    public void setRelSaida(Double relSaida) {
-        this.relSaida = relSaida;
+    public void setSolicitacoes(List<Solicitacao> solicitacoes) {
+        this.solicitacoes = solicitacoes;
     }
 
     public Double getRelDemonstrativo() {
@@ -47,9 +47,9 @@ public class RelatorioDTO {
 
     public static RelatorioDTO fromEntity(Relatorio relatorio) {
         return new RelatorioDTO(
-                relatorio.getRelEntrada(),
-                relatorio.getRelSaida(),
-                relatorio.getRelDemosntrativo()
+                relatorio.getEntradas(),
+                relatorio.getSolicitacoes(),
+                relatorio.getRelDemonstrativo()
         );
     }
 
@@ -62,9 +62,9 @@ public class RelatorioDTO {
     }
     public Relatorio toEntity() {
         Relatorio relatorio = new Relatorio();
-        relatorio.setRelEntrada(this.relEntrada);
-        relatorio.setRelSaida(this.relSaida);
-        relatorio.setRelDemosntrativo(this.relDemonstrativo);
+        relatorio.setEntradas(this.entradas);
+        relatorio.setSolicitacoes(this.solicitacoes);
+        relatorio.setRelDemonstrativo(this.relDemonstrativo);
         return relatorio;
     }
     public static List<Relatorio> toEntityList(List<RelatorioDTO> relatorioDTOS){

@@ -7,6 +7,7 @@ import rh.model.*;
 import rh.model.Specification.Specification;
 import rh.model.Specification.ValidationResult;
 import rh.model.Specification.ValorSpecification;
+import rh.resource.dto.EntradaDTO;
 import rh.service.EntradaService;
 
 import java.net.URI;
@@ -37,8 +38,8 @@ public class EntradaController extends AbstractController{
 
     @GetMapping
     public ResponseEntity findAll() {
-        List<Entrada> entrada = service.buscaTodos();
-        return ResponseEntity.ok(entrada);
+        List<Entrada> entradas = service.buscaTodos();
+        return ResponseEntity.ok(EntradaDTO.fromEntityList(entradas));
     }
 
     @GetMapping("{id}")
