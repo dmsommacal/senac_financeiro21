@@ -1,4 +1,4 @@
-package rh.model;
+package rh.model.Specification;
 
 
 public interface Specification<T> {
@@ -9,10 +9,10 @@ public interface Specification<T> {
     }
 
     default Specification<T> or(Specification<T> other){
-        return new  OrSpecification<>(this, other);
+        return new OrSpecification<>(this, other);
     }
 
     default Specification<T> not(){
-        return new  NotSpecification<>(this);
+        return new NotSpecification<>(this);
     }
 }

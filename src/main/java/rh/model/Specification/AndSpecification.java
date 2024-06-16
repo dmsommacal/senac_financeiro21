@@ -1,5 +1,4 @@
-package rh.model;
-
+package rh.model.Specification;
 public class AndSpecification<T> extends CompositeSpecification<T> {
 
     private Specification<T> spec1;
