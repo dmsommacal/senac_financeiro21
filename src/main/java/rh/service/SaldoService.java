@@ -1,5 +1,6 @@
 package rh.service;
 
+import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import rh.enterprise.ValidationException;
@@ -14,6 +15,13 @@ public class SaldoService {
     @Autowired
     private SaldoRepository saldoRepository;
 
+    @PostConstruct
+    public void verificaSaldo() {
+        if (!saldoRepository.existsById(1L)) {
+            Saldo saldo = new Saldo();
+            saldoRepository.save(saldo);
+        }
+    }
     public Saldo salvar(Saldo entity){
 
         if (entity.getValorDisponivel() != null && entity.getValorDisponivel().compareTo(BigDecimal.ZERO) != 0){

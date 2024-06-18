@@ -17,6 +17,7 @@ public class Entrada extends EntityId{
     private Saldo saldo;
     @ManyToOne
     @JoinColumn(name = "relatorio_id")
+    @JsonIgnore
     private Relatorio relatorio;
     @Column(nullable = false)
     private BigDecimal valor;

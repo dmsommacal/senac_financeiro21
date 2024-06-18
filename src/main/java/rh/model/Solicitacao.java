@@ -3,8 +3,6 @@ package rh.model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
-import java.util.List;
-
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 

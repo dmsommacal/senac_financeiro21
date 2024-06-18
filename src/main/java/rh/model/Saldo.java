@@ -3,6 +3,7 @@ package rh.model;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.PrePersist;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -22,7 +23,14 @@ public class Saldo extends EntityId{
     public Saldo(List<Entrada> entradas, List<Solicitacao> solicitacoes, BigDecimal valorDisponivel) {
         this.entradas = entradas;
         this.solicitacoes = solicitacoes;
-        this.valorDisponivel = valorDisponivel;
+        this.valorDisponivel = BigDecimal.ZERO;
+    }
+    @PrePersist
+    public void iniciaSaldo(){
+        setId(1L);
+        if (this.valorDisponivel == null) {
+            this.valorDisponivel = BigDecimal.ZERO;
+        }
     }
 
     public List<Entrada> getEntradas() {

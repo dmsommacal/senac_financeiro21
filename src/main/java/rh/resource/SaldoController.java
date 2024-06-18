@@ -17,11 +17,6 @@ public class SaldoController extends AbstractController{
     @Autowired
     private SaldoService service;
 
-    @PostMapping
-    public ResponseEntity create(@RequestBody Saldo entity) {
-        Saldo save = service.salvar(entity);
-        return ResponseEntity.created(URI.create("/api/saldos/" + entity.getId())).body(save);
-    }
     @GetMapping
     public ResponseEntity findAll() {
         List<Saldo> saldos = service.buscaTodos();

@@ -28,10 +28,12 @@ public class EntradaController extends AbstractController{
 
         ValidationResult result = valorSpec.isSatisfiedBy(entity);
 
-        if (!result.isValid()){
+        if (result.isValid()){
+            System.out.println("Entrada válida");
+        }
+        else {
             System.out.println("Entrada inválida: " + result.getMessage());
         }
-
         Entrada save = service.salvar(entity);
         return ResponseEntity.created(URI.create("/api/entradas/" + entity.getId())).body(save);
     }

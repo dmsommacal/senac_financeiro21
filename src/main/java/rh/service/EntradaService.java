@@ -5,11 +5,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import rh.enterprise.ValidationException;
 import rh.model.Entrada;
+import rh.model.Relatorio;
 import rh.model.Saldo;
 import rh.repository.EntradaRepository;
+import rh.repository.RelatorioRepository;
 import rh.repository.SaldoRepository;
 
-import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 
@@ -20,15 +21,24 @@ public class EntradaService {
     private EntradaRepository entradaRepository;
     @Autowired
     private SaldoRepository saldoRepository;
-    
+    @Autowired
+    private RelatorioRepository relatorioRepository;
     @Transactional
     public Entrada salvar(Entrada entity) {
+        Relatorio relatorio = new Relatorio();
 
         Saldo saldo = saldoRepository.findById(1L).orElseThrow(() -> new ValidationException("Saldo não identificado!"));
+
+        //Altera e salva o valorDisponível do Saldo a cada Entrada
         saldo.setValorDisponivel(saldo.getValorDisponivel().add(entity.getValor()));
         saldoRepository.save(saldo);
 
         entity.setSaldo(saldo);
+
+        entity.setRelatorio(relatorio);
+
+        relatorioRepository.save(relatorio);
+
         return entradaRepository.save(entity);
     }
 
