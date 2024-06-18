@@ -8,7 +8,7 @@ import jakarta.persistence.ManyToOne;
 import java.time.LocalDate;
 
 @Entity
-public class Certificacoes extends EntityId{
+public class Certificacao extends EntityId{
     @Column
     private String nome;
     @Column
@@ -19,7 +19,7 @@ public class Certificacoes extends EntityId{
     @JoinColumn(name = "funcionario_id")
     private Funcionario funcionario;
 
-    public Certificacoes(String nome, Double cargaHoraria, LocalDate dataEmissao, Funcionario funcionario) {
+    public Certificacao() {
         this.nome = nome;
         this.cargaHoraria = cargaHoraria;
         this.dataEmissao = dataEmissao;

@@ -3,8 +3,9 @@ package rh.resource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import rh.model.Certificacoes;
-import rh.service.CertificacoesService;
+import rh.model.Certificacao;
+import rh.resource.dto.CertificacaoDTO;
+import rh.service.CertificacaoService;
 
 import java.net.URI;
 import java.util.List;
@@ -13,28 +14,28 @@ import java.util.List;
 @RequestMapping("/api/certificacoes")
 
 
-public class CertificacoesController {
+public class CertificacaoController extends AbstractController{
 
     @Autowired
-    private CertificacoesService service;
+    private CertificacaoService service;
 
 
     @PostMapping
-    public ResponseEntity create(@RequestBody Certificacoes entity) {
-        Certificacoes save = service.salvar(entity);
+    public ResponseEntity create(@RequestBody Certificacao entity) {
+        Certificacao save = service.salvar(entity);
         return ResponseEntity.created(URI.create("/api/certificacoes/" + entity.getId())).body(save);
     }
 
     @GetMapping
 
     public ResponseEntity findAll() {
-        List<Certificacoes> certificacoes = service.buscaTodos();
-        return ResponseEntity.ok(certificacoes);
+        List<Certificacao> certificacoes = service.buscaTodos();
+        return ResponseEntity.ok(CertificacaoDTO.fromEntityList(certificacoes));
     }
 
     @GetMapping("{id}")
     public ResponseEntity findById(@PathVariable("id") Long id) {
-        Certificacoes certificacoes = service.buscaPorId(id);
+        Certificacao certificacoes = service.buscaPorId(id);
         return ResponseEntity.ok(certificacoes);
     }
 
@@ -46,8 +47,8 @@ public class CertificacoesController {
     }
 
     @PutMapping("{id}")
-    public ResponseEntity update(@PathVariable("id") Long id, @RequestBody Certificacoes entity) {
-        Certificacoes alterado = service.alterar(id, entity);
+    public ResponseEntity update(@PathVariable("id") Long id, @RequestBody Certificacao entity) {
+        Certificacao alterado = service.alterar(id, entity);
         return ResponseEntity.ok().body(alterado);
     }
 }

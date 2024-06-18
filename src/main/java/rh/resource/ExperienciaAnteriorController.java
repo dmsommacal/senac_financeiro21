@@ -4,16 +4,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import rh.model.ExperienciaAnterior;
+import rh.resource.dto.ExperienciaAnteriorDTO;
 import rh.service.ExperienciaAnteriorService;
 
 import java.net.URI;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/experienciaAnteriores")
+@RequestMapping("/api/experiencias-anteriores")
 
 
-public class ExperienciaAnteriorController {
+public class ExperienciaAnteriorController extends AbstractController{
 
     @Autowired
     private ExperienciaAnteriorService service;
@@ -22,14 +23,14 @@ public class ExperienciaAnteriorController {
     @PostMapping
     public ResponseEntity create(@RequestBody ExperienciaAnterior entity) {
         ExperienciaAnterior save = service.salvar(entity);
-        return ResponseEntity.created(URI.create("/api/experienciaAnteriores/" + entity.getId())).body(save);
+        return ResponseEntity.created(URI.create("/api/experiencias-anteriores/" + entity.getId())).body(save);
     }
 
     @GetMapping
 
     public ResponseEntity findAll() {
         List<ExperienciaAnterior> experienciaAnteriores = service.buscaTodos();
-        return ResponseEntity.ok(experienciaAnteriores);
+        return ResponseEntity.ok(ExperienciaAnteriorDTO.fromEntityList(experienciaAnteriores));
     }
 
     @GetMapping("{id}")

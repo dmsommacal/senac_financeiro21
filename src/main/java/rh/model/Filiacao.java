@@ -14,7 +14,7 @@ public class Filiacao extends EntityId{
     @Column
     private String telefoneMae;
 
-    public Filiacao(String nomePai, String telefonePai, String nomeMae, String telefoneMae) {
+    public Filiacao() {
         this.nomePai = nomePai;
         this.telefonePai = telefonePai;
         this.nomeMae = nomeMae;

@@ -3,52 +3,32 @@ package rh.model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
-import java.util.List;
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
 
 @Entity
 public class Solicitacao extends EntityId{
-    @Column
-    private Double valorSolicitado;
-    @Column
-    private Boolean aprovacao;
-    @Column
-    private String descricao;
     @ManyToOne
     @JoinColumn(name = "saldo_id")
     @JsonIgnore
     private Saldo saldo;
-
+    @ManyToOne
+    @JoinColumn(name = "relatorio_id")
+    private Relatorio relatorio;
+    @Column(nullable = false)
+    private BigDecimal valorSolicitado;
+    @Column
+    private LocalDateTime dataHora;
+    @Column
+    private String descricao;
     public Solicitacao() {
     }
 
-    public Solicitacao(Double valorSolicitado, Boolean aprovacao, String descricao, Saldo saldo) {
-        this.valorSolicitado = valorSolicitado;
-        this.aprovacao = aprovacao;
-        this.descricao = descricao;
+    public Solicitacao(Saldo saldo, Relatorio relatorio, BigDecimal valorSolicitado, LocalDateTime dataHora, String descricao) {
         this.saldo = saldo;
-    }
-
-    public Double getValorSolicitado() {
-        return valorSolicitado;
-    }
-
-    public void setValorSolicitado(Double valorSolicitado) {
+        this.relatorio = relatorio;
         this.valorSolicitado = valorSolicitado;
-    }
-
-    public Boolean getAprovacao() {
-        return aprovacao;
-    }
-
-    public void setAprovacao(Boolean aprovacao) {
-        this.aprovacao = aprovacao;
-    }
-
-    public String getDescricao() {
-        return descricao;
-    }
-
-    public void setDescricao(String descricao) {
+        this.dataHora = dataHora;
         this.descricao = descricao;
     }
 
@@ -60,13 +40,47 @@ public class Solicitacao extends EntityId{
         this.saldo = saldo;
     }
 
+    public Relatorio getRelatorio() {
+        return relatorio;
+    }
+
+    public void setRelatorio(Relatorio relatorio) {
+        this.relatorio = relatorio;
+    }
+
+    public BigDecimal getValorSolicitado() {
+        return valorSolicitado;
+    }
+
+    public void setValorSolicitado(BigDecimal valorSolicitado) {
+        this.valorSolicitado = valorSolicitado;
+    }
+
+    public LocalDateTime getDataHora() {
+        return dataHora;
+    }
+
+    public void setDataHora(LocalDateTime dataHora) {
+        this.dataHora = dataHora;
+    }
+
+    public String getDescricao() {
+        return descricao;
+    }
+
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
+    }
+
     @Override
     public String toString() {
         return "Solicitacao{" +
-                "valorSolicitado=" + valorSolicitado +
-                ", aprovacao=" + aprovacao +
+                "saldo=" + saldo +
+                ", relatorio=" + relatorio +
+                ", valorSolicitado=" + valorSolicitado +
+                ", dataHora=" + dataHora +
                 ", descricao='" + descricao + '\'' +
-                ", saldo=" + saldo +
                 '}';
     }
 }
+

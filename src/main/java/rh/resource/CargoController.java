@@ -3,6 +3,7 @@ package rh.resource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import rh.resource.dto.CargoDTO;
 import rh.model.Cargo;
 import rh.service.CargoService;
 
@@ -10,8 +11,8 @@ import java.net.URI;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/cargo")
-public class CargoController {
+@RequestMapping("/api/cargos")
+public class CargoController extends AbstractController{
 
     @Autowired
     private CargoService service;
@@ -20,14 +21,13 @@ public class CargoController {
     @PostMapping
     public ResponseEntity create(@RequestBody Cargo entity) {
         Cargo save = service.salvar(entity);
-        return ResponseEntity.created(URI.create("/api/cargo/" + entity.getId())).body(save);
+        return ResponseEntity.created(URI.create("/api/cargos/" + entity.getId())).body(save);
     }
 
     @GetMapping
-
     public ResponseEntity findAll() {
         List<Cargo> cargos = service.buscaTodos();
-        return ResponseEntity.ok(cargos);
+        return ResponseEntity.ok(CargoDTO.fromEntityList(cargos));
     }
 
     @GetMapping("{id}")

@@ -1,93 +1,62 @@
-package rh.model;
+package rh.resource.dto;
 
-import jakarta.persistence.*;
 import rh.enums.Escolaridade;
 import rh.enums.EstadoCivil;
 import rh.enums.Genero;
 import rh.enums.Status;
+import rh.model.Cargo;
+import rh.model.Certificacao;
+import rh.model.ExperienciaAnterior;
+import rh.model.Funcionario;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.List;
 
-@Entity
-public class Funcionario extends EntityId{
-    @OneToMany(mappedBy = "funcionario")
+public class FuncionarioDTO {
     private List<ExperienciaAnterior> experienciasAnteriores;
-    @OneToMany(mappedBy = "funcionario")
     private List<Certificacao> certificacoes;
     private Escolaridade escolaridade;
     private EstadoCivil estadoCivil;
     private Genero genero;
     private Status status;
-    @ManyToOne
-    @JoinColumn(name = "cargo_id")
     private Cargo cargo;
-    @Column(nullable = false)
     private String nome;
-    @Column(nullable = false)
     private String cpf;
-    @Column(nullable = false)
     private String rg;
-    @Column
     private String endereco;
-    @Column
     private String ctps;
-    @Column
     private Double salarioContratual;
-    @Column
     private Integer cargaHoraria;
-    @Column
     private String fonePessoal;
-    @Column
     private String foneRecados;
-    @Column
     private String titulo;
-    @Column
     private String carteiraReservista;
-    @Column
     private LocalDate dataNascimento;
-    @Column
     private String pis;
-    @Column
     private String registroProfissional;
-    @Column
     private String email;
-    @Column
     private String sindicato;
-    @Column
     private String setor;
-    @Column
     private String cnh;
-    @Column
     private LocalDate dataAdmissao;
-    @Column
     private String racaCor;
-    @Column
     private String religiao;
-    @Column
     private Boolean doadorSangue;
-    @Column
     private String nacionalidade;
-    @Column
     private String redeSocial;
-    @Column
     private String areaAtuacao;
-    @Column
     private String matricula;
-    @Column
     private String idiomas;
-    @Column
     private Integer horaExtra;
-    @Column
     private LocalTime horaEntrada;
-    @Column
     private LocalTime horaSaida;
 
-    public Funcionario() {
+    public FuncionarioDTO() {
     }
 
-    public Funcionario(List<ExperienciaAnterior> experienciasAnteriores, List<Certificacao> certificacoes, Escolaridade escolaridade, EstadoCivil estadoCivil, Genero genero, Status status, Cargo cargo, String nome, String cpf, String rg, String endereco, String ctps, Double salarioContratual, Integer cargaHoraria, String fonePessoal, String foneRecados, String titulo, String carteiraReservista, LocalDate dataNascimento, String pis, String registroProfissional, String email, String sindicato, String setor, String cnh, LocalDate dataAdmissao, String racaCor, String religiao, Boolean doadorSangue, String nacionalidade, String redeSocial, String areaAtuacao, String matricula, String idiomas, Integer horaExtra, LocalTime horaEntrada, LocalTime horaSaida) {
+    public FuncionarioDTO(List<ExperienciaAnterior> experienciasAnteriores, List<Certificacao> certificacoes, Escolaridade escolaridade, EstadoCivil estadoCivil, Genero genero, Status status, Cargo cargo, String nome, String cpf, String rg, String endereco, String ctps, Double salarioContratual, Integer cargaHoraria, String fonePessoal, String foneRecados, String titulo, String carteiraReservista, LocalDate dataNascimento, String pis, String registroProfissional, String email, String sindicato, String setor, String cnh, LocalDate dataAdmissao, String racaCor, String religiao, Boolean doadorSangue, String nacionalidade, String redeSocial, String areaAtuacao, String matricula, String idiomas, Integer horaExtra, LocalTime horaEntrada, LocalTime horaSaida) {
         this.experienciasAnteriores = experienciasAnteriores;
         this.certificacoes = certificacoes;
         this.escolaridade = escolaridade;
@@ -422,47 +391,99 @@ public class Funcionario extends EntityId{
     public void setHoraSaida(LocalTime horaSaida) {
         this.horaSaida = horaSaida;
     }
-
-    @Override
-    public String toString() {
-        return "Funcionario{" +
-                "experienciasAnteriores=" + experienciasAnteriores +
-                ", certificacoes=" + certificacoes +
-                ", escolaridade=" + escolaridade +
-                ", estadoCivil=" + estadoCivil +
-                ", genero=" + genero +
-                ", status=" + status +
-                ", cargo=" + cargo +
-                ", nome='" + nome + '\'' +
-                ", cpf='" + cpf + '\'' +
-                ", rg='" + rg + '\'' +
-                ", endereco='" + endereco + '\'' +
-                ", ctps='" + ctps + '\'' +
-                ", salarioContratual=" + salarioContratual +
-                ", cargaHoraria=" + cargaHoraria +
-                ", fonePessoal='" + fonePessoal + '\'' +
-                ", foneRecados='" + foneRecados + '\'' +
-                ", titulo='" + titulo + '\'' +
-                ", carteiraReservista='" + carteiraReservista + '\'' +
-                ", dataNascimento=" + dataNascimento +
-                ", pis='" + pis + '\'' +
-                ", registroProfissional='" + registroProfissional + '\'' +
-                ", email='" + email + '\'' +
-                ", sindicato='" + sindicato + '\'' +
-                ", setor='" + setor + '\'' +
-                ", cnh='" + cnh + '\'' +
-                ", dataAdmissao=" + dataAdmissao +
-                ", racaCor='" + racaCor + '\'' +
-                ", religiao='" + religiao + '\'' +
-                ", doadorSangue=" + doadorSangue +
-                ", nacionalidade='" + nacionalidade + '\'' +
-                ", redeSocial='" + redeSocial + '\'' +
-                ", areaAtuacao='" + areaAtuacao + '\'' +
-                ", matricula='" + matricula + '\'' +
-                ", idiomas='" + idiomas + '\'' +
-                ", horaExtra=" + horaExtra +
-                ", horaEntrada=" + horaEntrada +
-                ", horaSaida=" + horaSaida +
-                '}';
+    public static FuncionarioDTO fromEntity(Funcionario funcionario) {
+        return new FuncionarioDTO(
+                funcionario.getExperienciasAnteriores(),
+                funcionario.getCertificacoes(),
+                funcionario.getEscolaridade(),
+                funcionario.getEstadoCivil(),
+                funcionario.getGenero(),
+                funcionario.getStatus(),
+                funcionario.getCargo(),
+                funcionario.getNome(),
+                funcionario.getCpf(),
+                funcionario.getRg(),
+                funcionario.getEndereco(),
+                funcionario.getCtps(),
+                funcionario.getSalarioContratual(),
+                funcionario.getCargaHoraria(),
+                funcionario.getFonePessoal(),
+                funcionario.getFoneRecados(),
+                funcionario.getTitulo(),
+                funcionario.getCarteiraReservista(),
+                funcionario.getDataNascimento(),
+                funcionario.getPis(),
+                funcionario.getRegistroProfissional(),
+                funcionario.getEmail(),
+                funcionario.getSindicato(),
+                funcionario.getSetor(),
+                funcionario.getCnh(),
+                funcionario.getDataAdmissao(),
+                funcionario.getRacaCor(),
+                funcionario.getReligiao(),
+                funcionario.getDoadorSangue(),
+                funcionario.getNacionalidade(),
+                funcionario.getRedeSocial(),
+                funcionario.getAreaAtuacao(),
+                funcionario.getMatricula(),
+                funcionario.getIdiomas(),
+                funcionario.getHoraExtra(),
+                funcionario.getHoraEntrada(),
+                funcionario.getHoraSaida()
+        );
+    }
+    public static List<FuncionarioDTO> fromEntityList(List<Funcionario> funcionarios){
+        List<FuncionarioDTO> FuncionarioDTOList = new ArrayList<>();
+        for (Funcionario funcionario : funcionarios){
+            FuncionarioDTOList.add(fromEntity(funcionario));
+        }
+        return FuncionarioDTOList;
+    }
+    public Funcionario toEntity() {
+        Funcionario funcionario = new Funcionario();
+        funcionario.setCertificacoes(this.certificacoes);
+        funcionario.setEscolaridade(this.escolaridade);
+        funcionario.setEstadoCivil(this.estadoCivil);
+        funcionario.setGenero(this.genero);
+        funcionario.setStatus(this.status);
+        funcionario.setCargo(this.cargo);
+        funcionario.setNome(this.nome);
+        funcionario.setCpf(this.nome);
+        funcionario.setRg(this.rg);
+        funcionario.setEndereco(this.endereco);
+        funcionario.setCtps(this.ctps);
+        funcionario.setSalarioContratual(this.salarioContratual);
+        funcionario.setCargaHoraria(this.cargaHoraria);
+        funcionario.setFonePessoal(this.fonePessoal);
+        funcionario.setFoneRecados(this.foneRecados);
+        funcionario.setTitulo(this.titulo);
+        funcionario.setCarteiraReservista(this.carteiraReservista);
+        funcionario.setDataNascimento(this.dataNascimento);
+        funcionario.setPis(this.pis);
+        funcionario.setRegistroProfissional(this.registroProfissional);
+        funcionario.setEmail(this.email);
+        funcionario.setSindicato(this.sindicato);
+        funcionario.setSetor(this.setor);
+        funcionario.setCnh(this.cnh);
+        funcionario.setDataAdmissao(this.dataAdmissao);
+        funcionario.setRacaCor(this.racaCor);
+        funcionario.setReligiao(this.religiao);
+        funcionario.setDoadorSangue(this.doadorSangue);
+        funcionario.setNacionalidade(this.nacionalidade);
+        funcionario.setRedeSocial(this.redeSocial);
+        funcionario.setAreaAtuacao(this.areaAtuacao);
+        funcionario.setMatricula(this.matricula);
+        funcionario.setIdiomas(this.idiomas);
+        funcionario.setHoraExtra(this.horaExtra);
+        funcionario.setHoraEntrada(this.horaEntrada);
+        funcionario.setHoraSaida(this.horaSaida);
+        return funcionario;
+    }
+    public static List<Funcionario> toEntityList(List<FuncionarioDTO> funcionarioDTOs){
+        List<Funcionario> funcionarios = new ArrayList<>();
+        for (FuncionarioDTO funcionarioDTO : funcionarioDTOs){
+            funcionarios.add(funcionarioDTO.toEntity());
+        }
+        return funcionarios;
     }
 }

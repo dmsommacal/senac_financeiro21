@@ -4,16 +4,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import rh.model.FolhaPagamento;
+import rh.resource.dto.FolhaPagamentoDTO;
 import rh.service.FolhaPagamentoService;
 
 import java.net.URI;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/folhasPagamentos")
+@RequestMapping("/api/folhas-pagamentos")
 
 
-public class FolhaPagamentoController {
+public class FolhaPagamentoController extends AbstractController{
 
     @Autowired
     private FolhaPagamentoService service;
@@ -22,14 +23,14 @@ public class FolhaPagamentoController {
     @PostMapping
     public ResponseEntity create(@RequestBody FolhaPagamento entity) {
         FolhaPagamento save = service.salvar(entity);
-        return ResponseEntity.created(URI.create("/api/folhasPagamentos/" + entity.getId())).body(save);
+        return ResponseEntity.created(URI.create("/api/folhas-pagamentos/" + entity.getId())).body(save);
     }
 
     @GetMapping
 
     public ResponseEntity findAll() {
-        List<FolhaPagamento> folhaPagamento = service.buscaTodos();
-        return ResponseEntity.ok(folhaPagamento);
+        List<FolhaPagamento> folhaPagamentos = service.buscaTodos();
+        return ResponseEntity.ok(FolhaPagamentoDTO.fromEntityList(folhaPagamentos));
     }
 
     @GetMapping("{id}")

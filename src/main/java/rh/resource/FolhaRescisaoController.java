@@ -4,16 +4,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import rh.model.FolhaRescisao;
+import rh.resource.dto.FolhaRescisaoDTO;
 import rh.service.FolhaRescisaoService;
 
 import java.net.URI;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/folhasRecisoes")
+@RequestMapping("/api/folhas-recisoes")
 
 
-public class FolhaRescisaoController {
+public class FolhaRescisaoController extends AbstractController{
 
     @Autowired
     private FolhaRescisaoService service;
@@ -22,14 +23,14 @@ public class FolhaRescisaoController {
     @PostMapping
     public ResponseEntity create(@RequestBody FolhaRescisao entity) {
         FolhaRescisao save = service.salvar(entity);
-        return ResponseEntity.created(URI.create("/api/folhasRecisoes/" + entity.getId())).body(save);
+        return ResponseEntity.created(URI.create("/api/folhas-recisoes/" + entity.getId())).body(save);
     }
 
     @GetMapping
 
     public ResponseEntity findAll() {
-        List<FolhaRescisao> folhaRescisao = service.buscaTodos();
-        return ResponseEntity.ok(folhaRescisao);
+        List<FolhaRescisao> folhaRescisaos = service.buscaTodos();
+        return ResponseEntity.ok(FolhaRescisaoDTO.fromEntityList(folhaRescisaos));
     }
 
     @GetMapping("{id}")

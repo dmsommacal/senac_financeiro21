@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import rh.model.Funcionario;
+import rh.resource.dto.FuncionarioDTO;
 import rh.service.FuncionarioService;
 
 import java.net.URI;
@@ -13,7 +14,7 @@ import java.util.List;
 @RequestMapping("/api/funcionarios")
 
 
-public class FuncionarioController {
+public class FuncionarioController extends AbstractController{
 
     @Autowired
     private FuncionarioService service;
@@ -26,10 +27,9 @@ public class FuncionarioController {
     }
 
     @GetMapping
-
     public ResponseEntity findAll() {
         List<Funcionario> funcionarios = service.buscaTodos();
-        return ResponseEntity.ok(funcionarios);
+        return ResponseEntity.ok(FuncionarioDTO.fromEntityList(funcionarios));
     }
 
     @GetMapping("{id}")

@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import rh.model.Filiacao;
+import rh.resource.dto.FiliacaoDTO;
 import rh.service.FiliacaoService;
 
 import java.net.URI;
@@ -13,7 +14,7 @@ import java.util.List;
 @RequestMapping("/api/filiacoes")
 
 
-public class FiliacaoController {
+public class FiliacaoController extends AbstractController{
 
     @Autowired
     private FiliacaoService service;
@@ -26,10 +27,9 @@ public class FiliacaoController {
     }
 
     @GetMapping
-
     public ResponseEntity findAll() {
-        List<Filiacao> filiacao = service.buscaTodos();
-        return ResponseEntity.ok(filiacao);
+        List<Filiacao> filiacoes = service.buscaTodos();
+        return ResponseEntity.ok(FiliacaoDTO.fromEntityList(filiacoes));
     }
 
     @GetMapping("{id}")

@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import rh.model.Relatorio;
+import rh.resource.dto.RelatorioDTO;
 import rh.service.RelatorioService;
 
 import java.net.URI;
@@ -13,7 +14,7 @@ import java.util.List;
 @RequestMapping("/api/relatorios")
 
 
-public class RelatorioController {
+public class RelatorioController extends AbstractController{
 
     @Autowired
     private RelatorioService service;
@@ -28,8 +29,8 @@ public class RelatorioController {
     @GetMapping
 
     public ResponseEntity findAll() {
-        List<Relatorio> relatorio = service.buscaTodos();
-        return ResponseEntity.ok(relatorio);
+        List<Relatorio> relatorios = service.buscaTodos();
+        return ResponseEntity.ok(RelatorioDTO.fromEntityList(relatorios));
     }
 
     @GetMapping("{id}")

@@ -6,51 +6,34 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Entity
 public class Entrada extends EntityId{
-        @Column(name = "valor", nullable = false)
-        private Double valor;
-        @Column(name = "data", nullable = false)
-        private LocalDateTime data;
-        @Column
-        private String descricao;
-        @ManyToOne
-        @JoinColumn(name = "saldo_id")
-        @JsonIgnore
-        private Saldo saldo;
+    @ManyToOne
+    @JoinColumn(name = "saldo_id")
+    @JsonIgnore
+    private Saldo saldo;
+    @ManyToOne
+    @JoinColumn(name = "relatorio_id")
+    @JsonIgnore
+    private Relatorio relatorio;
+    @Column(nullable = false)
+    private BigDecimal valor;
+    @Column
+    private LocalDateTime dataHora;
+    @Column
+    private String descricao;
+
     public Entrada() {
     }
 
-    public Entrada(Double valor, LocalDateTime data, String descricao, Saldo saldo) {
-        this.valor = valor;
-        this.data = data;
-        this.descricao = descricao;
+    public Entrada(Saldo saldo, Relatorio relatorio, BigDecimal valor, LocalDateTime dataHora, String descricao) {
         this.saldo = saldo;
-    }
-
-    public Double getValor() {
-        return valor;
-    }
-
-    public void setValor(Double valor) {
+        this.relatorio = relatorio;
         this.valor = valor;
-    }
-
-    public LocalDateTime getData() {
-        return data;
-    }
-
-    public void setData(LocalDateTime data) {
-        this.data = data;
-    }
-
-    public String getDescricao() {
-        return descricao;
-    }
-
-    public void setDescricao(String descricao) {
+        this.dataHora = dataHora;
         this.descricao = descricao;
     }
 
@@ -62,13 +45,46 @@ public class Entrada extends EntityId{
         this.saldo = saldo;
     }
 
+    public Relatorio getRelatorio() {
+        return relatorio;
+    }
+
+    public void setRelatorio(Relatorio relatorio) {
+        this.relatorio = relatorio;
+    }
+
+    public BigDecimal getValor() {
+        return valor;
+    }
+
+    public void setValor(BigDecimal valor) {
+        this.valor = valor;
+    }
+
+    public LocalDateTime getDataHora() {
+        return dataHora;
+    }
+
+    public void setDataHora(LocalDateTime dataHora) {
+        this.dataHora = dataHora;
+    }
+
+    public String getDescricao() {
+        return descricao;
+    }
+
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
+    }
+
     @Override
     public String toString() {
         return "Entrada{" +
-                "valor=" + valor +
-                ", data=" + data +
+                "saldo=" + saldo +
+                ", relatorio=" + relatorio +
+                ", valor=" + valor +
+                ", dataHora=" + dataHora +
                 ", descricao='" + descricao + '\'' +
-                ", saldo=" + saldo +
                 '}';
     }
 }

@@ -3,32 +3,34 @@ package rh.model;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.PrePersist;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @Entity
 public class Saldo extends EntityId{
-    @Column
-    private Double valorDisponivel = 0.0;
+
     @OneToMany(mappedBy = "saldo")
     private List<Entrada> entradas;
     @OneToMany(mappedBy = "saldo")
     private List<Solicitacao> solicitacoes;
-
+    @Column(nullable = false)
+    private BigDecimal valorDisponivel;
     public Saldo() {
     }
 
-    public Saldo(Double valorDisponivel, List<Entrada> entradas) {
-        this.valorDisponivel = valorDisponivel;
+    public Saldo(List<Entrada> entradas, List<Solicitacao> solicitacoes, BigDecimal valorDisponivel) {
         this.entradas = entradas;
+        this.solicitacoes = solicitacoes;
+        this.valorDisponivel = BigDecimal.ZERO;
     }
-
-    public Double getValorDisponivel() {
-        return valorDisponivel;
-    }
-
-    public void setValorDisponivel(Double valorDisponivel) {
-        this.valorDisponivel = valorDisponivel;
+    @PrePersist
+    public void iniciaSaldo(){
+        setId(1L);
+        if (this.valorDisponivel == null) {
+            this.valorDisponivel = BigDecimal.ZERO;
+        }
     }
 
     public List<Entrada> getEntradas() {
@@ -39,11 +41,28 @@ public class Saldo extends EntityId{
         this.entradas = entradas;
     }
 
+    public List<Solicitacao> getSolicitacoes() {
+        return solicitacoes;
+    }
+
+    public void setSolicitacoes(List<Solicitacao> solicitacoes) {
+        this.solicitacoes = solicitacoes;
+    }
+
+    public BigDecimal getValorDisponivel() {
+        return valorDisponivel;
+    }
+
+    public void setValorDisponivel(BigDecimal valorDisponivel) {
+        this.valorDisponivel = valorDisponivel;
+    }
+
     @Override
     public String toString() {
         return "Saldo{" +
-                "valorDisponivel=" + valorDisponivel +
-                ", entradas=" + entradas +
+                "entradas=" + entradas +
+                ", solicitacoes=" + solicitacoes +
+                ", valorDisponivel=" + valorDisponivel +
                 '}';
     }
 }

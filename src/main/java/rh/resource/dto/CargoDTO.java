@@ -1,27 +1,24 @@
-package rh.model;
+package rh.resource.dto;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.OneToMany;
 import rh.enums.ModalidadeContratual;
 import rh.enums.Turno;
+import rh.model.Cargo;
+import rh.model.Funcionario;
 
+import java.util.ArrayList;
 import java.util.List;
-
-@Entity
-public class Cargo extends EntityId{
-    @OneToMany(mappedBy = "cargo")
+public class CargoDTO {
     private List<Funcionario> funcionarios;
-    @Column
     private String descricao;
-    @Column
     private String nivel;
-    @Column
     private Boolean comissao;
     private Turno turno;
     private ModalidadeContratual modalidadeContratual;
 
-    public Cargo() {
+    public CargoDTO() {
+    }
+
+    public CargoDTO(List<Funcionario> funcionarios, String descricao, String nivel, Boolean comissao, Turno turno, ModalidadeContratual modalidadeContratual) {
         this.funcionarios = funcionarios;
         this.descricao = descricao;
         this.nivel = nivel;
@@ -77,17 +74,39 @@ public class Cargo extends EntityId{
     public void setModalidadeContratual(ModalidadeContratual modalidadeContratual) {
         this.modalidadeContratual = modalidadeContratual;
     }
-
-    @Override
-    public String toString() {
-        return "Cargo{" +
-                "funcionarios=" + funcionarios +
-                ", descricao='" + descricao + '\'' +
-                ", nivel='" + nivel + '\'' +
-                ", comissao=" + comissao +
-                ", turno=" + turno +
-                ", modalidadeContratual=" + modalidadeContratual +
-                '}';
+    public static CargoDTO fromEntity(Cargo cargo) {
+        return new CargoDTO(
+                cargo.getFuncionarios(),
+                cargo.getDescricao(),
+                cargo.getNivel(),
+                cargo.getComissao(),
+                cargo.getTurno(),
+                cargo.getModalidadeContratual()
+        );
     }
-
+    public static List<CargoDTO> fromEntityList(List<Cargo> cargos){
+        List<CargoDTO> cargoDTOList = new ArrayList<>();
+        for (Cargo cargo : cargos){
+            cargoDTOList.add(fromEntity(cargo));
+        }
+        return cargoDTOList;
+    }
+    public Cargo toEntity() {
+        Cargo cargo = new Cargo();
+        cargo.setFuncionarios(this.funcionarios);
+        cargo.setDescricao(this.descricao);
+        cargo.setNivel(this.nivel);
+        cargo.setComissao(this.comissao);
+        cargo.setTurno(this.turno);
+        cargo.setModalidadeContratual(this.modalidadeContratual);
+        return cargo;
+    }
+    public static List<Cargo> toEntityList(List<CargoDTO> cargoDTOs){
+        List<Cargo> cargos = new ArrayList<>();
+        for (CargoDTO cargoDTO : cargoDTOs){
+            cargos.add(cargoDTO.toEntity());
+        }
+        return cargos;
+    }
 }
+

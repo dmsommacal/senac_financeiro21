@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import rh.model.Solicitacao;
+import rh.resource.dto.SolicitacaoDTO;
 import rh.service.SolicitacaoService;
 
 import java.net.URI;
@@ -11,13 +12,10 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/solicitacoes")
-
-
-public class SolicitacaoController {
+public class SolicitacaoController extends AbstractController{
 
     @Autowired
     private SolicitacaoService service;
-
 
     @PostMapping
     public ResponseEntity create(@RequestBody Solicitacao entity) {
@@ -27,8 +25,8 @@ public class SolicitacaoController {
 
     @GetMapping
     public ResponseEntity findAll() {
-        List<Solicitacao> solicitacao = service.buscaTodos();
-        return ResponseEntity.ok(solicitacao);
+        List<Solicitacao> solicitacoes = service.buscaTodos();
+        return ResponseEntity.ok(SolicitacaoDTO.fromEntityList(solicitacoes));
     }
 
     @GetMapping("{id}")
