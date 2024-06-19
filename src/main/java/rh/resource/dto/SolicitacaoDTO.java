@@ -1,9 +1,8 @@
 package rh.resource.dto;
 
 
-import rh.model.Cargo;
 import rh.model.Relatorio;
-import rh.model.Saldo;
+import rh.model.Conta;
 import rh.model.Solicitacao;
 
 import java.math.BigDecimal;
@@ -12,31 +11,28 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SolicitacaoDTO {
-    private Saldo saldo;
+    private Conta conta;
     private Relatorio relatorio;
     private BigDecimal valorSolicitado;
-
     private LocalDateTime dataHora;
-
     private String descricao;
-
     public SolicitacaoDTO() {
     }
 
-    public SolicitacaoDTO(Saldo saldo, Relatorio relatorio, BigDecimal valorSolicitado, LocalDateTime dataHora, String descricao) {
-        this.saldo = saldo;
+    public SolicitacaoDTO(Conta conta, Relatorio relatorio, BigDecimal valorSolicitado, LocalDateTime dataHora, String descricao) {
+        this.conta = conta;
         this.relatorio = relatorio;
         this.valorSolicitado = valorSolicitado;
         this.dataHora = dataHora;
         this.descricao = descricao;
     }
 
-    public Saldo getSaldo() {
-        return saldo;
+    public Conta getSaldo() {
+        return conta;
     }
 
-    public void setSaldo(Saldo saldo) {
-        this.saldo = saldo;
+    public void setSaldo(Conta conta) {
+        this.conta = conta;
     }
 
     public Relatorio getRelatorio() {
@@ -73,7 +69,7 @@ public class SolicitacaoDTO {
 
     public static SolicitacaoDTO fromEntity(Solicitacao solicitacao) {
         return new SolicitacaoDTO(
-                solicitacao.getSaldo(),
+                solicitacao.getConta(),
                 solicitacao.getRelatorio(),
                 solicitacao.getValorSolicitado(),
                 solicitacao.getDataHora(),
@@ -89,7 +85,7 @@ public class SolicitacaoDTO {
     }
     public Solicitacao toEntity() {
         Solicitacao solicitacao = new Solicitacao();
-        solicitacao.setSaldo(this.saldo);
+        solicitacao.setConta(this.conta);
         solicitacao.setRelatorio(this.relatorio);
         solicitacao.setValorSolicitado(this.valorSolicitado);
         solicitacao.setDataHora(this.dataHora);

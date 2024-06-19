@@ -6,37 +6,35 @@ import org.springframework.stereotype.Service;
 import rh.enterprise.ValidationException;
 import rh.model.Entrada;
 import rh.model.Relatorio;
-import rh.model.Saldo;
+import rh.model.Conta;
 import rh.repository.EntradaRepository;
 import rh.repository.RelatorioRepository;
-import rh.repository.SaldoRepository;
+import rh.repository.ContaRepository;
 
 import java.util.List;
 import java.util.Optional;
 
 @Service
 public class EntradaService {
-
     @Autowired
     private EntradaRepository entradaRepository;
     @Autowired
-    private SaldoRepository saldoRepository;
+    private ContaRepository contaRepository;
     @Autowired
     private RelatorioRepository relatorioRepository;
     @Transactional
     public Entrada salvar(Entrada entity) {
+
+        Conta conta = contaRepository.findById(1L).orElseThrow(() -> new ValidationException("Conta do Financeiro não identificada!"));
+
+        //Altera e salva o saldo a cada entrada
+        conta.setSaldo(conta.getSaldo().add(entity.getValor()));
+        contaRepository.save(conta);
+        entity.setConta(conta);
+
+        //Cria e salva o relatório
         Relatorio relatorio = new Relatorio();
-
-        Saldo saldo = saldoRepository.findById(1L).orElseThrow(() -> new ValidationException("Saldo não identificado!"));
-
-        //Altera e salva o valorDisponível do Saldo a cada Entrada
-        saldo.setValorDisponivel(saldo.getValorDisponivel().add(entity.getValor()));
-        saldoRepository.save(saldo);
-
-        entity.setSaldo(saldo);
-
         entity.setRelatorio(relatorio);
-
         relatorioRepository.save(relatorio);
 
         return entradaRepository.save(entity);
