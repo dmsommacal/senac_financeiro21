@@ -4,7 +4,7 @@ import rh.model.Entrada;
 
 import java.math.BigDecimal;
 
-public class ValorSpecification implements Specification<Entrada> {
+public class EntradaSpecification implements Specification<Entrada> {
 
     @Override
     public ValidationResult isSatisfiedBy(Entrada entrada){
@@ -12,7 +12,7 @@ public class ValorSpecification implements Specification<Entrada> {
             return ValidationResult.valid();
         }
         else {
-            return ValidationResult.invalid("A entrada deve possuir valor maior que ZERO e não pode ser NULL.");
+            return ValidationResult.invalid("A entrada deve possuir valor maior que ZERO e nao pode ser NULL.");
         }
     }
 }
