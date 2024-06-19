@@ -1,28 +1,39 @@
 package rh.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.PrePersist;
 
 import java.math.BigDecimal;
 import java.util.List;
 
 @Entity
-public class Saldo extends EntityId{
+public class Conta extends EntityId{
 
-    @OneToMany(mappedBy = "saldo")
+    @OneToMany(mappedBy = "conta")
+    @JsonIgnore
     private List<Entrada> entradas;
-    @OneToMany(mappedBy = "saldo")
+    @OneToMany(mappedBy = "conta")
+    @JsonIgnore
     private List<Solicitacao> solicitacoes;
     @Column(nullable = false)
-    private BigDecimal valorDisponivel;
-    public Saldo() {
+    private BigDecimal saldo;
+    public Conta() {
     }
 
-    public Saldo(List<Entrada> entradas, List<Solicitacao> solicitacoes, BigDecimal valorDisponivel) {
+    public Conta(List<Entrada> entradas, List<Solicitacao> solicitacoes, BigDecimal saldo) {
         this.entradas = entradas;
         this.solicitacoes = solicitacoes;
-        this.valorDisponivel = valorDisponivel;
+        this.saldo = BigDecimal.ZERO;
+    }
+    @PrePersist
+    public void iniciaSaldo(){
+        setId(1L);
+        if (this.saldo == null){
+            this.saldo = BigDecimal.ZERO;
+        }
     }
 
     public List<Entrada> getEntradas() {
@@ -41,20 +52,20 @@ public class Saldo extends EntityId{
         this.solicitacoes = solicitacoes;
     }
 
-    public BigDecimal getValorDisponivel() {
-        return valorDisponivel;
+    public BigDecimal getSaldo() {
+        return saldo;
     }
 
-    public void setValorDisponivel(BigDecimal valorDisponivel) {
-        this.valorDisponivel = valorDisponivel;
+    public void setSaldo(BigDecimal saldo) {
+        this.saldo = saldo;
     }
 
     @Override
     public String toString() {
-        return "Saldo{" +
+        return "Conta{" +
                 "entradas=" + entradas +
                 ", solicitacoes=" + solicitacoes +
-                ", valorDisponivel=" + valorDisponivel +
+                ", saldo=" + saldo +
                 '}';
     }
 }
