@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.*;
 import rh.model.*;
 import rh.model.Specification.Specification;
 import rh.model.Specification.ValidationResult;
-import rh.model.Specification.ValorSpecification;
+import rh.model.Specification.EntradaSpecification;
 import rh.resource.dto.EntradaDTO;
 import rh.service.EntradaService;
 
@@ -24,18 +24,19 @@ public class EntradaController extends AbstractController{
     public ResponseEntity create(@RequestBody Entrada entity) {
         Entrada entrada = new Entrada();
 
-        Specification<Entrada> valorSpec = new ValorSpecification();
+        Specification<Entrada> valorSpec = new EntradaSpecification();
 
         ValidationResult result = valorSpec.isSatisfiedBy(entity);
 
-        if (result.isValid()){
+        if (result.isValid()) {
             System.out.println("Entrada válida");
+            Entrada save = service.salvar(entity);
+            return ResponseEntity.created(URI.create("/api/entradas/" + entity.getId())).body(save);
         }
         else {
             System.out.println("Entrada inválida: " + result.getMessage());
+            return ResponseEntity.badRequest().body(result.getMessage());
         }
-        Entrada save = service.salvar(entity);
-        return ResponseEntity.created(URI.create("/api/entradas/" + entity.getId())).body(save);
     }
 
     @GetMapping

@@ -4,6 +4,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import rh.model.Solicitacao;
+import rh.model.Specification.SolicitacaoSpecification;
+import rh.model.Specification.Specification;
+import rh.model.Specification.ValidationResult;
 import rh.resource.dto.SolicitacaoDTO;
 import rh.service.SolicitacaoService;
 
@@ -19,8 +22,21 @@ public class SolicitacaoController extends AbstractController{
 
     @PostMapping
     public ResponseEntity create(@RequestBody Solicitacao entity) {
-        Solicitacao save = service.salvar(entity);
-        return ResponseEntity.created(URI.create("/api/solicitacoes/" + entity.getId())).body(save);
+        Solicitacao solicitacao = new Solicitacao();
+
+        Specification<Solicitacao> valorSolicitadoSpec = new SolicitacaoSpecification();
+
+        ValidationResult result = valorSolicitadoSpec.isSatisfiedBy(entity);
+
+        if (result.isValid()) {
+            System.out.println("Solicitação válida");
+            Solicitacao save = service.salvar(entity);
+            return ResponseEntity.created(URI.create("/api/entradas/" + entity.getId())).body(save);
+        }
+        else {
+            System.out.println("Solicitação inválida: " + result.getMessage());
+            return ResponseEntity.badRequest().body(result.getMessage());
+        }
     }
 
     @GetMapping

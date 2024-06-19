@@ -1,10 +1,8 @@
 package rh.resource.dto;
 
-import jakarta.persistence.Column;
-import rh.model.Cargo;
 import rh.model.Entrada;
 import rh.model.Relatorio;
-import rh.model.Saldo;
+import rh.model.Conta;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -12,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class EntradaDTO {
-    private Saldo saldo;
+    private Conta conta;
     private Relatorio relatorio;
     private BigDecimal valor;
     private LocalDateTime dataHora;
@@ -21,20 +19,20 @@ public class EntradaDTO {
     public EntradaDTO() {
     }
 
-    public EntradaDTO(Saldo saldo, Relatorio relatorio, BigDecimal valor, LocalDateTime dataHora, String descricao) {
-        this.saldo = saldo;
+    public EntradaDTO(Conta conta, Relatorio relatorio, BigDecimal valor, LocalDateTime dataHora, String descricao) {
+        this.conta = conta;
         this.relatorio = relatorio;
         this.valor = valor;
         this.dataHora = dataHora;
         this.descricao = descricao;
     }
 
-    public Saldo getSaldo() {
-        return saldo;
+    public Conta getSaldo() {
+        return conta;
     }
 
-    public void setSaldo(Saldo saldo) {
-        this.saldo = saldo;
+    public void setSaldo(Conta conta) {
+        this.conta = conta;
     }
 
     public Relatorio getRelatorio() {
@@ -71,7 +69,7 @@ public class EntradaDTO {
 
     public static EntradaDTO fromEntity(Entrada entrada) {
         return new EntradaDTO(
-                entrada.getSaldo(),
+                entrada.getConta(),
                 entrada.getRelatorio(),
                 entrada.getValor(),
                 entrada.getDataHora(),
@@ -91,7 +89,7 @@ public class EntradaDTO {
         Entrada entrada = new Entrada();
         entrada.setValor(this.valor);
         entrada.setRelatorio(this.relatorio);
-        entrada.setSaldo(this.saldo);
+        entrada.setConta(this.conta);
         entrada.setDataHora(this.dataHora);
         entrada.setDescricao(this.descricao);
         return entrada;
