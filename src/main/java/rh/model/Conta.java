@@ -4,7 +4,6 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.OneToMany;
-import jakarta.persistence.PrePersist;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -26,16 +25,8 @@ public class Conta extends EntityId{
     public Conta(List<Entrada> entradas, List<Solicitacao> solicitacoes, BigDecimal saldo) {
         this.entradas = entradas;
         this.solicitacoes = solicitacoes;
-        this.saldo = BigDecimal.ZERO;
+        this.saldo = saldo;
     }
-    @PrePersist
-    public void iniciaSaldo(){
-        setId(1L);
-        if (this.saldo == null){
-            this.saldo = BigDecimal.ZERO;
-        }
-    }
-
     public List<Entrada> getEntradas() {
         return entradas;
     }
