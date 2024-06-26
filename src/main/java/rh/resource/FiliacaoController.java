@@ -1,14 +1,17 @@
 package rh.resource;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import rh.model.Filiacao;
+import rh.repository.FiliacaoRepository;
+import org.springframework.data.domain.Pageable;
 import rh.resource.dto.FiliacaoDTO;
 import rh.service.FiliacaoService;
 
 import java.net.URI;
-import java.util.List;
 
 @RestController
 @RequestMapping("/api/filiacoes")
@@ -16,6 +19,8 @@ import java.util.List;
 
 public class FiliacaoController extends AbstractController{
 
+    @Autowired
+    private FiliacaoRepository repository;
     @Autowired
     private FiliacaoService service;
 
@@ -27,9 +32,14 @@ public class FiliacaoController extends AbstractController{
     }
 
     @GetMapping
-    public ResponseEntity findAll() {
-        List<Filiacao> filiacoes = service.buscaTodos();
-        return ResponseEntity.ok(FiliacaoDTO.fromEntityList(filiacoes));
+    public ResponseEntity findAll(@RequestParam(required = false)String filter,
+                                  @RequestParam(defaultValue = "0")int page,
+                                  @RequestParam(defaultValue = "10")int size) {
+        Pageable pageable = PageRequest.of(page, size);
+
+        Page<Filiacao> filiacoesPage = repository.findAll(filter, Filiacao.class, pageable);
+        Page<FiliacaoDTO> filiacoesDTOPage = filiacoesPage.map(FiliacaoDTO::fromEntity);
+        return ResponseEntity.ok(filiacoesDTOPage);
     }
 
     @GetMapping("{id}")

@@ -1,14 +1,17 @@
 package rh.resource;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import rh.model.ExperienciaAnterior;
+import rh.repository.ExperienciaAnteriorRepository;
+import org.springframework.data.domain.Pageable;
 import rh.resource.dto.ExperienciaAnteriorDTO;
 import rh.service.ExperienciaAnteriorService;
 
 import java.net.URI;
-import java.util.List;
 
 @RestController
 @RequestMapping("/api/experiencias-anteriores")
@@ -16,6 +19,8 @@ import java.util.List;
 
 public class ExperienciaAnteriorController extends AbstractController{
 
+    @Autowired
+    private ExperienciaAnteriorRepository repository;
     @Autowired
     private ExperienciaAnteriorService service;
 
@@ -27,12 +32,15 @@ public class ExperienciaAnteriorController extends AbstractController{
     }
 
     @GetMapping
+    public ResponseEntity findAll(@RequestParam(required = false)String filter,
+                                  @RequestParam(defaultValue = "0")int page,
+                                  @RequestParam(defaultValue = "10")int size) {
+        Pageable pageable = PageRequest.of(page, size);
 
-    public ResponseEntity findAll() {
-        List<ExperienciaAnterior> experienciaAnteriores = service.buscaTodos();
-        return ResponseEntity.ok(ExperienciaAnteriorDTO.fromEntityList(experienciaAnteriores));
+        Page<ExperienciaAnterior> experienciaAnterioresPage = repository.findAll(filter, ExperienciaAnterior.class, pageable);
+        Page<ExperienciaAnteriorDTO> experienciaAnterioresDTOPage = experienciaAnterioresPage.map(ExperienciaAnteriorDTO::fromEntity);
+        return ResponseEntity.ok(experienciaAnterioresDTOPage);
     }
-
     @GetMapping("{id}")
     public ResponseEntity findById(@PathVariable("id") Long id) {
         ExperienciaAnterior experienciaAnterior = service.buscaPorId(id);
