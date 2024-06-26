@@ -1,14 +1,18 @@
 package rh.resource;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import rh.model.DadoBancario;
+import rh.repository.DadoBancarioRepository;
 import rh.resource.dto.DadoBancarioDTO;
 import rh.service.DadoBancarioService;
+import org.springframework.data.domain.Pageable;
 
 import java.net.URI;
-import java.util.List;
+
 
 @RestController
 @RequestMapping("/api/dados-bancarios")
@@ -16,6 +20,8 @@ import java.util.List;
 
 public class DadoBancarioController extends AbstractController{
 
+    @Autowired
+    private DadoBancarioRepository repository;
     @Autowired
     private DadoBancarioService service;
 
@@ -27,10 +33,14 @@ public class DadoBancarioController extends AbstractController{
     }
 
     @GetMapping
+    public ResponseEntity findAll(@RequestParam(required = false)String filter,
+                                  @RequestParam(defaultValue = "0")int page,
+                                  @RequestParam(defaultValue = "10")int size) {
+        Pageable pageable = PageRequest.of(page, size);
 
-    public ResponseEntity findAll() {
-        List<DadoBancario> dadosBancarios = service.buscaTodos();
-        return ResponseEntity.ok(DadoBancarioDTO.fromEntityList(dadosBancarios));
+        Page<DadoBancario> dadoBancariosPage = repository.findAll(filter, DadoBancario.class, pageable);
+        Page<DadoBancarioDTO> dadoBancariosDTOPage = dadoBancariosPage.map(DadoBancarioDTO::fromEntity);
+        return ResponseEntity.ok(dadoBancariosDTOPage);
     }
 
     @GetMapping("{id}")
