@@ -19,7 +19,7 @@ public class Certificacao extends EntityId{
     @JoinColumn(name = "funcionario_id")
     private Funcionario funcionario;
 
-    public Certificacao(String nome, Double cargaHoraria, LocalDate dataEmissao, Funcionario funcionario) {
+    public Certificacao() {
         this.nome = nome;
         this.cargaHoraria = cargaHoraria;
         this.dataEmissao = dataEmissao;

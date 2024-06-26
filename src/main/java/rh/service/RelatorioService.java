@@ -20,6 +20,7 @@ public class RelatorioService {
     }
 
     public List<Relatorio> buscaTodos(){
+
         return relatorioRepository.findAll();
     }
     public Relatorio buscaPorId(Long id){

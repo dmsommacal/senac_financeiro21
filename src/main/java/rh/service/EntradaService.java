@@ -5,33 +5,40 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import rh.enterprise.ValidationException;
 import rh.model.Entrada;
-import rh.model.Saldo;
+import rh.model.Relatorio;
+import rh.model.Conta;
 import rh.repository.EntradaRepository;
-import rh.repository.SaldoRepository;
+import rh.repository.RelatorioRepository;
+import rh.repository.ContaRepository;
 
-import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 
 @Service
 public class EntradaService {
-
     @Autowired
     private EntradaRepository entradaRepository;
     @Autowired
-    private SaldoRepository saldoRepository;
-    
+    private ContaRepository contaRepository;
+    @Autowired
+    private RelatorioRepository relatorioRepository;
     @Transactional
     public Entrada salvar(Entrada entity) {
 
-        Saldo saldo = saldoRepository.findById(1L).orElseThrow(() -> new ValidationException("Saldo não identificado!"));
-        saldo.setValorDisponivel(saldo.getValorDisponivel().add(entity.getValor()));
-        saldoRepository.save(saldo);
+        Conta conta = contaRepository.findById(1L).orElseThrow(() -> new ValidationException("Conta do Financeiro não identificada!"));
 
-        entity.setSaldo(saldo);
+        //Altera e salva o saldo a cada entrada
+        conta.setSaldo(conta.getSaldo().add(entity.getValor()));
+        contaRepository.save(conta);
+        entity.setConta(conta);
+
+        //Aletra e salva a entrada no relatório
+        Relatorio relatorio = new Relatorio();
+        entity.setRelatorio(relatorio);
+        relatorioRepository.save(relatorio);
+
         return entradaRepository.save(entity);
     }
-
     public List<Entrada> buscaTodos(){
         return entradaRepository.findAll();
     }

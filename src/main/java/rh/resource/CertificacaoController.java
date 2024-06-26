@@ -1,14 +1,17 @@
 package rh.resource;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import rh.model.Certificacao;
+import rh.repository.CertificacaoRepository;
+import org.springframework.data.domain.Pageable;
 import rh.resource.dto.CertificacaoDTO;
 import rh.service.CertificacaoService;
 
 import java.net.URI;
-import java.util.List;
 
 @RestController
 @RequestMapping("/api/certificacoes")
@@ -16,6 +19,8 @@ import java.util.List;
 
 public class CertificacaoController extends AbstractController{
 
+    @Autowired
+    private CertificacaoRepository repository;
     @Autowired
     private CertificacaoService service;
 
@@ -27,10 +32,14 @@ public class CertificacaoController extends AbstractController{
     }
 
     @GetMapping
+    public ResponseEntity findAll(@RequestParam(required = false)String filter,
+                                  @RequestParam(defaultValue = "0")int page,
+                                  @RequestParam(defaultValue = "10")int size) {
+        Pageable pageable = PageRequest.of(page, size);
 
-    public ResponseEntity findAll() {
-        List<Certificacao> certificacoes = service.buscaTodos();
-        return ResponseEntity.ok(CertificacaoDTO.fromEntityList(certificacoes));
+        Page<Certificacao> certificacoesPage = repository.findAll(filter, Certificacao.class, pageable);
+        Page<CertificacaoDTO> certificacoesDTOPage = certificacoesPage.map(CertificacaoDTO::fromEntity);
+        return ResponseEntity.ok(certificacoesDTOPage);
     }
 
     @GetMapping("{id}")

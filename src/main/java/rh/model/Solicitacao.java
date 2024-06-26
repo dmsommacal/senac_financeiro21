@@ -3,17 +3,19 @@ package rh.model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
-import java.util.List;
-
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Entity
 public class Solicitacao extends EntityId{
     @ManyToOne
-    @JoinColumn(name = "saldo_id")
+    @JoinColumn(name = "conta_id")
     @JsonIgnore
-    private Saldo saldo;
+    private Conta conta;
+    @ManyToOne
+    @JoinColumn(name = "relatorio_id")
+    @JsonIgnore
+    private Relatorio relatorio;
     @Column(nullable = false)
     private BigDecimal valorSolicitado;
     @Column
@@ -23,19 +25,28 @@ public class Solicitacao extends EntityId{
     public Solicitacao() {
     }
 
-    public Solicitacao(Saldo saldo, BigDecimal valorSolicitado, LocalDateTime dataHora, String descricao) {
-        this.saldo = saldo;
+    public Solicitacao(Conta conta, Relatorio relatorio, BigDecimal valorSolicitado, LocalDateTime dataHora, String descricao) {
+        this.conta = conta;
+        this.relatorio = relatorio;
         this.valorSolicitado = valorSolicitado;
         this.dataHora = dataHora;
         this.descricao = descricao;
     }
 
-    public Saldo getSaldo() {
-        return saldo;
+    public Conta getConta() {
+        return conta;
     }
 
-    public void setSaldo(Saldo saldo) {
-        this.saldo = saldo;
+    public void setConta(Conta conta) {
+        this.conta = conta;
+    }
+
+    public Relatorio getRelatorio() {
+        return relatorio;
+    }
+
+    public void setRelatorio(Relatorio relatorio) {
+        this.relatorio = relatorio;
     }
 
     public BigDecimal getValorSolicitado() {
@@ -65,7 +76,8 @@ public class Solicitacao extends EntityId{
     @Override
     public String toString() {
         return "Solicitacao{" +
-                "saldo=" + saldo +
+                "conta=" + conta +
+                ", relatorio=" + relatorio +
                 ", valorSolicitado=" + valorSolicitado +
                 ", dataHora=" + dataHora +
                 ", descricao='" + descricao + '\'' +

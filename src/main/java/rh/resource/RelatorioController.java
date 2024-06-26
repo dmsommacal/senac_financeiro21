@@ -1,13 +1,17 @@
 package rh.resource;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.data.domain.Pageable;
 import rh.model.Relatorio;
+import rh.repository.RelatorioRepository;
+import rh.resource.dto.RelatorioDTO;
 import rh.service.RelatorioService;
 
 import java.net.URI;
-import java.util.List;
 
 @RestController
 @RequestMapping("/api/relatorios")
@@ -15,6 +19,8 @@ import java.util.List;
 
 public class RelatorioController extends AbstractController{
 
+    @Autowired
+    private RelatorioRepository repository;
     @Autowired
     private RelatorioService service;
 
@@ -26,10 +32,14 @@ public class RelatorioController extends AbstractController{
     }
 
     @GetMapping
+    public ResponseEntity findAll(@RequestParam(required = false)String filter,
+                                  @RequestParam(defaultValue = "0")int page,
+                                  @RequestParam(defaultValue = "10")int size) {
+        Pageable pageable = PageRequest.of(page, size);
 
-    public ResponseEntity findAll() {
-        List<Relatorio> relatorio = service.buscaTodos();
-        return ResponseEntity.ok(relatorio);
+        Page<Relatorio> relatoriosPage = repository.findAll(filter, Relatorio.class, pageable);
+        Page<RelatorioDTO> relatoriosDTOPage = relatoriosPage.map(RelatorioDTO::fromEntity);
+        return ResponseEntity.ok(relatoriosDTOPage);
     }
 
     @GetMapping("{id}")
