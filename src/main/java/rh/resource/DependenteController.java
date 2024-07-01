@@ -1,14 +1,17 @@
 package rh.resource;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import rh.model.Dependente;
+import rh.repository.DependenteRepository;
 import rh.resource.dto.DependenteDTO;
 import rh.service.DependenteService;
+import org.springframework.data.domain.Pageable;
 
 import java.net.URI;
-import java.util.List;
 
 @RestController
 @RequestMapping("/api/dependentes")
@@ -16,6 +19,8 @@ import java.util.List;
 
 public class DependenteController extends AbstractController{
 
+    @Autowired
+    private DependenteRepository repository;
     @Autowired
     private DependenteService service;
 
@@ -27,9 +32,14 @@ public class DependenteController extends AbstractController{
     }
 
     @GetMapping
-    public ResponseEntity findAll() {
-        List<Dependente> dependentes = service.buscaTodos();
-        return ResponseEntity.ok(DependenteDTO.fromEntityList(dependentes));
+    public ResponseEntity findAll(@RequestParam(required = false)String filter,
+                                  @RequestParam(defaultValue = "0")int page,
+                                  @RequestParam(defaultValue = "10")int size) {
+        Pageable pageable = PageRequest.of(page, size);
+
+        Page<Dependente> dependentesPage = repository.findAll(filter, Dependente.class, pageable);
+        Page<DependenteDTO> dependentesDTOPage = dependentesPage.map(DependenteDTO::fromEntity);
+        return ResponseEntity.ok(dependentesDTOPage);
     }
 
     @GetMapping("{id}")

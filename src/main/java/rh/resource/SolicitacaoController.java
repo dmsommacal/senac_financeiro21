@@ -1,22 +1,27 @@
 package rh.resource;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import rh.model.Solicitacao;
 import rh.model.Specification.SolicitacaoSpecification;
 import rh.model.Specification.Specification;
 import rh.model.Specification.ValidationResult;
+import rh.repository.SolicitacaoRepository;
+import org.springframework.data.domain.Pageable;
 import rh.resource.dto.SolicitacaoDTO;
 import rh.service.SolicitacaoService;
 
 import java.net.URI;
-import java.util.List;
 
 @RestController
 @RequestMapping("/api/solicitacoes")
 public class SolicitacaoController extends AbstractController{
 
+    @Autowired
+    private SolicitacaoRepository repository;
     @Autowired
     private SolicitacaoService service;
 
@@ -40,9 +45,14 @@ public class SolicitacaoController extends AbstractController{
     }
 
     @GetMapping
-    public ResponseEntity findAll() {
-        List<Solicitacao> solicitacoes = service.buscaTodos();
-        return ResponseEntity.ok(SolicitacaoDTO.fromEntityList(solicitacoes));
+    public ResponseEntity findAll(@RequestParam(required = false)String filter,
+                                  @RequestParam(defaultValue = "0")int page,
+                                  @RequestParam(defaultValue = "10")int size) {
+        Pageable pageable = PageRequest.of(page, size);
+
+        Page<Solicitacao> solicitacoesPage = repository.findAll(filter, Solicitacao.class, pageable);
+        Page<SolicitacaoDTO> solicitacoesDTOPage = solicitacoesPage.map(SolicitacaoDTO::fromEntity);
+        return ResponseEntity.ok(solicitacoesDTOPage);
     }
 
     @GetMapping("{id}")
