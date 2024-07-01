@@ -34,7 +34,7 @@ public class SolicitacaoService {
             contaRepository.save(conta);
             entity.setConta(conta);
 
-            //Altera e salva as solicitações nos relatórios
+            //Altera e salva a solicitação no relatório
             Relatorio relatorio = new Relatorio();
             entity.setRelatorio(relatorio);
             relatorioRepository.save(relatorio);

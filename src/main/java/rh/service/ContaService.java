@@ -15,16 +15,18 @@ public class ContaService {
     @Autowired
     private ContaRepository contaRepository;
     @PostConstruct
-    public void verificaConta() {
+    public void iniciaConta() {
         if (!contaRepository.existsById(1L)) {
             Conta conta = new Conta();
+            conta.setId(1L);
+            conta.setSaldo(BigDecimal.ZERO);
             contaRepository.save(conta);
         }
     }
     public Conta salvar(Conta entity){
 
         if (entity.getSaldo() != null && entity.getSaldo().compareTo(BigDecimal.ZERO) != 0){
-            throw new ValidationException("Já existe um saldo cadastrado!");
+            throw new ValidationException("Já existe uma conta cadastrada!");
         }
         return contaRepository.save(entity);
     }

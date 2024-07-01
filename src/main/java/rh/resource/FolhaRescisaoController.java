@@ -1,14 +1,17 @@
 package rh.resource;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.data.domain.Pageable;
 import rh.model.FolhaRescisao;
+import rh.repository.FolhaRescisaoRepository;
 import rh.resource.dto.FolhaRescisaoDTO;
 import rh.service.FolhaRescisaoService;
 
 import java.net.URI;
-import java.util.List;
 
 @RestController
 @RequestMapping("/api/folhas-recisoes")
@@ -16,6 +19,8 @@ import java.util.List;
 
 public class FolhaRescisaoController extends AbstractController{
 
+    @Autowired
+    private FolhaRescisaoRepository repository;
     @Autowired
     private FolhaRescisaoService service;
 
@@ -27,10 +32,14 @@ public class FolhaRescisaoController extends AbstractController{
     }
 
     @GetMapping
+    public ResponseEntity findAll(@RequestParam(required = false)String filter,
+                                  @RequestParam(defaultValue = "0")int page,
+                                  @RequestParam(defaultValue = "10")int size) {
+        Pageable pageable = PageRequest.of(page, size);
 
-    public ResponseEntity findAll() {
-        List<FolhaRescisao> folhaRescisaos = service.buscaTodos();
-        return ResponseEntity.ok(FolhaRescisaoDTO.fromEntityList(folhaRescisaos));
+        Page<FolhaRescisao> folhaRescisoesPage = repository.findAll(filter, FolhaRescisao.class, pageable);
+        Page<FolhaRescisaoDTO> folhaRescisoesDTOPage = folhaRescisoesPage.map(FolhaRescisaoDTO::fromEntity);
+        return ResponseEntity.ok(folhaRescisoesDTOPage);
     }
 
     @GetMapping("{id}")

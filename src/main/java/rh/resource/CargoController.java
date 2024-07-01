@@ -1,19 +1,26 @@
 package rh.resource;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import rh.repository.CargoRepository;
+import org.springframework.data.domain.Pageable;
+
 import rh.resource.dto.CargoDTO;
 import rh.model.Cargo;
 import rh.service.CargoService;
 
 import java.net.URI;
-import java.util.List;
+
 
 @RestController
 @RequestMapping("/api/cargos")
 public class CargoController extends AbstractController{
 
+    @Autowired
+    private CargoRepository repository;
     @Autowired
     private CargoService service;
 
@@ -25,12 +32,16 @@ public class CargoController extends AbstractController{
     }
 
     @GetMapping
-    public ResponseEntity findAll() {
-        List<Cargo> cargos = service.buscaTodos();
-        return ResponseEntity.ok(CargoDTO.fromEntityList(cargos));
-    }
+    public ResponseEntity findAll(@RequestParam(required = false)String filter,
+                                  @RequestParam(defaultValue = "0")int page,
+                                  @RequestParam(defaultValue = "10")int size) {
+        Pageable pageable = PageRequest.of(page, size);
 
-    @GetMapping("{id}")
+        Page<Cargo> cargosPage = repository.findAll(filter, Cargo.class, pageable);
+        Page<CargoDTO> cargosDTOPage = cargosPage.map(CargoDTO::fromEntity);
+        return ResponseEntity.ok(cargosDTOPage);
+    }
+        @GetMapping("{id}")
     public ResponseEntity findById(@PathVariable("id") Long id) {
         Cargo cargo = service.buscaPorId(id);
         return ResponseEntity.ok(cargo);
