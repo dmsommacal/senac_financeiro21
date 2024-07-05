@@ -32,14 +32,13 @@ public class EntradaService {
         contaRepository.save(conta);
         entity.setConta(conta);
 
-        //Cria e salva o relatório
+        //Aletra e salva a entrada no relatório
         Relatorio relatorio = new Relatorio();
         entity.setRelatorio(relatorio);
         relatorioRepository.save(relatorio);
 
         return entradaRepository.save(entity);
     }
-
     public List<Entrada> buscaTodos(){
         return entradaRepository.findAll();
     }

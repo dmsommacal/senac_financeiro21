@@ -1,23 +1,23 @@
 package rh.model;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.OneToMany;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import jakarta.persistence.*;
 import rh.enums.ModalidadeContratual;
 import rh.enums.Turno;
 
 import java.util.List;
 
 @Entity
-public class Cargo extends EntityId{
-    @OneToMany(mappedBy = "cargo")
+public class Cargo extends EntityId {
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    @OneToMany(mappedBy = "cargo", cascade = CascadeType.ALL)
     private List<Funcionario> funcionarios;
+    @Column
+    private Integer codigo;
     @Column
     private String descricao;
     @Column
     private String nivel;
-    @Column
-    private Boolean comissao;
     private Turno turno;
     private ModalidadeContratual modalidadeContratual;
 
@@ -25,7 +25,6 @@ public class Cargo extends EntityId{
         this.funcionarios = funcionarios;
         this.descricao = descricao;
         this.nivel = nivel;
-        this.comissao = comissao;
         this.turno = turno;
         this.modalidadeContratual = modalidadeContratual;
     }
@@ -54,14 +53,6 @@ public class Cargo extends EntityId{
         this.nivel = nivel;
     }
 
-    public Boolean getComissao() {
-        return comissao;
-    }
-
-    public void setComissao(Boolean comissao) {
-        this.comissao = comissao;
-    }
-
     public Turno getTurno() {
         return turno;
     }
@@ -81,13 +72,10 @@ public class Cargo extends EntityId{
     @Override
     public String toString() {
         return "Cargo{" +
-                "funcionarios=" + funcionarios +
-                ", descricao='" + descricao + '\'' +
+                "funcionarios=" + funcionarios + ", descricao='" + descricao + '\'' +
                 ", nivel='" + nivel + '\'' +
-                ", comissao=" + comissao +
                 ", turno=" + turno +
                 ", modalidadeContratual=" + modalidadeContratual +
                 '}';
     }
-
 }
