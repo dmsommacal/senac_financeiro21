@@ -1,5 +1,6 @@
 package rh.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import rh.enums.Escolaridade;
 import rh.enums.EstadoCivil;
@@ -12,22 +13,25 @@ import java.util.List;
 
 @Entity
 public class Funcionario extends EntityId{
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @OneToMany(mappedBy = "funcionario")
     private List<ExperienciaAnterior> experienciasAnteriores;
-    @OneToMany(mappedBy = "funcionario")
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    @OneToMany(mappedBy = "funcionario", cascade = CascadeType.ALL)
     private List<Certificacao> certificacoes;
     private Escolaridade escolaridade;
     private EstadoCivil estadoCivil;
     private Genero genero;
     private Status status;
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @ManyToOne
     @JoinColumn(name = "cargo_id")
     private Cargo cargo;
-    @Column(nullable = false)
+    @Column
     private String nome;
-    @Column(nullable = false)
+    @Column
     private String cpf;
-    @Column(nullable = false)
+    @Column
     private String rg;
     @Column
     private String endereco;

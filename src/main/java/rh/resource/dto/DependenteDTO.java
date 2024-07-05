@@ -2,25 +2,25 @@ package rh.resource.dto;
 
 import rh.enums.Escolaridade;
 import rh.model.Dependente;
+import rh.model.Funcionario;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class DependenteDTO {
-
     private String nome;
     private Escolaridade escolaridade;
     private String dataNascimento;
+    private Funcionario funcionario;
 
     public DependenteDTO() {
     }
-
-    public DependenteDTO(String nome, Escolaridade escolaridade, String dataNascimento) {
+    public DependenteDTO(String nome, Escolaridade escolaridade, String dataNascimento, Funcionario funcionario) {
         this.nome = nome;
         this.escolaridade = escolaridade;
         this.dataNascimento = dataNascimento;
+        this.funcionario = funcionario;
     }
-
     public String getNome() {
         return nome;
     }
@@ -44,11 +44,21 @@ public class DependenteDTO {
     public void setDataNascimento(String dataNascimento) {
         this.dataNascimento = dataNascimento;
     }
+
+    public Funcionario getFuncionario() {
+        return funcionario;
+    }
+
+    public void setFuncionario(Funcionario funcionario) {
+        this.funcionario = funcionario;
+    }
+
     public static DependenteDTO fromEntity(Dependente dependente) {
         return new DependenteDTO(
                 dependente.getNome(),
                 dependente.getEscolaridade(),
-                dependente.getDataNascimento()
+                dependente.getDataNascimento(),
+                dependente.getFuncionario()
         );
     }
     public static List<DependenteDTO> fromEntityList(List<Dependente> dependentes){
@@ -63,6 +73,7 @@ public class DependenteDTO {
         dependente.setNome(this.nome);
         dependente.setEscolaridade(this.escolaridade);
         dependente.setDataNascimento(this.dataNascimento);
+        dependente.setFuncionario(this.funcionario);
         return dependente;
     }
     public static List<Dependente> toEntityList(List<DependenteDTO> dependenteDTOs){

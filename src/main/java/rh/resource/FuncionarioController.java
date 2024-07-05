@@ -5,6 +5,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import rh.model.Cargo;
 import rh.model.Funcionario;
 import rh.repository.FuncionarioRepository;
 import rh.resource.dto.FuncionarioDTO;

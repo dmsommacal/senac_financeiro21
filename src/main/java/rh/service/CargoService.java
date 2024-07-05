@@ -13,14 +13,12 @@ import java.util.Optional;
 public class CargoService {
     @Autowired
     private CargoRepository cargoRepository;
-
     public Cargo salvar(Cargo entity){
         if (entity.getDescricao().isBlank()){
             throw new ValidationException("A descrição não pode estar vazia.");
         }
         return cargoRepository.save(entity);
     }
-
     public List<Cargo> buscaTodos(){
         return cargoRepository.findAll();
     }

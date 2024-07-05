@@ -1,5 +1,6 @@
 package rh.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
@@ -9,6 +10,7 @@ import java.time.LocalDate;
 
 @Entity
 public class ExperienciaAnterior extends EntityId{
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @ManyToOne
     @JoinColumn(name = "funcionario_id")
     private Funcionario funcionario;
