@@ -9,6 +9,7 @@ import rh.model.Certificacao;
 import rh.model.ExperienciaAnterior;
 import rh.model.Funcionario;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
@@ -27,7 +28,7 @@ public class FuncionarioDTO {
     private String rg;
     private String endereco;
     private String ctps;
-    private Double salarioContratual;
+    private BigDecimal salarioContratual;
     private Integer cargaHoraria;
     private String fonePessoal;
     private String foneRecados;
@@ -56,7 +57,7 @@ public class FuncionarioDTO {
     public FuncionarioDTO() {
     }
 
-    public FuncionarioDTO(List<ExperienciaAnterior> experienciasAnteriores, List<Certificacao> certificacoes, Escolaridade escolaridade, EstadoCivil estadoCivil, Genero genero, Status status, Cargo cargo, String nome, String cpf, String rg, String endereco, String ctps, Double salarioContratual, Integer cargaHoraria, String fonePessoal, String foneRecados, String titulo, String carteiraReservista, LocalDate dataNascimento, String pis, String registroProfissional, String email, String sindicato, String setor, String cnh, LocalDate dataAdmissao, String racaCor, String religiao, Boolean doadorSangue, String nacionalidade, String redeSocial, String areaAtuacao, String matricula, String idiomas, Integer horaExtra, LocalTime horaEntrada, LocalTime horaSaida) {
+    public FuncionarioDTO(List<ExperienciaAnterior> experienciasAnteriores, List<Certificacao> certificacoes, Escolaridade escolaridade, EstadoCivil estadoCivil, Genero genero, Status status, Cargo cargo, String nome, String cpf, String rg, String endereco, String ctps, BigDecimal salarioContratual, Integer cargaHoraria, String fonePessoal, String foneRecados, String titulo, String carteiraReservista, LocalDate dataNascimento, String pis, String registroProfissional, String email, String sindicato, String setor, String cnh, LocalDate dataAdmissao, String racaCor, String religiao, Boolean doadorSangue, String nacionalidade, String redeSocial, String areaAtuacao, String matricula, String idiomas, Integer horaExtra, LocalTime horaEntrada, LocalTime horaSaida) {
         this.experienciasAnteriores = experienciasAnteriores;
         this.certificacoes = certificacoes;
         this.escolaridade = escolaridade;
@@ -192,11 +193,11 @@ public class FuncionarioDTO {
         this.ctps = ctps;
     }
 
-    public Double getSalarioContratual() {
+    public BigDecimal getSalarioContratual() {
         return salarioContratual;
     }
 
-    public void setSalarioContratual(Double salarioContratual) {
+    public void setSalarioContratual(BigDecimal salarioContratual) {
         this.salarioContratual = salarioContratual;
     }
 
