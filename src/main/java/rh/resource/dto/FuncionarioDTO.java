@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FuncionarioDTO {
+    private Long id;
     private List<ExperienciaAnterior> experienciasAnteriores;
     private List<Certificacao> certificacoes;
     private Escolaridade escolaridade;
@@ -57,7 +58,8 @@ public class FuncionarioDTO {
     public FuncionarioDTO() {
     }
 
-    public FuncionarioDTO(List<ExperienciaAnterior> experienciasAnteriores, List<Certificacao> certificacoes, Escolaridade escolaridade, EstadoCivil estadoCivil, Genero genero, Status status, Cargo cargo, String nome, String cpf, String rg, String endereco, String ctps, BigDecimal salarioContratual, Integer cargaHoraria, String fonePessoal, String foneRecados, String titulo, String carteiraReservista, LocalDate dataNascimento, String pis, String registroProfissional, String email, String sindicato, String setor, String cnh, LocalDate dataAdmissao, String racaCor, String religiao, Boolean doadorSangue, String nacionalidade, String redeSocial, String areaAtuacao, String matricula, String idiomas, Integer horaExtra, LocalTime horaEntrada, LocalTime horaSaida) {
+    public FuncionarioDTO(Long id, List<ExperienciaAnterior> experienciasAnteriores, List<Certificacao> certificacoes, Escolaridade escolaridade, EstadoCivil estadoCivil, Genero genero, Status status, Cargo cargo, String nome, String cpf, String rg, String endereco, String ctps, BigDecimal salarioContratual, Integer cargaHoraria, String fonePessoal, String foneRecados, String titulo, String carteiraReservista, LocalDate dataNascimento, String pis, String registroProfissional, String email, String sindicato, String setor, String cnh, LocalDate dataAdmissao, String racaCor, String religiao, Boolean doadorSangue, String nacionalidade, String redeSocial, String areaAtuacao, String matricula, String idiomas, Integer horaExtra, LocalTime horaEntrada, LocalTime horaSaida) {
+        this.id = id;
         this.experienciasAnteriores = experienciasAnteriores;
         this.certificacoes = certificacoes;
         this.escolaridade = escolaridade;
@@ -95,6 +97,14 @@ public class FuncionarioDTO {
         this.horaExtra = horaExtra;
         this.horaEntrada = horaEntrada;
         this.horaSaida = horaSaida;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public List<ExperienciaAnterior> getExperienciasAnteriores() {
@@ -394,6 +404,7 @@ public class FuncionarioDTO {
     }
     public static FuncionarioDTO fromEntity(Funcionario funcionario) {
         return new FuncionarioDTO(
+                funcionario.getId(),
                 funcionario.getExperienciasAnteriores(),
                 funcionario.getCertificacoes(),
                 funcionario.getEscolaridade(),
@@ -442,6 +453,7 @@ public class FuncionarioDTO {
     }
     public Funcionario toEntity() {
         Funcionario funcionario = new Funcionario();
+        funcionario.setId(this.getId());
         funcionario.setCertificacoes(this.certificacoes);
         funcionario.setEscolaridade(this.escolaridade);
         funcionario.setEstadoCivil(this.estadoCivil);
