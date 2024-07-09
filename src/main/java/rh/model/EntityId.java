@@ -1,7 +1,6 @@
 package rh.model;
 
 import jakarta.persistence.*;
-
 @MappedSuperclass
 public class EntityId {
     @Id
