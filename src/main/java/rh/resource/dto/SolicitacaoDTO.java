@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SolicitacaoDTO {
+    private Long id;
     private Conta conta;
     private Relatorio relatorio;
     private BigDecimal valorSolicitado;
@@ -19,12 +20,29 @@ public class SolicitacaoDTO {
     public SolicitacaoDTO() {
     }
 
-    public SolicitacaoDTO(Conta conta, Relatorio relatorio, BigDecimal valorSolicitado, LocalDateTime dataHora, String descricao) {
+    public SolicitacaoDTO(Long id, Conta conta, Relatorio relatorio, BigDecimal valorSolicitado, LocalDateTime dataHora, String descricao) {
+        this.id = id;
         this.conta = conta;
         this.relatorio = relatorio;
         this.valorSolicitado = valorSolicitado;
         this.dataHora = dataHora;
         this.descricao = descricao;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Conta getConta() {
+        return conta;
+    }
+
+    public void setConta(Conta conta) {
+        this.conta = conta;
     }
 
     public Conta getSaldo() {
@@ -69,6 +87,7 @@ public class SolicitacaoDTO {
 
     public static SolicitacaoDTO fromEntity(Solicitacao solicitacao) {
         return new SolicitacaoDTO(
+                solicitacao.getId(),
                 solicitacao.getConta(),
                 solicitacao.getRelatorio(),
                 solicitacao.getValorSolicitado(),
@@ -85,6 +104,7 @@ public class SolicitacaoDTO {
     }
     public Solicitacao toEntity() {
         Solicitacao solicitacao = new Solicitacao();
+        solicitacao.setId(this.id);
         solicitacao.setConta(this.conta);
         solicitacao.setRelatorio(this.relatorio);
         solicitacao.setValorSolicitado(this.valorSolicitado);

@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class EntradaDTO {
+    private Long id;
     private Conta conta;
     private Relatorio relatorio;
     private BigDecimal valor;
@@ -19,12 +20,29 @@ public class EntradaDTO {
     public EntradaDTO() {
     }
 
-    public EntradaDTO(Conta conta, Relatorio relatorio, BigDecimal valor, LocalDateTime dataHora, String descricao) {
+    public EntradaDTO(Long id, Conta conta, Relatorio relatorio, BigDecimal valor, LocalDateTime dataHora, String descricao) {
+        this.id = id;
         this.conta = conta;
         this.relatorio = relatorio;
         this.valor = valor;
         this.dataHora = dataHora;
         this.descricao = descricao;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Conta getConta() {
+        return conta;
+    }
+
+    public void setConta(Conta conta) {
+        this.conta = conta;
     }
 
     public Conta getSaldo() {
@@ -69,6 +87,7 @@ public class EntradaDTO {
 
     public static EntradaDTO fromEntity(Entrada entrada) {
         return new EntradaDTO(
+                entrada.getId(),
                 entrada.getConta(),
                 entrada.getRelatorio(),
                 entrada.getValor(),
@@ -87,6 +106,7 @@ public class EntradaDTO {
 
     public Entrada toEntity() {
         Entrada entrada = new Entrada();
+        entrada.setId(this.id);
         entrada.setValor(this.valor);
         entrada.setRelatorio(this.relatorio);
         entrada.setConta(this.conta);

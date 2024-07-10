@@ -6,10 +6,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 import rh.enterprise.CustomQuerydslPredicateExecutor;
 import rh.model.Funcionario;
-
-import java.util.List;
-
 @Repository
 public interface FuncionarioRepository extends JpaRepository<Funcionario, Long>, CustomQuerydslPredicateExecutor<Funcionario> {
-    List<Funcionario> findByNome(String nome);
+    Page<Funcionario> findByNome(String nome, Pageable pageable);
+    Page<Funcionario> findByCpf(String cpf, Pageable pageable);
 }

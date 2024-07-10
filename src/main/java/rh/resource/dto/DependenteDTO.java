@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DependenteDTO {
+    private Long id;
     private String nome;
     private Escolaridade escolaridade;
     private String dataNascimento;
@@ -15,12 +16,22 @@ public class DependenteDTO {
 
     public DependenteDTO() {
     }
-    public DependenteDTO(String nome, Escolaridade escolaridade, String dataNascimento, Funcionario funcionario) {
+    public DependenteDTO(Long id, String nome, Escolaridade escolaridade, String dataNascimento, Funcionario funcionario) {
+        this.id = id;
         this.nome = nome;
         this.escolaridade = escolaridade;
         this.dataNascimento = dataNascimento;
         this.funcionario = funcionario;
     }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     public String getNome() {
         return nome;
     }
@@ -55,6 +66,7 @@ public class DependenteDTO {
 
     public static DependenteDTO fromEntity(Dependente dependente) {
         return new DependenteDTO(
+                dependente.getId(),
                 dependente.getNome(),
                 dependente.getEscolaridade(),
                 dependente.getDataNascimento(),
@@ -70,6 +82,7 @@ public class DependenteDTO {
     }
     public Dependente toEntity() {
         Dependente dependente = new Dependente();
+        dependente.setId(this.id);
         dependente.setNome(this.nome);
         dependente.setEscolaridade(this.escolaridade);
         dependente.setDataNascimento(this.dataNascimento);
