@@ -46,17 +46,4 @@ public class EntradaService {
         return entradaRepository.findById(id).orElse(null);
     }
 
-    public Entrada alterar(Long id, Entrada alterado){
-        Optional<Entrada> encontrado = entradaRepository.findById(id);
-        if (encontrado.isPresent()){
-            Entrada entrada = encontrado.get();
-
-            return entradaRepository.save(entrada);
-        }
-        return null;
-    }
-    public void remover(Long id) {
-        entradaRepository.deleteById(id);
-    }
-
 }

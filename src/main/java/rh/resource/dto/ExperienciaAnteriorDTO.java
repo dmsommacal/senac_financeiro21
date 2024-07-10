@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ExperienciaAnteriorDTO {
-
+    private Long id;
     private Funcionario funcionario;
 
     private String descricao;
@@ -22,12 +22,21 @@ public class ExperienciaAnteriorDTO {
     public ExperienciaAnteriorDTO() {
     }
 
-    public ExperienciaAnteriorDTO(Funcionario funcionario, String descricao, String cargo, LocalDate periodoInicial, LocalDate periodoFinal) {
+    public ExperienciaAnteriorDTO(Long id, Funcionario funcionario, String descricao, String cargo, LocalDate periodoInicial, LocalDate periodoFinal) {
+        this.id = id;
         this.funcionario = funcionario;
         this.descricao = descricao;
         this.cargo = cargo;
         this.periodoInicial = periodoInicial;
         this.periodoFinal = periodoFinal;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public Funcionario getFuncionario() {
@@ -71,6 +80,7 @@ public class ExperienciaAnteriorDTO {
     }
     public static ExperienciaAnteriorDTO fromEntity(ExperienciaAnterior experienciaAnterior) {
         return new ExperienciaAnteriorDTO(
+                experienciaAnterior.getId(),
                 experienciaAnterior.getFuncionario(),
                 experienciaAnterior.getDescricao(),
                 experienciaAnterior.getCargo(),
@@ -87,6 +97,7 @@ public class ExperienciaAnteriorDTO {
     }
     public ExperienciaAnterior toEntity() {
         ExperienciaAnterior experienciaAnterior = new ExperienciaAnterior();
+        experienciaAnterior.setId(this.id);
         experienciaAnterior.setFuncionario(this.funcionario);
         experienciaAnterior.setDescricao(this.descricao);
         experienciaAnterior.setCargo(this.cargo);
