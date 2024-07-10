@@ -27,10 +27,12 @@ public class Funcionario extends EntityId{
     private EstadoCivil estadoCivil;
     private Genero genero;
     private Status status;
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-    @ManyToOne
-    @JoinColumn(name = "cargo_id")
-    private Cargo cargo;
+//    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+//    @ManyToOne
+//    @JoinColumn(name = "cargo_id")
+//    private Cargo cargo;
+    @Column
+    private String cargo;
     @Column
     private String nome;
     @Column
@@ -95,7 +97,7 @@ public class Funcionario extends EntityId{
     public Funcionario() {
     }
 
-    public Funcionario(List<FolhaPagamento> folhasPagamentos, List<ExperienciaAnterior> experienciasAnteriores, List<Certificacao> certificacoes, Escolaridade escolaridade, EstadoCivil estadoCivil, Genero genero, Status status, Cargo cargo, String nome, String cpf, String rg, String endereco, String ctps, BigDecimal salarioContratual, Integer cargaHoraria, String fonePessoal, String foneRecados, String titulo, String carteiraReservista, LocalDate dataNascimento, String pis, String registroProfissional, String email, String sindicato, String setor, String cnh, LocalDate dataAdmissao, String racaCor, String religiao, Boolean doadorSangue, String nacionalidade, String redeSocial, String areaAtuacao, String matricula, String idiomas, Integer horaExtra, LocalTime horaEntrada, LocalTime horaSaida) {
+    public Funcionario(List<FolhaPagamento> folhasPagamentos, List<ExperienciaAnterior> experienciasAnteriores, List<Certificacao> certificacoes, Escolaridade escolaridade, EstadoCivil estadoCivil, Genero genero, Status status,String cargo, String nome, String cpf, String rg, String endereco, String ctps, BigDecimal salarioContratual, Integer cargaHoraria, String fonePessoal, String foneRecados, String titulo, String carteiraReservista, LocalDate dataNascimento, String pis, String registroProfissional, String email, String sindicato, String setor, String cnh, LocalDate dataAdmissao, String racaCor, String religiao, Boolean doadorSangue, String nacionalidade, String redeSocial, String areaAtuacao, String matricula, String idiomas, Integer horaExtra, LocalTime horaEntrada, LocalTime horaSaida) {
         this.folhasPagamentos = folhasPagamentos;
         this.experienciasAnteriores = experienciasAnteriores;
         this.certificacoes = certificacoes;
@@ -192,13 +194,20 @@ public class Funcionario extends EntityId{
         this.status = status;
     }
 
-    public Cargo getCargo() {
+    public String getCargo() {
         return cargo;
     }
 
-    public void setCargo(Cargo cargo) {
+    public void setCargo(String cargo) {
         this.cargo = cargo;
     }
+    //    public Cargo getCargo() {
+//        return cargo;
+//    }
+//
+//    public void setCargo(Cargo cargo) {
+//        this.cargo = cargo;
+//    }
 
     public String getNome() {
         return nome;
@@ -450,7 +459,7 @@ public class Funcionario extends EntityId{
                 ", estadoCivil=" + estadoCivil +
                 ", genero=" + genero +
                 ", status=" + status +
-                ", cargo=" + cargo +
+                ", cargo='" + cargo + '\'' +
                 ", nome='" + nome + '\'' +
                 ", cpf='" + cpf + '\'' +
                 ", rg='" + rg + '\'' +

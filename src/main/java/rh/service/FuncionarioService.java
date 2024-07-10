@@ -1,7 +1,6 @@
 package rh.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 import rh.enterprise.ValidationException;
 import rh.model.Funcionario;
@@ -25,31 +24,18 @@ public class FuncionarioService {
     public Funcionario buscaPorId(Long id) {
         return funcionarioRepository.findById(id).orElse(null);
     }
-    public List<Funcionario> buscaPorNome(String nome) {
-        return funcionarioRepository.findByNome(nome);
-    }
     public Funcionario alterar(Long id, Funcionario alterado){
         Optional<Funcionario> encontrado = funcionarioRepository.findById(id);
         if (encontrado.isPresent()){
             Funcionario funcionario = encontrado.get();
 
-            funcionario.setAreaAtuacao(alterado.getAreaAtuacao());
+            funcionario.setNome(alterado.getNome());
+            funcionario.setCpf(alterado.getCpf());
+            funcionario.setRg(alterado.getRg());
             funcionario.setCargo(alterado.getCargo());
-            funcionario.setCargaHoraria(alterado.getCargaHoraria());
             funcionario.setEmail(alterado.getEmail());
-            funcionario.setDoadorSangue(alterado.getDoadorSangue());
-            funcionario.setEndereco(alterado.getEndereco());
-            funcionario.setEstadoCivil(alterado.getEstadoCivil());
             funcionario.setFonePessoal(alterado.getFonePessoal());
             funcionario.setFoneRecados(alterado.getFoneRecados());
-            funcionario.setSetor(alterado.getSetor());
-            funcionario.setStatus(alterado.getStatus());
-            funcionario.setRedeSocial(alterado.getRedeSocial());
-            funcionario.setHoraEntrada(alterado.getHoraEntrada());
-            funcionario.setHoraSaida(alterado.getHoraSaida());
-            funcionario.setHoraExtra(alterado.getHoraExtra());
-            funcionario.setGenero(alterado.getGenero());
-            funcionario.setIdiomas(alterado.getIdiomas());
 
             return funcionarioRepository.save(funcionario);
         }

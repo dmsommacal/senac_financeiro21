@@ -1,5 +1,4 @@
 package rh.model.Specification;
-
 import rh.model.Solicitacao;
 
 import java.math.BigDecimal;

@@ -29,6 +29,8 @@ public class SolicitacaoService {
     public Solicitacao salvar(Solicitacao entity) {
 
             Conta conta = contaRepository.findById(1L).orElseThrow(() -> new ValidationException("Conta do Financeiro não identificada!"));
+
+            if (entity.getValorSolicitado().compareTo(conta.getSaldo() ) < 0){
             //Altera e salva o saldo a cada solicitação
             conta.setSaldo(conta.getSaldo().subtract(entity.getValorSolicitado()));
             contaRepository.save(conta);
@@ -38,7 +40,9 @@ public class SolicitacaoService {
             Relatorio relatorio = new Relatorio();
             entity.setRelatorio(relatorio);
             relatorioRepository.save(relatorio);
-
+            }else {
+                throw new ValidationException("A solicitação não pode ser maior que o saldo em conta");
+            }
             return solicitacaoRepository.save(entity);
     }
 

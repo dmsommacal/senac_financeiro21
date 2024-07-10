@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FolhaPagamentoDTO {
-   private Funcionario funcionario;
+    private Funcionario funcionario;
     private BigDecimal inss;
     private BigDecimal irrf;
     private BigDecimal baseIrrf;
