@@ -1,65 +1,84 @@
 package rh.model;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import jakarta.persistence.*;
+
+import java.math.BigDecimal;
 
 @Entity
 public class FolhaPagamento extends EntityId{
-    @Column
-    private Double horaTrabalhada;
-    @Column
-    private Double inss;
-    @Column
-    private Double irrf;
-    @Column
-    private Double fgts;
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    @ManyToOne
+    @JoinColumn(name = "funcionario_id", nullable = false)
+    private Funcionario funcionario;
+    @Column(nullable = true)
+    private BigDecimal inss = BigDecimal.ZERO;
+    @Column(nullable = true)
+    private BigDecimal irrf = BigDecimal.ZERO;
+    @Column(nullable = true)
+    private BigDecimal baseIrrf = BigDecimal.ZERO;
+    @Column(nullable = true)
+    private BigDecimal salarioLiquido = BigDecimal.ZERO;
 
     public FolhaPagamento() {
-        this.horaTrabalhada = horaTrabalhada;
+    }
+
+    public FolhaPagamento(Funcionario funcionario, BigDecimal inss, BigDecimal irrf, BigDecimal baseIrrf, BigDecimal salarioLiquido) {
+        this.funcionario = funcionario;
         this.inss = inss;
         this.irrf = irrf;
-        this.fgts = fgts;
+        this.baseIrrf = baseIrrf;
+        this.salarioLiquido = salarioLiquido;
     }
 
-    public Double getHoraTrabalhada() {
-        return horaTrabalhada;
+    public Funcionario getFuncionario() {
+        return funcionario;
     }
 
-    public void setHoraTrabalhada(Double horaTrabalhada) {
-        this.horaTrabalhada = horaTrabalhada;
+    public void setFuncionario(Funcionario funcionario) {
+        this.funcionario = funcionario;
     }
 
-    public Double getInss() {
+    public BigDecimal getInss() {
         return inss;
     }
 
-    public void setInss(Double inss) {
+    public void setInss(BigDecimal inss) {
         this.inss = inss;
     }
 
-    public Double getIrrf() {
+    public BigDecimal getIrrf() {
         return irrf;
     }
 
-    public void setIrrf(Double irrf) {
+    public void setIrrf(BigDecimal irrf) {
         this.irrf = irrf;
     }
 
-    public Double getFgts() {
-        return fgts;
+    public BigDecimal getBaseIrrf() {
+        return baseIrrf;
     }
 
-    public void setFgts(Double fgts) {
-        this.fgts = fgts;
+    public void setBaseIrrf(BigDecimal baseIrrf) {
+        this.baseIrrf = baseIrrf;
+    }
+
+    public BigDecimal getSalarioLiquido() {
+        return salarioLiquido;
+    }
+
+    public void setSalarioLiquido(BigDecimal salarioLiquido) {
+        this.salarioLiquido = salarioLiquido;
     }
 
     @Override
     public String toString() {
         return "FolhaPagamento{" +
-                "horaTrabalhada=" + horaTrabalhada +
+                "funcionario=" + funcionario +
                 ", inss=" + inss +
                 ", irrf=" + irrf +
-                ", fgts=" + fgts +
+                ", baseIrrf=" + baseIrrf +
+                ", salarioLiquido=" + salarioLiquido +
                 '}';
     }
 }

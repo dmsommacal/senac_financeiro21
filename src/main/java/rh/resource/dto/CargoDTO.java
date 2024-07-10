@@ -11,18 +11,16 @@ public class CargoDTO {
     private List<Funcionario> funcionarios;
     private String descricao;
     private String nivel;
-    private Boolean comissao;
     private Turno turno;
     private ModalidadeContratual modalidadeContratual;
 
     public CargoDTO() {
     }
 
-    public CargoDTO(List<Funcionario> funcionarios, String descricao, String nivel, Boolean comissao, Turno turno, ModalidadeContratual modalidadeContratual) {
+    public CargoDTO(List<Funcionario> funcionarios, String descricao, String nivel, Turno turno, ModalidadeContratual modalidadeContratual) {
         this.funcionarios = funcionarios;
         this.descricao = descricao;
         this.nivel = nivel;
-        this.comissao = comissao;
         this.turno = turno;
         this.modalidadeContratual = modalidadeContratual;
     }
@@ -51,14 +49,6 @@ public class CargoDTO {
         this.nivel = nivel;
     }
 
-    public Boolean getComissao() {
-        return comissao;
-    }
-
-    public void setComissao(Boolean comissao) {
-        this.comissao = comissao;
-    }
-
     public Turno getTurno() {
         return turno;
     }
@@ -79,7 +69,6 @@ public class CargoDTO {
                 cargo.getFuncionarios(),
                 cargo.getDescricao(),
                 cargo.getNivel(),
-                cargo.getComissao(),
                 cargo.getTurno(),
                 cargo.getModalidadeContratual()
         );
@@ -96,7 +85,6 @@ public class CargoDTO {
         cargo.setFuncionarios(this.funcionarios);
         cargo.setDescricao(this.descricao);
         cargo.setNivel(this.nivel);
-        cargo.setComissao(this.comissao);
         cargo.setTurno(this.turno);
         cargo.setModalidadeContratual(this.modalidadeContratual);
         return cargo;

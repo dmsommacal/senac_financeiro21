@@ -5,6 +5,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import rh.model.Cargo;
 import rh.model.Funcionario;
 import rh.repository.FuncionarioRepository;
 import rh.resource.dto.FuncionarioDTO;
@@ -13,6 +14,7 @@ import org.springframework.data.domain.Pageable;
 
 
 import java.net.URI;
+import java.util.List;
 
 
 @RestController
@@ -25,8 +27,6 @@ public class FuncionarioController extends AbstractController{
     private FuncionarioRepository repository;
     @Autowired
     private FuncionarioService service;
-
-
     @PostMapping
     public ResponseEntity create(@RequestBody Funcionario entity) {
         Funcionario save = service.salvar(entity);
@@ -45,12 +45,22 @@ public class FuncionarioController extends AbstractController{
     }
 
     @GetMapping("{id}")
-    public ResponseEntity findById(@PathVariable("id") Long id) {
+    public ResponseEntity findById(@PathVariable("id") Long id,
+                                   @PathVariable("id") String nome,
+                                   @PathVariable("id") String cpf
+    ) {
         Funcionario funcionario = service.buscaPorId(id);
         return ResponseEntity.ok(funcionario);
     }
-
-
+    @GetMapping("{nome}")
+    public ResponseEntity findByNome(@RequestParam String nome) {
+        List<Funcionario> funcionarios = service.buscaPorNome(nome);
+        if (!funcionarios.isEmpty()) {
+            return ResponseEntity.ok(funcionarios);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
     @DeleteMapping("{id}")
     public ResponseEntity remove(@PathVariable("id") Long id) {
         service.remover(id);
