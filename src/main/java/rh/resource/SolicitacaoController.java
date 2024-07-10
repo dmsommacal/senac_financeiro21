@@ -60,17 +60,4 @@ public class SolicitacaoController extends AbstractController{
         Solicitacao solicitacao = service.buscaPorId(id);
         return ResponseEntity.ok(solicitacao);
     }
-
-
-    @DeleteMapping("{id}")
-    public ResponseEntity remove(@PathVariable("id") Long id) {
-        service.remover(id);
-        return ResponseEntity.noContent().build();
-    }
-
-    @PutMapping("{id}")
-    public ResponseEntity update(@PathVariable("id") Long id, @RequestBody Solicitacao entity) {
-        Solicitacao alterado = service.alterar(id, entity);
-        return ResponseEntity.ok().body(alterado);
-    }
 }

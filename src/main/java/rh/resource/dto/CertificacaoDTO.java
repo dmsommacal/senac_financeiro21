@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CertificacaoDTO {
+    private Long id;
     private String nome;
 
     private Double cargaHoraria;
@@ -19,11 +20,20 @@ public class CertificacaoDTO {
     public CertificacaoDTO() {
     }
 
-    public CertificacaoDTO(String nome, Double cargaHoraria, LocalDate dataEmissao, Funcionario funcionario) {
+    public CertificacaoDTO(Long id, String nome, Double cargaHoraria, LocalDate dataEmissao, Funcionario funcionario) {
+        this.id = id;
         this.nome = nome;
         this.cargaHoraria = cargaHoraria;
         this.dataEmissao = dataEmissao;
         this.funcionario = funcionario;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getNome() {
@@ -59,6 +69,7 @@ public class CertificacaoDTO {
     }
     public static CertificacaoDTO fromEntity(Certificacao certificacao) {
         return new CertificacaoDTO(
+                certificacao.getId(),
                 certificacao.getNome(),
                 certificacao.getCargaHoraria(),
                 certificacao.getDataEmissao(),
@@ -74,6 +85,7 @@ public class CertificacaoDTO {
     }
     public Certificacao toEntity() {
         Certificacao certificacao = new Certificacao();
+        certificacao.setId(this.id);
         certificacao.setNome(this.nome);
         certificacao.setCargaHoraria(this.cargaHoraria);
         certificacao.setDataEmissao(this.dataEmissao);

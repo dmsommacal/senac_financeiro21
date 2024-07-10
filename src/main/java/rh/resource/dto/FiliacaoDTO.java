@@ -1,26 +1,36 @@
 package rh.resource.dto;
 
-import rh.model.Cargo;
 import rh.model.Filiacao;
+import rh.model.Funcionario;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class FiliacaoDTO {
-
+    private Long id;
     private String nomePai;
     private String telefonePai;
     private String nomeMae;
     private String telefoneMae;
+    private Funcionario funcionario;
 
     public FiliacaoDTO() {
     }
-
-    public FiliacaoDTO(String nomePai, String telefonePai, String nomeMae, String telefoneMae) {
+    public FiliacaoDTO(Long id, String nomePai, String telefonePai, String nomeMae, String telefoneMae, Funcionario funcionario) {
+        this.id = id;
         this.nomePai = nomePai;
         this.telefonePai = telefonePai;
         this.nomeMae = nomeMae;
         this.telefoneMae = telefoneMae;
+        this.funcionario = funcionario;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getNomePai() {
@@ -54,12 +64,23 @@ public class FiliacaoDTO {
     public void setTelefoneMae(String telefoneMae) {
         this.telefoneMae = telefoneMae;
     }
+
+    public Funcionario getFuncionario() {
+        return funcionario;
+    }
+
+    public void setFuncionario(Funcionario funcionario) {
+        this.funcionario = funcionario;
+    }
+
     public static FiliacaoDTO fromEntity(Filiacao filiacao) {
         return new FiliacaoDTO(
+                filiacao.getId(),
                 filiacao.getNomePai(),
                 filiacao.getTelefonePai(),
                 filiacao.getNomeMae(),
-                filiacao.getTelefoneMae()
+                filiacao.getTelefoneMae(),
+                filiacao.getFuncionario()
         );
     }
     public static List<FiliacaoDTO> fromEntityList(List<Filiacao> filiacoes){
@@ -71,10 +92,12 @@ public class FiliacaoDTO {
     }
     public Filiacao toEntity() {
         Filiacao filiacao = new Filiacao();
+        filiacao.setId(this.id);
         filiacao.setNomePai(this.nomePai);
         filiacao.setTelefonePai(this.telefonePai);
         filiacao.setNomeMae(this.nomeMae);
         filiacao.setTelefoneMae(this.telefoneMae);
+        filiacao.setFuncionario(this.funcionario);
         return filiacao;
     }
     public static List<Filiacao> toEntityList(List<FiliacaoDTO> filiacaoDTOs){

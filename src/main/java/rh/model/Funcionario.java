@@ -1,40 +1,50 @@
 package rh.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import rh.enums.Escolaridade;
 import rh.enums.EstadoCivil;
 import rh.enums.Genero;
 import rh.enums.Status;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
 
 @Entity
 public class Funcionario extends EntityId{
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    @OneToMany(mappedBy = "funcionario", cascade = CascadeType.ALL)
+    private List<FolhaPagamento> folhasPagamentos;
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @OneToMany(mappedBy = "funcionario")
     private List<ExperienciaAnterior> experienciasAnteriores;
-    @OneToMany(mappedBy = "funcionario")
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    @OneToMany(mappedBy = "funcionario", cascade = CascadeType.ALL)
     private List<Certificacao> certificacoes;
     private Escolaridade escolaridade;
     private EstadoCivil estadoCivil;
     private Genero genero;
     private Status status;
-    @ManyToOne
-    @JoinColumn(name = "cargo_id")
-    private Cargo cargo;
-    @Column(nullable = false)
+//    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+//    @ManyToOne
+//    @JoinColumn(name = "cargo_id")
+//    private Cargo cargo;
+    @Column
+    private String cargo;
+    @Column
     private String nome;
-    @Column(nullable = false)
+    @Column
     private String cpf;
-    @Column(nullable = false)
+    @Column
     private String rg;
     @Column
     private String endereco;
     @Column
     private String ctps;
     @Column
-    private Double salarioContratual;
+    private BigDecimal salarioContratual;
     @Column
     private Integer cargaHoraria;
     @Column
@@ -87,7 +97,8 @@ public class Funcionario extends EntityId{
     public Funcionario() {
     }
 
-    public Funcionario(List<ExperienciaAnterior> experienciasAnteriores, List<Certificacao> certificacoes, Escolaridade escolaridade, EstadoCivil estadoCivil, Genero genero, Status status, Cargo cargo, String nome, String cpf, String rg, String endereco, String ctps, Double salarioContratual, Integer cargaHoraria, String fonePessoal, String foneRecados, String titulo, String carteiraReservista, LocalDate dataNascimento, String pis, String registroProfissional, String email, String sindicato, String setor, String cnh, LocalDate dataAdmissao, String racaCor, String religiao, Boolean doadorSangue, String nacionalidade, String redeSocial, String areaAtuacao, String matricula, String idiomas, Integer horaExtra, LocalTime horaEntrada, LocalTime horaSaida) {
+    public Funcionario(List<FolhaPagamento> folhasPagamentos, List<ExperienciaAnterior> experienciasAnteriores, List<Certificacao> certificacoes, Escolaridade escolaridade, EstadoCivil estadoCivil, Genero genero, Status status,String cargo, String nome, String cpf, String rg, String endereco, String ctps, BigDecimal salarioContratual, Integer cargaHoraria, String fonePessoal, String foneRecados, String titulo, String carteiraReservista, LocalDate dataNascimento, String pis, String registroProfissional, String email, String sindicato, String setor, String cnh, LocalDate dataAdmissao, String racaCor, String religiao, Boolean doadorSangue, String nacionalidade, String redeSocial, String areaAtuacao, String matricula, String idiomas, Integer horaExtra, LocalTime horaEntrada, LocalTime horaSaida) {
+        this.folhasPagamentos = folhasPagamentos;
         this.experienciasAnteriores = experienciasAnteriores;
         this.certificacoes = certificacoes;
         this.escolaridade = escolaridade;
@@ -125,6 +136,14 @@ public class Funcionario extends EntityId{
         this.horaExtra = horaExtra;
         this.horaEntrada = horaEntrada;
         this.horaSaida = horaSaida;
+    }
+
+    public List<FolhaPagamento> getFolhasPagamentos() {
+        return folhasPagamentos;
+    }
+
+    public void setFolhasPagamentos(List<FolhaPagamento> folhasPagamentos) {
+        this.folhasPagamentos = folhasPagamentos;
     }
 
     public List<ExperienciaAnterior> getExperienciasAnteriores() {
@@ -175,13 +194,20 @@ public class Funcionario extends EntityId{
         this.status = status;
     }
 
-    public Cargo getCargo() {
+    public String getCargo() {
         return cargo;
     }
 
-    public void setCargo(Cargo cargo) {
+    public void setCargo(String cargo) {
         this.cargo = cargo;
     }
+    //    public Cargo getCargo() {
+//        return cargo;
+//    }
+//
+//    public void setCargo(Cargo cargo) {
+//        this.cargo = cargo;
+//    }
 
     public String getNome() {
         return nome;
@@ -223,11 +249,11 @@ public class Funcionario extends EntityId{
         this.ctps = ctps;
     }
 
-    public Double getSalarioContratual() {
+    public BigDecimal getSalarioContratual() {
         return salarioContratual;
     }
 
-    public void setSalarioContratual(Double salarioContratual) {
+    public void setSalarioContratual(BigDecimal salarioContratual) {
         this.salarioContratual = salarioContratual;
     }
 
@@ -426,13 +452,14 @@ public class Funcionario extends EntityId{
     @Override
     public String toString() {
         return "Funcionario{" +
-                "experienciasAnteriores=" + experienciasAnteriores +
+                "folhasPagamentos=" + folhasPagamentos +
+                ", experienciasAnteriores=" + experienciasAnteriores +
                 ", certificacoes=" + certificacoes +
                 ", escolaridade=" + escolaridade +
                 ", estadoCivil=" + estadoCivil +
                 ", genero=" + genero +
                 ", status=" + status +
-                ", cargo=" + cargo +
+                ", cargo='" + cargo + '\'' +
                 ", nome='" + nome + '\'' +
                 ", cpf='" + cpf + '\'' +
                 ", rg='" + rg + '\'' +

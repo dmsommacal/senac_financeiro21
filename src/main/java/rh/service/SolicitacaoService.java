@@ -19,7 +19,6 @@ public class SolicitacaoService {
 
     @Autowired
     private SolicitacaoRepository solicitacaoRepository;
-
     @Autowired
     private ContaRepository contaRepository;
     @Autowired
@@ -29,6 +28,8 @@ public class SolicitacaoService {
     public Solicitacao salvar(Solicitacao entity) {
 
             Conta conta = contaRepository.findById(1L).orElseThrow(() -> new ValidationException("Conta do Financeiro não identificada!"));
+
+            if (entity.getValorSolicitado().compareTo(conta.getSaldo() ) < 0){
             //Altera e salva o saldo a cada solicitação
             conta.setSaldo(conta.getSaldo().subtract(entity.getValorSolicitado()));
             contaRepository.save(conta);
@@ -38,7 +39,9 @@ public class SolicitacaoService {
             Relatorio relatorio = new Relatorio();
             entity.setRelatorio(relatorio);
             relatorioRepository.save(relatorio);
-
+            }else {
+                throw new ValidationException("A solicitação não pode ser maior que o saldo em conta");
+            }
             return solicitacaoRepository.save(entity);
     }
 
@@ -47,18 +50,5 @@ public class SolicitacaoService {
     }
     public Solicitacao buscaPorId(Long id){
         return solicitacaoRepository.findById(id).orElse(null);
-    }
-
-    public Solicitacao alterar(Long id, Solicitacao alterado){
-        Optional<Solicitacao> encontrado = solicitacaoRepository.findById(id);
-        if (encontrado.isPresent()){
-            Solicitacao solicitacao = encontrado.get();
-
-            return solicitacaoRepository.save(solicitacao);
-        }
-        return null;
-    }
-    public void remover(Long id) {
-        solicitacaoRepository.deleteById(id);
     }
 }

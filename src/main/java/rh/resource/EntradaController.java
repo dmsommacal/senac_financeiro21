@@ -20,12 +20,10 @@ import java.net.URI;
 @RestController
 @RequestMapping("/api/entradas")
 public class EntradaController extends AbstractController{
-
     @Autowired
     private EntradaRepository repository;
     @Autowired
     private EntradaService service;
-
     @PostMapping
     public ResponseEntity create(@RequestBody Entrada entity) {
         Entrada entrada = new Entrada();
