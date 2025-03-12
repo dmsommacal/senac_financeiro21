@@ -14,12 +14,12 @@ public class DadoBancarioDTO {
     private String agencia;
 
     private String conta;
-    private List<TipoConta> tipoConta;
+    private TipoConta tipoConta;
 
     public DadoBancarioDTO() {
     }
 
-    public DadoBancarioDTO(String banco, String agencia, String conta, List<TipoConta> tipoConta) {
+    public DadoBancarioDTO(String banco, String agencia, String conta, TipoConta tipoConta) {
         this.banco = banco;
         this.agencia = agencia;
         this.conta = conta;
@@ -50,11 +50,11 @@ public class DadoBancarioDTO {
         this.conta = conta;
     }
 
-    public List<TipoConta> getTipoConta() {
+    public TipoConta getTipoConta() {
         return tipoConta;
     }
 
-    public void setTipoConta(List<TipoConta> tipoConta) {
+    public void setTipoConta(TipoConta tipoConta) {
         this.tipoConta = tipoConta;
     }
 
